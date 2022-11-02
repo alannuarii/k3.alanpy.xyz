@@ -1,19 +1,19 @@
 import mysql.connector
 
-# Niagahoster
-# conn = mysql.connector.connect(host='srv152.niagahoster.com',
-#                                database='u1724208_k3',
-#                                user='u1724208_k3',
-#                                password='So!4-uQ7D?&f')
+# Domainesia
+conn = mysql.connector.connect(host='vicenza.id.domainesia.com',
+                               database='alanwebi_k3',
+                               user='alanwebi_k3',
+                               password='So!4-uQ7D?&f')
 
 # AWS 
-conn = mysql.connector.connect(
-        host = 'k3database.cjbgtbz37j5g.ap-southeast-3.rds.amazonaws.com', 
-        port = 3306,
-        user = 'admin', 
-        password = 'admin123',
-        db = 'k3database',  
-        )
+# conn = mysql.connector.connect(
+#         host = 'k3database.cjbgtbz37j5g.ap-southeast-3.rds.amazonaws.com', 
+#         port = 3306,
+#         user = 'admin', 
+#         password = 'admin123',
+#         db = 'k3database',  
+#         )
 
 # Local 
 # conn = mysql.connector.connect(host='localhost',
