@@ -1,0 +1,55 @@
+<!-- Awal Modal Checklist APAR -->
+<div class="modal fade" id="modalChecklistAPAR{{apar['id_apar']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{apar['id_apar']}}. {{apar['lokasi']}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="formFileSm" class="form-label">Checklist</label>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="fisik" value="1" id="defaultCheck6" />
+            <label class="form-check-label" for="defaultCheck6"> Fisik </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="kartu_gantung" value="1" id="defaultCheck1" />
+            <label class="form-check-label" for="defaultCheck1"> Kartu Gantung </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="seal" value="1" id="defaultCheck2" />
+            <label class="form-check-label" for="defaultCheck2"> Seal </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="pin" value="1" id="defaultCheck3" />
+            <label class="form-check-label" for="defaultCheck3"> Pin </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="meter" value="1" id="defaultCheck4" />
+            <label class="form-check-label" for="defaultCheck4"> Meter </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="selang_corong" value="1" id="defaultCheck5" />
+            <label class="form-check-label" for="defaultCheck5"> Selang dan Corong </label>
+          </div>
+          <div class="mt-3">
+            <label for="formFileSm" class="form-label">Dokumentasi (Optional)</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="file" disabled />
+          </div>
+          <div class="mt-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Keterangan (Optional)</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="keterangan"></textarea>
+            <input type="hidden" name="apar_id" value="{{apar['id_apar']}}" />
+            <input type="hidden" name="kirim" value="" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-outline-secondary btn-second">Reset</button>
+          <button type="submit" class="btn btn-primary btn-first">Kirim</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Akhir Modal Checklist APAR  -->

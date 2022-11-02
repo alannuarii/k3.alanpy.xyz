@@ -1,0 +1,27 @@
+{% extends 'layouts/base.html' %} {% block content %}
+<main id="checklist-apar">
+  <div class="row">
+    <div class="col">
+      <div class="section-title position-relative">
+        <h2>APAR</h2>
+        <p>CHECKLIST APAR</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="list-group">
+        {% for apar in apars %} {% if apar['id_apar'] in checks %}
+        <button type="button" class="list-group-item list-group-item-action d-flex" disabled>
+          {{apar['id_apar']}}. {{apar['lokasi']}} <span class="text-success ms-auto"><i class="bi-check-square-fill"></i></span>
+        </button>
+        {% else %}
+        <button type="button" class="list-group-item list-group-item-action d-flex" data-bs-toggle="modal" data-bs-target="#modalChecklistAPAR{{apar['id_apar']}}">
+          {{apar['id_apar']}}. {{apar['lokasi']}} <span class="text-danger ms-auto"><i class="bi-x-square-fill"></i></span>
+        </button>
+        {% endif %} {% include 'pages/apar/modal/modal-checklist-apar.html' %}{% include 'pages/apar/modal/modal-update-checklist.html' %} {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

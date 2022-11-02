@@ -1,0 +1,10 @@
+<nav class="navbar fixed-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="{{ url_for('static', filename='img/safety.png' ) }}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top" />
+      K3 App
+    </a>
+    <i class="btn bi-distribute-vertical" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"></i>
+  </div>
+  {% include 'includes/offcanvas.html' %}
+</nav>

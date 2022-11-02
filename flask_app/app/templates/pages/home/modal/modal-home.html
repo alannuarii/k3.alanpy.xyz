@@ -1,0 +1,43 @@
+<!-- Modal APAR -->
+<div class="modal fade" id="modal-apar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-5">
+      <div class="modal-body">
+        <div class="btn-group py-4" role="group" aria-label="Basic outlined example">
+          <a href="{{ url_for('data_apar' ) }}" class="btn btn-nav">
+            <i class="bi-card-text"></i>
+            <h6>Data</h6>
+          </a>
+          <a href="{{ url_for('checklist_apar' ) }}" class="btn btn-nav">
+            <i class="bi-check2-circle"></i>
+            <h6>Checklist</h6>
+          </a>
+          <a href="{{ url_for('report_apar' ) }}" class="btn btn-nav">
+            <i class="bi-clipboard2-check"></i>
+            <h6>Report</h6>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal P3K -->
+<div class="modal fade" id="modal-p3k" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-5">
+      <div class="modal-body">
+        <div class="btn-group py-4" role="group" aria-label="Basic outlined example">
+          <a href="{{ url_for('data_p3k' ) }}" class="btn btn-nav">
+            <i class="bi-arrow-left-right"></i>
+            <h6>Mutasi</h6>
+          </a>
+          <a href="{{ url_for('report_apar' ) }}" class="btn btn-nav">
+            <i class="bi-clipboard2-check"></i>
+            <h6>Report</h6>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

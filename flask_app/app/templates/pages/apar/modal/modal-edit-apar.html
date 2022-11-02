@@ -1,0 +1,61 @@
+<!-- Awal Modal Checklist APAR -->
+<div class="modal fade" id="modalUpdateAPAR{{apar['id_apar']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <form method="post" , enctype="multipart/form-data">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit APAR</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="">
+            <label for="formFileSm" class="form-label">Nomor APAR</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="number" name="id_apar" value="{{apar['id_apar']}}" required />
+          </div>
+          <div class="row mt-md-3">
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Lokasi</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="text" name="lokasi" value="{{apar['lokasi']}}" required />
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Merek</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="text" name="merek" value="{{apar['merek']}}" />
+            </div>
+          </div>
+          <div class="row mt-md-3">
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Tipe</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="text" name="tipe" value="{{apar['tipe']}}" />
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Jenis</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="text" name="jenis" value="{{apar['jenis']}}" required />
+            </div>
+          </div>
+          <div class="row mt-md-3">
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Kapasitas</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="text" name="kapasitas" value="{{apar['kapasitas']}}" />
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Masa Berlaku <i class="bi-arrow-right" style="font-size: 17px"></i> <span class="fw-bolder" style="color: #ffc451; font-size: 17px">{{apar['masa_berlaku']}}</span></label>
+              <input class="form-control form-control-sm" id="formFileSm" type="month" name="masa_berlaku" required />
+            </div>
+          </div>
+          <div class="mt-3">
+            <label for="formFileSm" class="form-label">Foto APAR</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="file" name="foto_apar" />
+            <input type="hidden" name="current_id" value="{{apar['id_apar']}}" />
+            <input type="hidden" name="current_foto" value="{{apar['foto_apar']}}">
+            <input type="hidden" name="edit" value="" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-outline-secondary btn-second">Reset</button>
+          <button type="submit" class="btn btn-primary btn-first">Kirim</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Akhir Modal Checklist APAR  -->

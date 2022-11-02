@@ -1,0 +1,64 @@
+{% extends 'layouts/base.html' %}{% block content %}
+<main id="data-p3k">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="section-title position-relative">
+          <h2>P3K</h2>
+          <p>MUTASI P3K</p>
+          <i class="btn bi-plus-circle position-absolute top-0 end-0 me-md-3" data-bs-toggle="modal" data-bs-target="#modalInsertP3K"><span class="d-block fst-normal">Tambah</span></i>
+          {% include 'pages/p3k/modal/modal-input-p3k.html' %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="table-responsive">
+          <table class="table text-center table-bordered">
+            <thead>
+              <tr class="align-middle">
+                <th scope="col" rowspan="2" class="th1">NO</th>
+                <th scope="col" rowspan="2" class="th2">NAMA BARANG</th>
+                <th scope="col" rowspan="2" class="th3">SATUAN</th>
+                <th scope="col" colspan="4" class="th4">SALDO KOTAK P3K</th>
+                <th scope="col" rowspan="2" class="th5">STOK</th>
+                <th scope="col" rowspan="2" class="th6">TOTAL SALDO</th>
+                <th scope="col" rowspan="2" class="th7">TANGGAL KADALUARSA</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col" class="th8">KANTOR <i class="bi-arrow-left-right btn ms-2"></i></th>
+                <th scope="col" class="th9">CCR 1 <i class="bi-arrow-left-right btn ms-2"></i></th>
+                <th scope="col" class="th10">TPS LB3 <i class="bi-arrow-left-right btn ms-2"></i></th>
+                <th scope="col" class="th11">POS SECURITY <i class="bi-arrow-left-right btn ms-2"></i></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for p3k in all_p3k %}
+              <tr class="align-middle">
+                <td>{{loop.index}}</td>
+                <td class="text-start d-flex align-items-center nama-barang">
+                  {{p3k['nama_barang']}}
+                  <div class="d-inline ms-auto btn-nav">
+                    <i class="bi-file-image btn" data-bs-toggle="modal" data-bs-target="#modal-foto-p3k{{p3k['id_p3k']}}"></i><i class="bi-vr btn" data-bs-toggle="modal" data-bs-target="#modalEditP3K{{p3k['id_p3k']}}"></i
+                    ><i class="bi-trash3 btn" data-bs-toggle="modal" data-bs-target="#modalDeleteP3K{{p3k['id_p3k']}}"></i>
+                  </div>
+                </td>
+                <td>{{p3k['satuan']}}</td>
+                <td>{{p3k['saldo_kantor']}}</td>
+                <td>{{p3k['saldo_ccr']}}</td>
+                <td>{{p3k['saldo_tps']}}</td>
+                <td>{{p3k['saldo_pos']}}</td>
+                <td>{{p3k['stock']}}</td>
+                <td>{{p3k['total']}}</td>
+                <td>{{p3k['kadaluarsa']}}</td>
+              </tr>
+              {% include 'pages/p3k/modal/modal-foto-p3k.html' %} {% include 'pages/p3k/modal/modal-edit-p3k.html' %}{% include 'pages/p3k/modal/modal-delete-p3k.html' %}{% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{% endblock %}

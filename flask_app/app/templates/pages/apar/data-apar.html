@@ -1,0 +1,47 @@
+{% extends 'layouts/base.html' %}{% block content %}
+<main id="data-apar">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="section-title position-relative">
+          <h2>APAR</h2>
+          <p>DAFTAR APAR</p>
+          <i class="btn bi-plus-circle position-absolute top-0 end-0 me-md-3" data-bs-toggle="modal" data-bs-target="#modalAddAPAR"><span class="d-block fst-normal">Tambah</span></i>
+          {% include 'pages/apar/modal/modal-add-apar.html' %}
+        </div>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      {% for apar in apars %}
+      <div class="col d-flex justify-content-center">
+        <div class="card mb-3" style="width: 700px">
+          <div class="row g-0">
+            <div class="col-md-5">
+              <img src="/static/img/apar/foto/{{apar['foto_apar']}}" class="img-fluid rounded-start" />
+            </div>
+            <div class="col-md-7">
+              <div class="card-body">
+                <h5 class="card-title mb-4 mt-2"><span class="p-3 rounded-4">{{apar['id_apar']}}</span> {{apar['lokasi']}}</h5>
+                <ul class="list-group">
+                  <li class="list-group-item"><span class="fw-bolder">Merek</span>: {{apar['merek']}}</li>
+                  <li class="list-group-item"><span class="fw-bolder">Tipe</span>: {{apar['tipe']}}</li>
+                  <li class="list-group-item"><span class="fw-bolder">Jenis</span>: {{apar['jenis']}}</li>
+                  <li class="list-group-item"><span class="fw-bolder">Kapasitas</span>: {{apar['kapasitas']}}</li>
+                  <li class="list-group-item"><span class="fw-bolder">Masa Berlaku</span>: {{apar['masa_berlaku']}}</li>
+                </ul>
+                <div class="btn-nav mt-2 d-flex justify-content-center">
+                  <i class="btn bi-vr" data-bs-toggle="modal" data-bs-target="#modalUpdateAPAR{{apar['id_apar']}}"><span class="d-block fst-normal">Edit</span></i>
+                  {% include 'pages/apar/modal/modal-edit-apar.html' %}
+                  <i class="btn bi-trash3" data-bs-toggle="modal" data-bs-target="#modalDeleteAPAR{{apar['id_apar']}}"><span class="d-block fst-normal">Delete</span></i>
+                  {% include 'pages/apar/modal/modal-delete-apar.html' %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,14 @@
+# flask instant deploy
+# deployed by DomaiNesia
+Options +FollowSymLinks -Indexes
+IndexIgnore *
+DirectoryIndex
+
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+    RewriteRule ^(.*)$ http://127.0.0.1:52335/$1 [P]
+</IfModule>
