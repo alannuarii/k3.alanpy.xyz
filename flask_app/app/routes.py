@@ -108,12 +108,11 @@ def delete_apar(id_apar):
 @app.route('/apar/checklist', methods=['GET','POST'])
 def checklist_apar():
     object_apar = K3()
-    
+    all_apar = object_apar.get_apar()
     date_range = object_apar.get_friday(date.today())
     check_apar = object_apar.get_checklist_apar(date_range[0], date_range[1])
     apars = object_apar.get_apar_inspection(date_range[0], date_range[1])
-    all_apar = object_apar.get_apar()
-
+    
     for apar in apars:
         if apar['fisik']:
             apar['fisik'] = 'checked'
@@ -139,11 +138,6 @@ def checklist_apar():
             apar['selang_corong'] = 'checked'
         else:
             apar['selang_corong'] = '' 
-
-
-    checks = []
-    for check in check_apar:
-        checks.append(check['apar_id'])
 
     if 'kirim' in request.form:
         try:
@@ -216,6 +210,10 @@ def checklist_apar():
 
         except Exception as error:
             print(error)
+
+    checks = []
+    for check in check_apar:
+        checks.append(check['apar_id'])
 
     return render_template('pages/apar/checklist.html', title='Checklist APAR', apars=all_apar, checks=checks)
 
