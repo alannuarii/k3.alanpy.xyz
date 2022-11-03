@@ -115,7 +115,7 @@ class K3:
         return result
 
     def get_apar_inspection(self, awal, akhir):
-        cur.execute(f"SELECT * FROM checklist_apar JOIN apar ON checklist_apar.apar_id = apar.id_apar WHERE tanggal >= '{awal}' AND tanggal <= '{akhir}'")
+        cur.execute(f"SELECT * FROM checklist_apar JOIN apar ON checklist_apar.apar_id = apar.id_apar WHERE tanggal >= '{awal}' AND tanggal <= '{akhir}' GROUP BY id_apar ORDER BY id_apar")
         result = cur.fetchall()
         return result
 
