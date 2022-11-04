@@ -5,7 +5,7 @@
       <div class="col">
         <div class="section-title position-relative">
           <h2>P3K</h2>
-          <p>MUTASI P3K</p>
+          <p>PERSEDIAAN P3K</p>
           <i class="btn bi-plus-circle position-absolute top-0 end-0 me-md-3" data-bs-toggle="modal" data-bs-target="#modalInsertP3K"><span class="d-block fst-normal">Tambah</span></i>
           {% include 'pages/p3k/modal/modal-input-p3k.html' %}
         </div>
@@ -26,7 +26,8 @@
                 <th scope="col" rowspan="2" class="th7">TANGGAL KADALUARSA</th>
               </tr>
               <tr class="align-middle">
-                <th scope="col" class="th8">KANTOR <i class="bi-arrow-left-right btn ms-2"></i></th>
+                <th scope="col" class="th8">KANTOR <i class="bi-arrow-left-right btn ms-2" data-bs-toggle="modal" data-bs-target="#modalKantor"></i></th>
+                {% include 'pages/p3k/modal/modal-kantor.html' %}
                 <th scope="col" class="th9">CCR 1 <i class="bi-arrow-left-right btn ms-2"></i></th>
                 <th scope="col" class="th10">TPS LB3 <i class="bi-arrow-left-right btn ms-2"></i></th>
                 <th scope="col" class="th11">POS SECURITY <i class="bi-arrow-left-right btn ms-2"></i></th>
