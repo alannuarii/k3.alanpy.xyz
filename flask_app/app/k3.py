@@ -154,3 +154,8 @@ class K3:
         result = cur.fetchall()
         return result
 
+    def get_persediaan_kantor(self):
+        cur.execute(f"SELECT id_p3k, nama_barang, saldo_kantor, satuan FROM p3k WHERE saldo_kantor > 0")
+        result =  cur.fetchall()
+        return result
+

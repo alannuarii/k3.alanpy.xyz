@@ -259,6 +259,8 @@ def print_report(tanggal):
 def data_p3k():
     object_p3k = K3()
     all_p3k = object_p3k.get_p3k()
+    persediaan_kantor = object_p3k.get_persediaan_kantor()
+    print(persediaan_kantor)
 
     for p3k in all_p3k:
         p3k['kadaluarsa'] = f"{object_p3k.format_bulan(p3k['kadaluarsa'])} {p3k['kadaluarsa'][:-3]}"
@@ -317,7 +319,10 @@ def data_p3k():
             
         return redirect('/p3k/data')
 
-    return render_template('pages/p3k/data-p3k.html', title='Mutasi P3K', all_p3k=all_p3k)
+    if 'kantor' in request.form:
+        
+
+    return render_template('pages/p3k/data-p3k.html', title='Mutasi P3K', all_p3k=all_p3k, kantors=persediaan_kantor)
 
 
 @app.route('/p3k/data/<id_p3k>')

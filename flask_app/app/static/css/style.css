@@ -294,7 +294,8 @@ label {
 }
 
 #data-apar .card-body .btn-nav span {
-  font-size: 11px;
+  font-size: 9px;
+  margin-top: -3px;
 }
 
 #data-apar .card-body .btn-nav i:hover {
@@ -311,7 +312,8 @@ label {
 }
 
 #data-apar .section-title span {
-  font-size: 11px;
+  font-size: 9px;
+  margin-top: -3px;
 }
 
 #data-apar .section-title i:hover {
@@ -532,7 +534,8 @@ label {
 }
 
 #data-p3k .section-title span {
-  font-size: 11px;
+  font-size: 9px;
+  margin-top: -3px;
 }
 
 #data-p3k .section-title i:hover {
