@@ -1,8 +1,8 @@
-<div class="modal fade" id="modalKantor" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="modalTPS" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Kotak P3K Kantor</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Kotak P3K TPS LB3</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <form method="post">
@@ -12,8 +12,8 @@
               <label for="formFileSm" class="form-label">Persediaan</label>
               <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="p3k_id">
                 <option selected>Nama barang</option>
-                {% for kantor in kantors %}
-                <option value="{{kantor['id_p3k']}}">{{kantor['nama_barang']}}</option>
+                {% for tps in tpss %}
+                <option value="{{tps['id_p3k']}}">{{tps['nama_barang']}}</option>
                 {% endfor %}
               </select>
             </div>
@@ -37,7 +37,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <input type="hidden" name="kantor" value="" />
+          <input type="hidden" name="tps" value="" />
           <button type="reset" class="btn btn-outline-secondary btn-second">Reset</button>
           <button type="submit" class="btn btn-primary btn-first">Kirim</button>
         </div>

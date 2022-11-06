@@ -260,7 +260,13 @@ def data_p3k():
     object_p3k = K3()
     all_p3k = object_p3k.get_p3k()
     persediaan_kantor = object_p3k.get_persediaan_kantor()
-    print(persediaan_kantor)
+    get_saldo_kantor = object_p3k.get_saldo_kantor()
+    persediaan_ccr = object_p3k.get_persediaan_ccr()
+    get_saldo_ccr = object_p3k.get_saldo_ccr()
+    persediaan_tps = object_p3k.get_persediaan_tps()
+    get_saldo_tps = object_p3k.get_saldo_tps()
+    persediaan_pos = object_p3k.get_persediaan_pos()
+    get_saldo_pos = object_p3k.get_saldo_pos()
 
     for p3k in all_p3k:
         p3k['kadaluarsa'] = f"{object_p3k.format_bulan(p3k['kadaluarsa'])} {p3k['kadaluarsa'][:-3]}"
@@ -320,9 +326,46 @@ def data_p3k():
         return redirect('/p3k/data')
 
     if 'kantor' in request.form:
-        
+        p3k_id = request.form['p3k_id']
+        tanggal = request.form['tanggal']
+        masuk = request.form['masuk']
+        keluar = request.form['keluar']
 
-    return render_template('pages/p3k/data-p3k.html', title='Mutasi P3K', all_p3k=all_p3k, kantors=persediaan_kantor)
+        object_p3k.insert_kantor(tgl_kantor=tanggal, masuk_kantor=masuk, keluar_kantor=keluar, p3k_id=p3k_id)
+
+        return redirect('/p3k/data')
+
+    if 'ccr' in request.form:
+        p3k_id = request.form['p3k_id']
+        tanggal = request.form['tanggal']
+        masuk = request.form['masuk']
+        keluar = request.form['keluar']
+
+        object_p3k.insert_ccr(tgl_ccr=tanggal, masuk_ccr=masuk, keluar_ccr=keluar, p3k_id=p3k_id)
+
+        return redirect('/p3k/data')
+
+    if 'tps' in request.form:
+        p3k_id = request.form['p3k_id']
+        tanggal = request.form['tanggal']
+        masuk = request.form['masuk']
+        keluar = request.form['keluar']
+
+        object_p3k.insert_tps(tgl_tps=tanggal, masuk_tps=masuk, keluar_tps=keluar, p3k_id=p3k_id)
+
+        return redirect('/p3k/data')
+
+    if 'pos' in request.form:
+        p3k_id = request.form['p3k_id']
+        tanggal = request.form['tanggal']
+        masuk = request.form['masuk']
+        keluar = request.form['keluar']
+
+        object_p3k.insert_pos(tgl_pos=tanggal, masuk_pos=masuk, keluar_pos=keluar, p3k_id=p3k_id)
+
+        return redirect('/p3k/data')
+
+    return render_template('pages/p3k/data-p3k.html', title='Mutasi P3K', all_p3k=all_p3k, kantors=persediaan_kantor, pers_kantor=get_saldo_kantor, ccrs=persediaan_ccr, pers_ccr=get_saldo_ccr, tpss=persediaan_tps, pers_tps=get_saldo_tps, poss=persediaan_pos, pers_pos=get_saldo_pos,)
 
 
 @app.route('/p3k/data/<id_p3k>')
