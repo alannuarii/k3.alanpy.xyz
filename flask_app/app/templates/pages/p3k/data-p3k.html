@@ -21,7 +21,8 @@
                 <th scope="col" rowspan="2" class="th2">NAMA BARANG</th>
                 <th scope="col" rowspan="2" class="th3">SATUAN</th>
                 <th scope="col" colspan="4" class="th4">SALDO KOTAK P3K</th>
-                <th scope="col" rowspan="2" class="th5">STOK</th>
+                <th scope="col" rowspan="2" class="th5">STOK <i class="bi-arrow-left-right btn d-block mt-1" data-bs-toggle="modal" data-bs-target="#modalStock"></i></th>
+                {% include 'pages/p3k/modal/modal-stock.html' %}
                 <th scope="col" rowspan="2" class="th6">TOTAL SALDO</th>
                 <th scope="col" rowspan="2" class="th7">TANGGAL KADALUARSA</th>
               </tr>
@@ -64,9 +65,12 @@
                 <td>{{p3k['saldo_pos']}}</td>
                 {% else %}
                 <td>{{pers_pos[loop.index0]['pers_pos']}}</td>
-                {% endif %}
+                {% endif %} {% if pers_stock[loop.index0]['pers_stock'] == None %}
                 <td>{{p3k['stock']}}</td>
-                <td>{{p3k['total']}}</td>
+                {% else %}
+                <td>{{pers_stock[loop.index0]['pers_stock']}}</td>
+                {% endif %}
+                <td>{{pers_kantor[loop.index0]['pers_kantor']|int + pers_ccr[loop.index0]['pers_ccr']|int + pers_tps[loop.index0]['pers_tps']|int + pers_pos[loop.index0]['pers_pos']|int + pers_stock[loop.index0]['pers_stock']|int}}</td>
                 <td>{{p3k['kadaluarsa']}}</td>
               </tr>
               {% include 'pages/p3k/modal/modal-foto-p3k.html' %} {% include 'pages/p3k/modal/modal-edit-p3k.html' %}{% include 'pages/p3k/modal/modal-delete-p3k.html' %}{% endfor %}

@@ -160,7 +160,7 @@ class K3:
         return result
 
     def get_saldo_kantor(self):
-        cur.execute(f"SELECT (saldo_kantor + SUM(masuk_kantor) - SUM(keluar_kantor)) AS pers_kantor FROM p3k LEFT JOIN kantor ON p3k.id_p3k = kantor.p3k_id GROUP BY id_p3k")
+        cur.execute(f"SELECT (SUM(masuk_kantor) - SUM(keluar_kantor)) AS pers_kantor FROM p3k LEFT JOIN kantor ON p3k.id_p3k = kantor.p3k_id GROUP BY id_p3k")
         result = cur.fetchall()
         return result
 
@@ -174,7 +174,7 @@ class K3:
         return result
 
     def get_saldo_ccr(self):
-        cur.execute(f"SELECT (saldo_ccr + SUM(masuk_ccr) - SUM(keluar_ccr)) AS pers_ccr FROM p3k LEFT JOIN ccr ON p3k.id_p3k = ccr.p3k_id GROUP BY id_p3k")
+        cur.execute(f"SELECT (SUM(masuk_ccr) - SUM(keluar_ccr)) AS pers_ccr FROM p3k LEFT JOIN ccr ON p3k.id_p3k = ccr.p3k_id GROUP BY id_p3k")
         result = cur.fetchall()
         return result
 
@@ -188,7 +188,7 @@ class K3:
         return result
 
     def get_saldo_tps(self):
-        cur.execute(f"SELECT (saldo_tps + SUM(masuk_tps) - SUM(keluar_tps)) AS pers_tps FROM p3k LEFT JOIN tps ON p3k.id_p3k = tps.p3k_id GROUP BY id_p3k")
+        cur.execute(f"SELECT (SUM(masuk_tps) - SUM(keluar_tps)) AS pers_tps FROM p3k LEFT JOIN tps ON p3k.id_p3k = tps.p3k_id GROUP BY id_p3k")
         result = cur.fetchall()
         return result
 
@@ -202,12 +202,26 @@ class K3:
         return result
 
     def get_saldo_pos(self):
-        cur.execute(f"SELECT (saldo_pos + SUM(masuk_pos) - SUM(keluar_pos)) AS pers_pos FROM p3k LEFT JOIN pos ON p3k.id_p3k = pos.p3k_id GROUP BY id_p3k")
+        cur.execute(f"SELECT (SUM(masuk_pos) - SUM(keluar_pos)) AS pers_pos FROM p3k LEFT JOIN pos ON p3k.id_p3k = pos.p3k_id GROUP BY id_p3k")
         result = cur.fetchall()
         return result
 
     def insert_pos(self, tgl_pos, masuk_pos, keluar_pos, p3k_id):
         cur.execute(f"INSERT INTO pos (tgl_pos, masuk_pos, keluar_pos, p3k_id) VALUES ('{tgl_pos}', {masuk_pos}, {keluar_pos}, {p3k_id})")
+        conn.commit()
+
+    def get_persediaan_stock(self):
+        cur.execute(f"SELECT id_p3k, nama_barang, stock, satuan FROM p3k WHERE stock > 0")
+        result =  cur.fetchall()
+        return result
+
+    def get_saldo_stock(self):
+        cur.execute(f"SELECT (SUM(masuk_stock) - SUM(keluar_stock)) AS pers_stock FROM p3k LEFT JOIN stock ON p3k.id_p3k = stock.p3k_id GROUP BY id_p3k")
+        result = cur.fetchall()
+        return result
+
+    def insert_stock(self, tgl_stock, masuk_stock, keluar_stock, p3k_id):
+        cur.execute(f"INSERT INTO stock (tgl_stock, masuk_stock, keluar_stock, p3k_id) VALUES ('{tgl_stock}', {masuk_stock}, {keluar_stock}, {p3k_id})")
         conn.commit()
         
 

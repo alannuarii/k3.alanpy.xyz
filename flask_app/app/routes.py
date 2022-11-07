@@ -267,6 +267,8 @@ def data_p3k():
     get_saldo_tps = object_p3k.get_saldo_tps()
     persediaan_pos = object_p3k.get_persediaan_pos()
     get_saldo_pos = object_p3k.get_saldo_pos()
+    persediaan_stock = object_p3k.get_persediaan_stock()
+    get_saldo_stock = object_p3k.get_saldo_stock()
 
     for p3k in all_p3k:
         p3k['kadaluarsa'] = f"{object_p3k.format_bulan(p3k['kadaluarsa'])} {p3k['kadaluarsa'][:-3]}"
@@ -365,7 +367,17 @@ def data_p3k():
 
         return redirect('/p3k/data')
 
-    return render_template('pages/p3k/data-p3k.html', title='Mutasi P3K', all_p3k=all_p3k, kantors=persediaan_kantor, pers_kantor=get_saldo_kantor, ccrs=persediaan_ccr, pers_ccr=get_saldo_ccr, tpss=persediaan_tps, pers_tps=get_saldo_tps, poss=persediaan_pos, pers_pos=get_saldo_pos,)
+    if 'stock' in request.form:
+        p3k_id = request.form['p3k_id']
+        tanggal = request.form['tanggal']
+        masuk = request.form['masuk']
+        keluar = request.form['keluar']
+
+        object_p3k.insert_stock(tgl_stock=tanggal, masuk_stock=masuk, keluar_stock=keluar, p3k_id=p3k_id)
+
+        return redirect('/p3k/data')
+
+    return render_template('pages/p3k/data-p3k.html', title='Mutasi P3K', all_p3k=all_p3k, kantors=persediaan_kantor, pers_kantor=get_saldo_kantor, ccrs=persediaan_ccr, pers_ccr=get_saldo_ccr, tpss=persediaan_tps, pers_tps=get_saldo_tps, poss=persediaan_pos, pers_pos=get_saldo_pos, stocks=persediaan_stock, pers_stock=get_saldo_stock)
 
 
 @app.route('/p3k/data/<id_p3k>')

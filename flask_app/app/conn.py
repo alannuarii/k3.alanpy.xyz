@@ -113,3 +113,14 @@ cur = conn.cursor(dictionary=True)
 #     PRIMARY KEY (id_pos),
 #     CONSTRAINT fk_pos_p3k FOREIGN KEY (p3k_id) REFERENCES p3k (id_p3k)
 # );
+
+# CREATE TABLE stock
+# (
+#     id_stock INT NOT NULL AUTO_INCREMENT,
+#     tgl_stock DATE NOT NULL,
+#     masuk_stock INT,
+#     keluar_stock INT,
+#     p3k_id INT NOT NULL,
+#     PRIMARY KEY (id_stock),
+#     CONSTRAINT fk_stock_p3k FOREIGN KEY (p3k_id) REFERENCES p3k (id_p3k)
+# );
