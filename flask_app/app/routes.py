@@ -259,15 +259,10 @@ def print_report(tanggal):
 def data_p3k():
     object_p3k = K3()
     all_p3k = object_p3k.get_p3k()
-    persediaan_kantor = object_p3k.get_persediaan_kantor()
     get_saldo_kantor = object_p3k.get_saldo_kantor()
-    persediaan_ccr = object_p3k.get_persediaan_ccr()
     get_saldo_ccr = object_p3k.get_saldo_ccr()
-    persediaan_tps = object_p3k.get_persediaan_tps()
     get_saldo_tps = object_p3k.get_saldo_tps()
-    persediaan_pos = object_p3k.get_persediaan_pos()
     get_saldo_pos = object_p3k.get_saldo_pos()
-    persediaan_stock = object_p3k.get_persediaan_stock()
     get_saldo_stock = object_p3k.get_saldo_stock()
 
     for p3k in all_p3k:
@@ -276,11 +271,6 @@ def data_p3k():
     if 'input' in request.form:
         nama_barang = request.form['nama_barang']
         satuan = request.form['satuan']
-        saldo_kantor = request.form['saldo_kantor']
-        saldo_ccr = request.form['saldo_ccr']
-        saldo_tps = request.form['saldo_tps']
-        saldo_pos = request.form['saldo_pos']
-        stock = request.form['stock']
         kadaluarsa = request.form['kadaluarsa']
         
         foto_p3k = request.files['foto_p3k']
@@ -292,7 +282,7 @@ def data_p3k():
         renamefile = f"{nama_barang}-{filename}"
         foto_p3k.save(os.path.join(app.config['FOTO_P3K'], renamefile))
 
-        object_p3k.insert_p3k(nama_barang=nama_barang, satuan=satuan, saldo_kantor=saldo_kantor, saldo_ccr=saldo_ccr, saldo_tps=saldo_tps, saldo_pos=saldo_pos, stock=stock, kadaluarsa=kadaluarsa, foto_p3k=renamefile)
+        object_p3k.insert_p3k(nama_barang=nama_barang, satuan=satuan, kadaluarsa=kadaluarsa, foto_p3k=renamefile)
 
         return redirect('/p3k/data')
 
@@ -300,11 +290,6 @@ def data_p3k():
         id_p3k = request.form['id_p3k']
         nama_barang = request.form['nama_barang']
         satuan = request.form['satuan']
-        saldo_kantor = request.form['saldo_kantor']
-        saldo_ccr = request.form['saldo_ccr']
-        saldo_tps = request.form['saldo_tps']
-        saldo_pos = request.form['saldo_pos']
-        stock = request.form['stock']
         kadaluarsa = request.form['kadaluarsa']
         current_foto = request.form['current_foto']
         foto_p3k = request.files['foto_p3k']
@@ -323,7 +308,7 @@ def data_p3k():
         else:
             renamefile = current_foto
 
-        object_p3k.update_p3k(nama_barang=nama_barang, satuan=satuan, saldo_kantor=saldo_kantor, saldo_ccr=saldo_ccr, saldo_tps=saldo_tps, saldo_pos=saldo_pos, stock=stock, kadaluarsa=kadaluarsa, foto_p3k=renamefile, id_p3k=id_p3k)
+        object_p3k.update_p3k(nama_barang=nama_barang, satuan=satuan, kadaluarsa=kadaluarsa, foto_p3k=renamefile, id_p3k=id_p3k)
             
         return redirect('/p3k/data')
 
@@ -377,7 +362,7 @@ def data_p3k():
 
         return redirect('/p3k/data')
 
-    return render_template('pages/p3k/data-p3k.html', title='Mutasi P3K', all_p3k=all_p3k, kantors=persediaan_kantor, pers_kantor=get_saldo_kantor, ccrs=persediaan_ccr, pers_ccr=get_saldo_ccr, tpss=persediaan_tps, pers_tps=get_saldo_tps, poss=persediaan_pos, pers_pos=get_saldo_pos, stocks=persediaan_stock, pers_stock=get_saldo_stock)
+    return render_template('pages/p3k/data-p3k.html', title='Mutasi P3K', all_p3k=all_p3k, pers_kantor=get_saldo_kantor, pers_ccr=get_saldo_ccr, pers_tps=get_saldo_tps, pers_pos=get_saldo_pos, pers_stock=get_saldo_stock)
 
 
 @app.route('/p3k/data/<id_p3k>')

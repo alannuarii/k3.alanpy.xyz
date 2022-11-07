@@ -49,27 +49,11 @@
                   </div>
                 </td>
                 <td>{{p3k['satuan']}}</td>
-                {% if pers_kantor[loop.index0]['pers_kantor'] == None %}
-                <td>{{p3k['saldo_kantor']}}</td>
-                {% else %}
                 <td>{{pers_kantor[loop.index0]['pers_kantor']}}</td>
-                {% endif %} {% if pers_ccr[loop.index0]['pers_ccr'] == None %}
-                <td>{{p3k['saldo_ccr']}}</td>
-                {% else %}
                 <td>{{pers_ccr[loop.index0]['pers_ccr']}}</td>
-                {% endif %} {% if pers_tps[loop.index0]['pers_tps'] == None %}
-                <td>{{p3k['saldo_tps']}}</td>
-                {% else %}
                 <td>{{pers_tps[loop.index0]['pers_tps']}}</td>
-                {% endif %} {% if pers_pos[loop.index0]['pers_pos'] == None %}
-                <td>{{p3k['saldo_pos']}}</td>
-                {% else %}
                 <td>{{pers_pos[loop.index0]['pers_pos']}}</td>
-                {% endif %} {% if pers_stock[loop.index0]['pers_stock'] == None %}
-                <td>{{p3k['stock']}}</td>
-                {% else %}
                 <td>{{pers_stock[loop.index0]['pers_stock']}}</td>
-                {% endif %}
                 <td>{{pers_kantor[loop.index0]['pers_kantor']|int + pers_ccr[loop.index0]['pers_ccr']|int + pers_tps[loop.index0]['pers_tps']|int + pers_pos[loop.index0]['pers_pos']|int + pers_stock[loop.index0]['pers_stock']|int}}</td>
                 <td>{{p3k['kadaluarsa']}}</td>
               </tr>

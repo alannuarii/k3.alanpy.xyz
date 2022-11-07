@@ -12,7 +12,7 @@
               <label for="formFileSm" class="form-label">Persediaan</label>
               <select class="form-select form-select-sm" aria-label=".form-select-sm example" name="p3k_id">
                 <option selected>Nama barang</option>
-                {% for tps in tpss %}
+                {% for tps in all_p3k %}
                 <option value="{{tps['id_p3k']}}">{{tps['nama_barang']}}</option>
                 {% endfor %}
               </select>
