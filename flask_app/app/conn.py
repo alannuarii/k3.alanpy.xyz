@@ -124,3 +124,24 @@ cur = conn.cursor(dictionary=True)
 #     PRIMARY KEY (id_stock),
 #     CONSTRAINT fk_stock_p3k FOREIGN KEY (p3k_id) REFERENCES p3k (id_p3k)
 # );
+
+# CREATE TABLE hydrant 
+# (
+#         id_hydrant INT NOT NULL AUTO_INCREMENT,
+#         nama_peralatan VARCHAR(50) NOT NULL,
+#         merek VARCHAR(20),
+#         type VARCHAR(20),
+#         jumlah INT NOT NULL,
+#         satuan VARCHAR(10) NOT NULL,
+#         keterangan TEXT,
+#         foto_p3k VARCHAR(100),
+#         PRIMARY KEY (id_hydrant)
+# );
+
+# CREATE TABLE kondisi_hydrant
+# (
+#         id_kondisi_hydrant INT NOT NULL AUTO_INCREMENT,
+#         tanggal DATE NOT NULL,
+#         fisik BOOLEAN NOT NULL,
+
+# )
