@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'includes/styles.html' %}
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='img/safety.png' ) }}" rel="icon" />
+  </head>
+  <body>
+    {% block content %}
+    <main id="print-report">
+      <div class="container-fluid position-relative overflow-hidden">
+        <div class="table-responsive">
+          <table class="table table-header table-bordered border-dark text-center">
+            <thead>
+              <tr class="align-middle">
+                <th scope="col" rowspan="2"><img src="{{ url_for('static', filename='img/logo-pln.png' ) }}" class="img-fluid" alt="" /></th>
+                <th scope="col" class="smt">PLN SISTEM MANAJEMEN TERINTEGRASI</th>
+                <th scope="col" class="text-start">Nomor</th>
+                <th scope="col" class="text-start">: SMI-PKTM-CL-U-002</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col" class="checklist">CHECKLIST</th>
+                <th scope="col" class="text-start">Revisi</th>
+                <th scope="col" class="text-start">: 0</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col">UIKL SULAWESI</th>
+                <th scope="col" rowspan="3" class="align-middle">INSPEKSI P3K</th>
+                <th scope="col" class="text-start">Edisi</th>
+                <th scope="col" class="text-start">: 2</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col">UPDK MINAHASA</th>
+                <th scope="col" class="text-start">Tanggal Terbit</th>
+                <th scope="col" class="text-start">: 03 September 2020</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col">ULPLTD KOTAMOBAGU</th>
+                <th scope="col" class="text-start">Halaman</th>
+                <th scope="col" class="text-start">: 1 dari 1</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <h6 class="fw-bolder text-center mt-lg-2">BULAN {{bulan|upper}}</h6>
+        <div class="table-responsive">
+          <table class="table main-table table-bordered border-dark text-center">
+            <thead>
+              <tr class="align-middle">
+                <th scope="col" rowspan="2" class="th1">NO</th>
+                <th scope="col" rowspan="2" class="th2">NAMA BARANG</th>
+                <th scope="col" rowspan="2" class="th3">SATUAN</th>
+                <th scope="col" colspan="4" class="th4">SALDO KOTAK P3K</th>
+                <th scope="col" rowspan="2" class="th5">STOK</th>
+                <th scope="col" rowspan="2" class="th6">TOTAL SALDO</th>
+                <th scope="col" rowspan="2" class="th7">TANGGAL KADALUARSA</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col" class="th8">KANTOR</th>
+                <th scope="col" class="th8">CCR 1</th>
+                <th scope="col" class="th8">TPS LB3</th>
+                <th scope="col" class="th8">POS SECURITY</th>
+              </tr>
+            </thead>
+            {% if pers_kantor %}
+            <tbody>
+              {% for p3k in all_p3k %}
+              <tr class="align-middle">
+                <td>{{loop.index}}</td>
+                <td class="text-start">{{p3k['nama_barang']}}</td>
+                <td>{{p3k['satuan']}}</td>
+                <td>{{pers_kantor[loop.index0]['pers_kantor']}}</td>
+                <td>{{pers_ccr[loop.index0]['pers_ccr']}}</td>
+                <td>{{pers_tps[loop.index0]['pers_tps']}}</td>
+                <td>{{pers_pos[loop.index0]['pers_pos']}}</td>
+                <td>{{pers_stock[loop.index0]['pers_stock']}}</td>
+                <td>{{pers_kantor[loop.index0]['pers_kantor']|int + pers_ccr[loop.index0]['pers_ccr']|int + pers_tps[loop.index0]['pers_tps']|int + pers_pos[loop.index0]['pers_pos']|int + pers_stock[loop.index0]['pers_stock']|int}}</td>
+                <td>{{p3k['kadaluarsa']}}</td>
+              </tr>
+              {% include 'pages/p3k/modal/modal-foto-p3k.html' %} {% include 'pages/p3k/modal/modal-edit-p3k.html' %}{% include 'pages/p3k/modal/modal-delete-p3k.html' %}{% endfor %}
+            </tbody>
+            {% endif %}
+          </table>
+        </div>
+        <p class="fst-italic">Source = https://k3.alanpy.xyz/{{request.path}}</p>
+
+        <div class="row">
+          <div class="col-6 text-center">
+            <h6 class="invisible mb-3">Kotamobagu, 28 Oktober 2022</h6>
+            <h6 class="mb-5">PLT MANAGER</h6>
+            <h6 class="fw-bolder">BAHAR SUDRAJAT</h6>
+          </div>
+          <div class="col-6 text-center">
+            <h6 class="mb-3">Kotamobagu, {{tanggal}}</h6>
+            <h6 class="mb-5">PJ LAKS K3L DAN KEAMANAN</h6>
+            <h6 class="fw-bolder">ALAN NUARI</h6>
+          </div>
+        </div>
+        <div class="text-center download position-absolute bottom-0 start-50 translate-middle-x">
+          <i class="bi-cloud-arrow-down btn" onclick="window.print()"></i>
+          <h6>Download PDF</h6>
+        </div>
+      </div>
+    </main>
+    {% endblock %} {% include 'includes/scripts.html' %}
+  </body>
+</html>

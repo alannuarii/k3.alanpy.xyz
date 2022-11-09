@@ -39,10 +39,14 @@ class K3:
         elif bulan == '12':
             return 'Desember'
 
-    def format_bulan(self, tanggal):
+    def format_bulan(self, tanggal:str):
         if len(tanggal) == 10:
-            bulan = tanggal[3:-5]
-            return self.month_id(bulan)
+            if tanggal[4] == '-':
+                bulan = tanggal[5:-3]
+                return self.month_id(bulan)
+            elif tanggal[2] == '-':
+                bulan = tanggal[3:-5]
+                return self.month_id(bulan)
         elif len(tanggal) == 7:
             bulan = tanggal[5:]
             return self.month_id(bulan)
@@ -86,6 +90,12 @@ class K3:
             date_id = f"{new_date[:-8]} {month_id} {new_date[6:]}"
             result.append(date_id)
         return result
+
+    def get_tanggal_format(self, tanggal:date):
+        new_date = tanggal.strftime('%d-%m-%Y')
+        month_id = self.format_bulan(new_date)
+        date_id = f"{new_date[:-8]} {month_id} {new_date[6:]}"
+        return date_id
 
     def get_apar(self):
         cur.execute("SELECT * FROM apar")
@@ -159,12 +169,22 @@ class K3:
         result = cur.fetchall()
         return result
 
+    def get_saldo_kantor_filter(self, tanggal):
+        cur.execute(f"SELECT (SUM(masuk_kantor) - SUM(keluar_kantor)) AS pers_kantor FROM p3k LEFT JOIN kantor ON p3k.id_p3k = kantor.p3k_id WHERE tgl_kantor < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k")
+        result = cur.fetchall()
+        return result
+
     def insert_kantor(self, tgl_kantor, masuk_kantor, keluar_kantor, p3k_id):
         cur.execute(f"INSERT INTO kantor (tgl_kantor, masuk_kantor, keluar_kantor, p3k_id) VALUES ('{tgl_kantor}', {masuk_kantor}, {keluar_kantor}, {p3k_id})")
         conn.commit()
 
     def get_saldo_ccr(self):
         cur.execute(f"SELECT (SUM(masuk_ccr) - SUM(keluar_ccr)) AS pers_ccr FROM p3k LEFT JOIN ccr ON p3k.id_p3k = ccr.p3k_id GROUP BY id_p3k")
+        result = cur.fetchall()
+        return result
+
+    def get_saldo_ccr_filter(self, tanggal):
+        cur.execute(f"SELECT (SUM(masuk_ccr) - SUM(keluar_ccr)) AS pers_ccr FROM p3k LEFT JOIN ccr ON p3k.id_p3k = ccr.p3k_id WHERE tgl_ccr < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k")
         result = cur.fetchall()
         return result
 
@@ -177,12 +197,22 @@ class K3:
         result = cur.fetchall()
         return result
 
+    def get_saldo_tps_filter(self, tanggal):
+        cur.execute(f"SELECT (SUM(masuk_tps) - SUM(keluar_tps)) AS pers_tps FROM p3k LEFT JOIN tps ON p3k.id_p3k = tps.p3k_id WHERE tgl_tps < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k")
+        result = cur.fetchall()
+        return result
+
     def insert_tps(self, tgl_tps, masuk_tps, keluar_tps, p3k_id):
         cur.execute(f"INSERT INTO tps (tgl_tps, masuk_tps, keluar_tps, p3k_id) VALUES ('{tgl_tps}', {masuk_tps}, {keluar_tps}, {p3k_id})")
         conn.commit()
 
     def get_saldo_pos(self):
         cur.execute(f"SELECT (SUM(masuk_pos) - SUM(keluar_pos)) AS pers_pos FROM p3k LEFT JOIN pos ON p3k.id_p3k = pos.p3k_id GROUP BY id_p3k")
+        result = cur.fetchall()
+        return result
+
+    def get_saldo_pos_filter(self, tanggal):
+        cur.execute(f"SELECT (SUM(masuk_pos) - SUM(keluar_pos)) AS pers_pos FROM p3k LEFT JOIN pos ON p3k.id_p3k = pos.p3k_id WHERE tgl_pos < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k")
         result = cur.fetchall()
         return result
 
@@ -195,8 +225,18 @@ class K3:
         result = cur.fetchall()
         return result
 
+    def get_saldo_stock_filter(self, tanggal):
+        cur.execute(f"SELECT (SUM(masuk_stock) - SUM(keluar_stock)) AS pers_stock FROM p3k LEFT JOIN stock ON p3k.id_p3k = stock.p3k_id WHERE tgl_stock < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k")
+        result = cur.fetchall()
+        return result
+
     def insert_stock(self, tgl_stock, masuk_stock, keluar_stock, p3k_id):
         cur.execute(f"INSERT INTO stock (tgl_stock, masuk_stock, keluar_stock, p3k_id) VALUES ('{tgl_stock}', {masuk_stock}, {keluar_stock}, {p3k_id})")
         conn.commit()
+
+    def get_saldo_p3k(self, table, tgl_p3k, tanggal):
+        cur.execute(f"SELECT * FROM {table} WHERE {tgl_p3k} < '{tanggal}'")
+        result = cur.fetchall()
+        return result
         
 

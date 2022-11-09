@@ -21,8 +21,8 @@ jumatx = datetime.strptime(jumat, '%Y-%m-%d').date()
 
 tanggal = '20-10-2020'
 
-bulan = tanggal[6:]
-bulanx = '2020-10'
+bulan = tanggal[3:-5]
+print(bulan)
 
 data = [
     {'id': 1,

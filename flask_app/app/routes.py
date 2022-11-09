@@ -2,7 +2,8 @@ import os
 from app import app
 from flask import render_template, request, redirect
 from app.k3 import K3
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
+from dateutil.relativedelta import relativedelta
 from werkzeug.utils import secure_filename
 
 
@@ -242,7 +243,7 @@ def report_apar():
     return render_template('pages/apar/report.html', title='Report APAR', periodes=list_periode, dates=list_date, month=month)
 
 @app.route('/apar/report/<tanggal>')
-def print_report(tanggal):
+def print_report_apar(tanggal):
     object_apar = K3()
     date_range = object_apar.get_friday(datetime.strptime(tanggal, '%Y-%m-%d').date())
     datas = object_apar.get_apar_inspection(date_range[0], date_range[1])
@@ -374,3 +375,44 @@ def delete_p3k(id_p3k):
     object_p3k.delete_p3k(id_p3k)
 
     return redirect('/p3k/data')
+
+
+@app.route('/p3k/report')
+def report_p3k():
+    month = None
+    year = None
+    next_month = None
+
+    if 'month' in request.args:
+        query = request.args.get('month')
+
+        object_p3k = K3()
+        tanggal = object_p3k.get_date(f"{query}-01")
+        next_month = tanggal + relativedelta(months=+1) 
+        
+        month = object_p3k.format_bulan(query)
+        year = str(tanggal)[:-6]
+    
+    return render_template('pages/p3k/report.html', title='Report P3K', month=month, year=year, tanggal=next_month)
+
+
+@app.route('/p3k/report/<tanggal>')
+def print_report_p3k(tanggal):
+    
+    object_p3k = K3()
+    all_p3k = object_p3k.get_p3k()
+    get_saldo_kantor = object_p3k.get_saldo_kantor_filter(tanggal)
+    get_saldo_ccr = object_p3k.get_saldo_ccr_filter(tanggal)
+    get_saldo_tps = object_p3k.get_saldo_tps_filter(tanggal)
+    get_saldo_pos = object_p3k.get_saldo_pos_filter(tanggal)
+    get_saldo_stock = object_p3k.get_saldo_stock_filter(tanggal)
+
+    tanggal_date = object_p3k.get_date(tanggal) + relativedelta(months=-1) 
+    bulan = object_p3k.format_bulan(str(tanggal_date))
+
+    tanggal_format = object_p3k.get_tanggal_format(object_p3k.get_date(tanggal))
+
+    for p3k in all_p3k:
+        p3k['kadaluarsa'] = f"{object_p3k.format_bulan(p3k['kadaluarsa'])} {p3k['kadaluarsa'][:-3]}"
+    
+    return render_template('pages/p3k/print-report.html', title='Report P3K', all_p3k=all_p3k, pers_kantor=get_saldo_kantor, pers_ccr=get_saldo_ccr, pers_tps=get_saldo_tps, pers_pos=get_saldo_pos, pers_stock=get_saldo_stock, bulan=bulan, tanggal=tanggal_format)
