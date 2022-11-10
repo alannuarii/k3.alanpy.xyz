@@ -130,7 +130,7 @@ cur = conn.cursor(dictionary=True)
 #         id_hydrant INT NOT NULL AUTO_INCREMENT,
 #         nama_peralatan VARCHAR(50) NOT NULL,
 #         merek VARCHAR(20),
-#         type VARCHAR(20),
+#         tipe VARCHAR(20),
 #         jumlah INT NOT NULL,
 #         satuan VARCHAR(10) NOT NULL,
 #         keterangan TEXT,
@@ -142,6 +142,8 @@ cur = conn.cursor(dictionary=True)
 # (
 #         id_kondisi_hydrant INT NOT NULL AUTO_INCREMENT,
 #         tanggal DATE NOT NULL,
-#         fisik BOOLEAN NOT NULL,
-
+#         kondisi VARCHAR(10) NOT NULL,
+#       hydrant_id INT NOT NULL,
+#       PRIMARY KEY (id_kondisi_hydrant),
+#       CONSTRAINT fk_kondisi_hydrant FOREIGN KEY (hydrant_id) REFERENCES hydrant (id_hydrant)
 # )
