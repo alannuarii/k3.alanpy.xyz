@@ -239,4 +239,11 @@ class K3:
         result = cur.fetchall()
         return result
         
+    def get_hydrant(self):
+        cur.execute("SELECT * FROM hydrant")
+        result = cur.fetchall()
+        return result
 
+    def insert_hydrant(self, nama_peralatan, merek, tipe, jumlah, satuan, foto_hydrant):
+        cur.execute(f"INSERT INTO hydrant (nama_peralatan, merek, tipe, jumlah, satuan, foto_hydrant) VALUES ('{nama_peralatan}', '{merek}', '{tipe}', {jumlah}, '{satuan}', '{foto_hydrant}')")
+        conn.commit()

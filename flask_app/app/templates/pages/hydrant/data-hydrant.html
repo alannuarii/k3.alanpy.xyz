@@ -1,0 +1,45 @@
+{% extends 'layouts/base.html' %}{% block content %}
+<main id="data-apar">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="section-title position-relative">
+          <h2>HYDRANT</h2>
+          <p>DATA HYDRANT</p>
+          <i class="btn bi-plus-circle position-absolute top-0 end-0 me-md-3" data-bs-toggle="modal" data-bs-target="#modalAddHydrant"><span class="d-block fst-normal">Tambah</span></i>
+          {% include 'pages/hydrant/modal/modal-add-hydrant.html' %}
+        </div>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      {% for hydrant in hydrants %}
+      <div class="col d-flex justify-content-center">
+        <div class="card mb-3" style="width: 700px">
+          <div class="row g-0">
+            <div class="col-md-5">
+              <img src="/static/img/hydrant/foto/{{hydrant['foto_hydrant']}}" class="img-fluid rounded-start" />
+            </div>
+            <div class="col-md-7">
+              <div class="card-body">
+                <h5 class="card-title mb-4 mt-2">{{hydrant['nama_peralatan']}}</h5>
+                <ul class="list-group">
+                  <li class="list-group-item"><span class="fw-bolder">Merek</span>: {{hydrant['merek']}}</li>
+                  <li class="list-group-item"><span class="fw-bolder">Tipe</span>: {{hydrant['tipe']}}</li>
+                  <li class="list-group-item"><span class="fw-bolder">Jumlah</span>: {{hydrant['jumlah']}} {{hydrant['satuan']}}</li>
+                </ul>
+                <div class="btn-nav mt-2 d-flex justify-content-center">
+                  <i class="btn bi-vr" data-bs-toggle="modal" data-bs-target="#modalUpdateHydrant{{hydrant['id_hydrant']}}"><span class="d-block fst-normal">Edit</span></i>
+                  {% include 'pages/hydrant/modal/modal-edit-hydrant.html' %}
+                  <i class="btn bi-trash3" data-bs-toggle="modal" data-bs-target="#modalDeleteHydrant{{hydrant['id_hydrant']}}"><span class="d-block fst-normal">Delete</span></i>
+                  {% include 'pages/hydrant/modal/modal-delete-hydrant.html' %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</main>
+{% endblock %}

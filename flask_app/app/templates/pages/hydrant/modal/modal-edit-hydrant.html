@@ -1,0 +1,50 @@
+<!-- Awal Modal Checklist APAR -->
+<div class="modal fade" id="modalUpdatehydrant{{hydrant['id_hydrant']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <form method="post" , enctype="multipart/form-data">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Data Peralatan</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="">
+            <label for="formFileSm" class="form-label">Nama Peralatan</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="text" name="nama_peralatan" value="{{hydrant['nama_peralatan']}}" required />
+          </div>
+          <div class="row mt-md-3">
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Merek</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="text" name="merek" value="{{hydrant['merek']}}" />
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Tipe</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="text" name="tipe" value="{{hydrant['tipe']}}" />
+            </div>
+          </div>
+          <div class="row mt-md-3">
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Jumlah</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="number" name="jumlah" value="{{hydrant['jumlah']}}" required />
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Satuan</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="text" name="satuan" value="{{hydrant['satuan']}}" required />
+            </div>
+          </div>
+          <div class="mt-3">
+            <label for="formFileSm" class="form-label">Foto hydrant</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="file" name="foto_hydrant" />
+            <input type="hidden" name="current_foto" value="{{hydrant['foto_hydrant']}}" />
+            <input type="hidden" name="edit" value="" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-outline-secondary btn-second">Reset</button>
+          <button type="submit" class="btn btn-primary btn-first">Kirim</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Akhir Modal Checklist hydrant  -->
