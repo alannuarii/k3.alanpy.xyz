@@ -452,35 +452,33 @@ def data_hydrant():
 
     if 'edit' in request.form:
 
-        current_id = int(request.form['current_id'])
-        id_apar = int(request.form['id_apar'])
-        lokasi = request.form['lokasi']
+        id_hydrant = request.form['id_hydrant']
+        nama_peralatan = request.form['nama_peralatan']
         merek = request.form['merek']
         tipe = request.form['tipe']
-        kapasitas = request.form['kapasitas']
-        jenis = request.form['jenis']
-        masa_berlaku = request.form['masa_berlaku']
-        foto_apar = request.files['foto_apar']
+        jumlah = request.form['jumlah']
+        satuan = request.form['satuan']
         current_foto = request.form['current_foto']
+        foto_hydrant = request.files['foto_hydrant']
 
-        if foto_apar:
-            extension_foto = foto_apar.filename.rsplit('.',1)[1]
+        if foto_hydrant:
+            extension_foto = foto_hydrant.filename.rsplit('.',1)[1]
             if extension_foto not in app.config['ALLOWED_EXTENSIONS']:
                 return redirect('/')
             
             if current_foto != '' or None:
-                foto = object_hydrant.get_foto_apar(current_id)
-                os.remove(os.path.join(app.config['FOTO_APAR'], foto[0]['foto_apar']))
+                foto = object_hydrant.get_foto_hydrant(id_hydrant)
+                os.remove(os.path.join(app.config['FOTO_HYDRANT'], foto[0]['foto_hydrant']))
                 
-            filename = secure_filename(foto_apar.filename)
-            renamefile = f"id_apar={id_apar}-{filename}"
-            foto_apar.save(os.path.join(app.config['FOTO_APAR'], renamefile))
+            filename = secure_filename(foto_hydrant.filename)
+            renamefile = f"{nama_peralatan}-{filename}"
+            foto_hydrant.save(os.path.join(app.config['FOTO_HYDRANT'], renamefile))
         else:
             renamefile = current_foto
 
-        object_hydrant.update_apar(id_apar=id_apar, lokasi=lokasi, merek=merek, tipe=tipe, kapasitas=kapasitas, jenis=jenis, masa_berlaku=masa_berlaku, foto_apar=renamefile, current_id=current_id)
+        object_hydrant.update_hydrant(id_hydrant=id_hydrant, nama_peralatan=nama_peralatan, merek=merek, tipe=tipe, jumlah=jumlah, satuan=satuan, foto_hydrant=renamefile)
             
-        return redirect('/apar/data')
+        return redirect('/hydrant/data')
 
 
     return render_template('pages/hydrant/data-hydrant.html', title='Data Hydrant', hydrants=hydrants)
@@ -495,3 +493,28 @@ def delete_hydrant(id_hydrant):
     object_hydrant.delete_hydrant(id_hydrant)
 
     return redirect('/hydrant/data')
+
+
+@app.route('/hydrant/inspection', methods=['GET','POST'])
+def inspection_hydrant():
+    object_hydrant = K3()
+    hydrants = object_hydrant.get_hydrant()
+    bulan = object_hydrant.get_this_month()
+    check_hydrant = object_hydrant.get_kondisi_hydrant()
+    print(bulan)
+    print(check_hydrant)
+
+    if 'kirim' in request.form:
+        kondisi = request.form['kondisi']
+        keterangan = request.form['keterangan']
+        hydrant_id = request.form['hydrant_id']
+
+        object_hydrant.insert_kondisi_hydrant(kondisi=kondisi, keterangan=keterangan, hydrant_id=hydrant_id)
+
+        return redirect('/hydrant/inspection')
+
+    checks = []
+    for check in check_hydrant:
+        checks.append(check['hydrant_id'])
+
+    return render_template('pages/hydrant/inspection.html', title='Inspeksi Hydrant', hydrants=hydrants, checks=checks)

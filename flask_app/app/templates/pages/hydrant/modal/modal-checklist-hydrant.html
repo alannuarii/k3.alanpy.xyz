@@ -1,0 +1,42 @@
+<!-- Awal Modal Checklist APAR -->
+<div class="modal fade" id="modalChecklistHydrant{{hydrant['id_hydrant']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">{{hydrant['nama_peralatan']}}</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="kondisi" id="flexRadioDefault1" value="Baik" />
+            <label class="form-check-label" for="flexRadioDefault1"> Baik </label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="kondisi" id="flexRadioDefault1" value="Kurang Baik" />
+            <label class="form-check-label" for="flexRadioDefault1"> Kurang Baik </label>
+          </div>
+          <div class="form-check mb-2">
+            <input class="form-check-input" type="radio" name="kondisi" id="flexRadioDefault1" value="Rusak" />
+            <label class="form-check-label" for="flexRadioDefault1"> Rusak </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="kondisi" id="flexRadioDefault1" value="Tidak Ada" />
+            <label class="form-check-label" for="flexRadioDefault1"> Tidak Ada </label>
+          </div>
+          <div class="mt-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Keterangan (Optional)</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="keterangan"></textarea>
+            <input type="hidden" name="hydrant_id" value="{{hydrant['id_hydrant']}}" />
+            <input type="hidden" name="kirim" value="" />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-outline-secondary btn-second">Reset</button>
+          <button type="submit" class="btn btn-primary btn-first">Kirim</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Akhir Modal Checklist APAR  -->

@@ -13,6 +13,11 @@ class K3:
         'masa_berlaku' : '2023-01'
     }
 
+    def get_this_month(self):
+        today =  date.today()
+        month = str(today)[5:-3]
+        return month
+
     def month_id(self, bulan:str):
         if bulan == '01':
             return 'Januari'
@@ -247,3 +252,25 @@ class K3:
     def insert_hydrant(self, nama_peralatan, merek, tipe, jumlah, satuan, foto_hydrant):
         cur.execute(f"INSERT INTO hydrant (nama_peralatan, merek, tipe, jumlah, satuan, foto_hydrant) VALUES ('{nama_peralatan}', '{merek}', '{tipe}', {jumlah}, '{satuan}', '{foto_hydrant}')")
         conn.commit()
+
+    def update_hydrant(self, id_hydrant, nama_peralatan, merek, tipe, jumlah, satuan, foto_hydrant):
+        cur.execute(f"UPDATE hydrant SET nama_peralatan='{nama_peralatan}', merek='{merek}', tipe='{tipe}', jumlah='{jumlah}', satuan='{satuan}', foto_hydrant='{foto_hydrant}' WHERE id_hydrant={id_hydrant}")
+        conn.commit()
+
+    def delete_hydrant(self, id_hydrant):
+        cur.execute(f"DELETE FROM hydrant WHERE id_hydrant={id_hydrant}")
+        conn.commit()
+
+    def get_foto_hydrant(self, id_hydrant):
+        cur.execute(f"SELECT foto_hydrant FROM hydrant WHERE id_hydrant={id_hydrant}")
+        result = cur.fetchall()
+        return result
+
+    def insert_kondisi_hydrant(self, kondisi, keterangan, hydrant_id):
+        cur.execute(f"INSERT INTO kondisi_hydrant (tanggal, kondisi, keterangan, hydrant_id) VALUES (NOW(), '{kondisi}', '{keterangan}', {hydrant_id})")
+        conn.commit()
+
+    def get_kondisi_hydrant(self):
+        cur.execute(f"SELECT DISTINCT (hydrant_id) FROM kondisi_hydrant WHERE MONTH(tanggal) = '{self.get_this_month()}'")
+        result = cur.fetchall()
+        return result

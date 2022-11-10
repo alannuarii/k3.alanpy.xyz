@@ -1,6 +1,6 @@
 <!-- Awal Modal Checklist APAR -->
-<div class="modal fade" id="modalUpdatehydrant{{hydrant['id_hydrant']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal fade" id="modalUpdateHydrant{{hydrant['id_hydrant']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
     <form method="post" , enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
@@ -36,6 +36,7 @@
             <label for="formFileSm" class="form-label">Foto hydrant</label>
             <input class="form-control form-control-sm" id="formFileSm" type="file" name="foto_hydrant" />
             <input type="hidden" name="current_foto" value="{{hydrant['foto_hydrant']}}" />
+            <input type="hidden" name="id_hydrant" value="{{hydrant['id_hydrant']}}" />
             <input type="hidden" name="edit" value="" />
           </div>
         </div>

@@ -1,6 +1,6 @@
 <!-- Awal Modal Checklist APAR -->
 <div class="modal fade" id="modalUpdateAPAR{{apar['id_apar']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
+  <div class="modal-dialog modal-lg">
     <form method="post" , enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
@@ -46,7 +46,7 @@
             <label for="formFileSm" class="form-label">Foto APAR</label>
             <input class="form-control form-control-sm" id="formFileSm" type="file" name="foto_apar" />
             <input type="hidden" name="current_id" value="{{apar['id_apar']}}" />
-            <input type="hidden" name="current_foto" value="{{apar['foto_apar']}}">
+            <input type="hidden" name="current_foto" value="{{apar['foto_apar']}}" />
             <input type="hidden" name="edit" value="" />
           </div>
         </div>
