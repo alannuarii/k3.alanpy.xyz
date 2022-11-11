@@ -236,7 +236,9 @@ def report_apar():
             if date_range_id not in list_periode:
                 list_periode.append(date_range_id)
             
-            list_date.append(object_apar.get_friday(bulan['tanggal'])[1])
+            date_friday = object_apar.get_friday(bulan['tanggal'])[1]
+            if date_friday not in list_date:
+                list_date.append(date_friday)
         
         month = object_apar.format_bulan(query)
     

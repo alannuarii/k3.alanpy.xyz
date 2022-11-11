@@ -87,8 +87,8 @@ class K3:
             return [deltafriday, deltafriday + timedelta(days=+6)]
 
     def get_friday_format(self, tanggal:date):
-        list_date = self.get_friday(tanggal)
         result = []
+        list_date = self.get_friday(tanggal)
         for date in list_date:
             new_date = date.strftime('%d-%m-%Y')
             month_id = self.format_bulan(new_date)
