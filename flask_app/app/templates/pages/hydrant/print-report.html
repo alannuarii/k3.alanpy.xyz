@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'includes/styles.html' %}
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='img/safety.png' ) }}" rel="icon" />
+  </head>
+  <body>
+    {% block content %}
+    <main id="print-report">
+      <div class="container-fluid position-relative overflow-hidden">
+        <div class="table-responsive">
+          <table class="table table-header table-bordered border-dark text-center">
+            <thead>
+              <tr class="align-middle">
+                <th scope="col" rowspan="2"><img src="{{ url_for('static', filename='img/logo-pln.png' ) }}" class="img-fluid" alt="" /></th>
+                <th scope="col" class="smt">PLN SISTEM MANAJEMEN TERINTEGRASI</th>
+                <th scope="col" class="text-start">Nomor</th>
+                <th scope="col" class="text-start">: SMI-PKTM-CL-U-002</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col" class="checklist">CHECKLIST</th>
+                <th scope="col" class="text-start">Revisi</th>
+                <th scope="col" class="text-start">: 0</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col">UIKL SULAWESI</th>
+                <th scope="col" rowspan="3" class="align-middle">INSPEKSI HYDRANT</th>
+                <th scope="col" class="text-start">Edisi</th>
+                <th scope="col" class="text-start">: 2</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col">UPDK MINAHASA</th>
+                <th scope="col" class="text-start">Tanggal Terbit</th>
+                <th scope="col" class="text-start">: 03 September 2020</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col">ULPLTD KOTAMOBAGU</th>
+                <th scope="col" class="text-start">Halaman</th>
+                <th scope="col" class="text-start">: 1 dari 1</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <h6 class="fw-bolder text-center mt-lg-2">BULAN {{bulan|upper}}</h6>
+        <div class="table-responsive">
+          <table class="table main-table table-bordered border-dark text-center">
+            <thead>
+              <tr class="align-middle">
+                <th scope="col" rowspan="2">NO</th>
+                <th scope="col" rowspan="2">NAMA PERALATAN</th>
+                <th scope="col" rowspan="2">MEREK</th>
+                <th scope="col" rowspan="2">TIPE</th>
+                <th scope="col" rowspan="2">JUMLAH</th>
+                <th scope="col" rowspan="2">KONDISI</th>
+                <th scope="col" rowspan="2">KETERANGAN</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for hydrant in all_hydrant %}
+              <tr class="align-middle">
+                <td>{{loop.index}}</td>
+                <td class="text-start">{{hydrant['nama_peralatan']}}</td>
+                <td>{{hydrant['merek']}}</td>
+                <td>{{hydrant['tipe']}}</td>
+                <td>{{hydrant['jumlah']}} {{hydrant['satuan']}}</td>
+                <td>{{hydrant['kondisi']}}</td>
+                <td>{{hydrant['keterangan']}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="fst-italic">Source = https://k3.alanpy.xyz/{{request.path}}</p>
+
+        <div class="row">
+          <div class="col-6 text-center">
+            <h6 class="invisible mb-3">Kotamobagu, 28 Oktober 2022</h6>
+            <h6 class="mb-5">PLT MANAGER</h6>
+            <h6 class="fw-bolder">BAHAR SUDRAJAT</h6>
+          </div>
+          <div class="col-6 text-center">
+            <h6 class="mb-3">Kotamobagu, {{tanggal}}</h6>
+            <h6 class="mb-5">PJ LAKS K3L DAN KEAMANAN</h6>
+            <h6 class="fw-bolder">ALAN NUARI</h6>
+          </div>
+        </div>
+        <div class="text-center download position-absolute bottom-0 start-50 translate-middle-x">
+          <i class="bi-cloud-arrow-down btn" onclick="window.print()"></i>
+          <h6>Download PDF</h6>
+        </div>
+      </div>
+    </main>
+    {% endblock %} {% include 'includes/scripts.html' %}
+  </body>
+</html>

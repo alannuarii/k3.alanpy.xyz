@@ -499,10 +499,7 @@ def delete_hydrant(id_hydrant):
 def inspection_hydrant():
     object_hydrant = K3()
     hydrants = object_hydrant.get_hydrant()
-    bulan = object_hydrant.get_this_month()
     check_hydrant = object_hydrant.get_kondisi_hydrant()
-    print(bulan)
-    print(check_hydrant)
 
     if 'kirim' in request.form:
         kondisi = request.form['kondisi']
@@ -518,3 +515,35 @@ def inspection_hydrant():
         checks.append(check['hydrant_id'])
 
     return render_template('pages/hydrant/inspection.html', title='Inspeksi Hydrant', hydrants=hydrants, checks=checks)
+
+
+@app.route('/hydrant/report')
+def report_hydrant():
+    month = None
+    year = None
+    next_month = None
+
+    if 'month' in request.args:
+        query = request.args.get('month')
+
+        object_hydrant = K3()
+        tanggal = object_hydrant.get_date(f"{query}-01")
+        next_month = tanggal + relativedelta(months=+1) 
+        
+        month = object_hydrant.format_bulan(query)
+        year = str(tanggal)[:-6]
+    
+    return render_template('pages/hydrant/report.html', title='Report Hydrant', month=month, year=year, tanggal=next_month)
+
+
+@app.route('/hydrant/report/<tanggal>')
+def print_report_hydrant(tanggal):
+    
+    object_hydrant = K3()
+    tanggal_date = object_hydrant.get_date(tanggal) + relativedelta(months=-1) 
+    all_hydrant = object_hydrant.get_inspection_hydrant(str(tanggal_date)[5:-3])
+
+    bulan = object_hydrant.format_bulan(str(tanggal_date))
+    tanggal_format = object_hydrant.get_tanggal_format(object_hydrant.get_date(tanggal))
+
+    return render_template('pages/hydrant/print-report.html', title='Report Hydrant', all_hydrant=all_hydrant, bulan=bulan, tanggal=tanggal_format)

@@ -274,3 +274,8 @@ class K3:
         cur.execute(f"SELECT DISTINCT (hydrant_id) FROM kondisi_hydrant WHERE MONTH(tanggal) = '{self.get_this_month()}'")
         result = cur.fetchall()
         return result
+
+    def get_inspection_hydrant(self, tanggal):
+        cur.execute(f"SELECT * FROM hydrant JOIN kondisi_hydrant ON hydrant.id_hydrant = kondisi_hydrant.hydrant_id WHERE MONTH (tanggal) = '{tanggal}' GROUP BY id_hydrant ORDER BY id_hydrant")
+        result = cur.fetchall()
+        return result
