@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %}{% block content %}
+<main id="data-apar">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="section-title position-relative">
+          <h2>TOOLS</h2>
+          <p>DAFTAR HADIR</p>
+          <i class="btn bi-plus-circle position-absolute top-0 end-0 me-md-3" data-bs-toggle="modal" data-bs-target="#modal-buat-daftar-hadir"><span class="d-block fst-normal">Tambah</span></i>
+          {% include 'pages/tools/daftar-hadir/modal/modal-buat-daftar-hadir.html' %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr class="align-middle">
+              <th scope="col">No</th>
+              <th scope="col">Hari/Tanggal</th>
+              <th scope="col">Lokasi</th>
+              <th scope="col">Agenda</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="align-middle">
+              <td>1</td>
+              <td>Senin, 14 November 2022</td>
+              <td>Ruang Rapat</td>
+              <td>Daily Meeting</td>
+              <td>. . .</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

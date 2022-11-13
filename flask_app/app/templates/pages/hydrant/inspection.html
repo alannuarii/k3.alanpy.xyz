@@ -1,7 +1,7 @@
 {% extends 'layouts/base.html' %} {% block content %}
 <main id="checklist-apar">
   <div class="row">
-    <div class="col">
+    <div class="col offset-md-3">
       <div class="section-title position-relative">
         <h2>HYDRANT</h2>
         <p>INSPEKSI HYRDANT</p>
@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-6 offset-md-3">
       <div class="list-group">
         {% for hydrant in hydrants %} {% if hydrant['id_hydrant'] in checks %}
         <button type="button" class="list-group-item list-group-item-action d-flex" disabled>

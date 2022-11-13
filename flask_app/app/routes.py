@@ -604,3 +604,9 @@ def print_report_hydrant(tanggal):
     tanggal_format = object_hydrant.get_tanggal_format(object_hydrant.get_date(tanggal))
 
     return render_template('pages/hydrant/print-report.html', title='Report Hydrant', all_hydrant=all_hydrant, bulan=bulan, tanggal=tanggal_format)
+
+
+@app.route('/tools/daftar-hadir')
+def daftar_hadir():
+
+    return render_template('pages/tools/daftar-hadir/daftar-hadir.html', title='Daftar Hadir')

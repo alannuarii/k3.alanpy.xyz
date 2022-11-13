@@ -1,0 +1,45 @@
+<!-- Awal Modal Checklist APAR -->
+<div class="modal fade" id="modal-buat-daftar-hadir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <form method="post" enctype="multipart/form-data">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Buat Daftar Hadir</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="">
+            <label for="formFileSm" class="form-label">Agenda</label>
+            <input class="form-control form-control-sm" id="formFileSm" type="text" name="agenda" required />
+          </div>
+          <div class="row mt-md-3">
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Tanggal</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="date" name="tanggal" required />
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Waktu</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="time" name="waktu" required />
+            </div>
+          </div>
+          <div class="row mt-md-3">
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Lokasi</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="text" name="lokasi" required />
+            </div>
+            <div class="col-md-6 mt-3 mt-md-0">
+              <label for="formFileSm" class="form-label">Link Online Meeting (Jika Rapat Virtual)</label>
+              <input class="form-control form-control-sm" id="formFileSm" type="text" name="link" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <input type="hidden" name="buat" value="" />
+          <button type="reset" class="btn btn-outline-secondary btn-second">Reset</button>
+          <button type="submit" class="btn btn-primary btn-first">Kirim</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Akhir Modal Checklist APAR  -->

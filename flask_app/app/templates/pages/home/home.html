@@ -8,33 +8,59 @@
       </div>
     </div>
 
-    <div class="row gy-4 mt-3 mb-5 mb-xl-0 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
-      <div class="col-xl-2 col-md-4 col-6">
+    <div class="row row-cols-md-6 gy-4 mt-3 mb-xl-0 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+      <div class="col-md col-6">
         <div class="icon-box rounded-5 btn" data-bs-toggle="modal" data-bs-target="#modal-apar">
           <img src="{{ url_for('static', filename='img/fire-extinguisher.png' ) }}" class="img-fluid" alt="" />
           <h3><a href="">APAR</a></h3>
         </div>
       </div>
-      <div class="col-xl-2 col-md-4 col-6">
-        <div class="icon-box rounded-5">
+      <div class="col-md col-6">
+        <div class="icon-box rounded-5 btn">
           <img src="{{ url_for('static', filename='img/shovel.png' ) }}" class="img-fluid" alt="" />
           <h3><a href="">APAT</a></h3>
         </div>
       </div>
-      <div class="col-xl-2 col-md-4 col-6">
+      <div class="col-md col-6">
         <div class="icon-box rounded-5 btn" data-bs-toggle="modal" data-bs-target="#modal-hydrant">
           <img src="{{ url_for('static', filename='img/fire-hydrant.png' ) }}" class="img-fluid" alt="" />
           <h3><a href="">HYDRANT</a></h3>
         </div>
       </div>
-      <div class="col-xl-2 col-md-4 col-6">
+      <div class="col-md col-6">
         <div class="icon-box rounded-5 btn" data-bs-toggle="modal" data-bs-target="#modal-p3k">
           <img src="{{ url_for('static', filename='img/first-aid-kit.png' ) }}" class="img-fluid" alt="" />
           <h3><a href="">P3K</a></h3>
         </div>
       </div>
-      {% include 'pages/home/modal/modal-home.html' %}
+    </div>
+    <div class="row row-cols-md-6 gy-4 mt-md-3 mt-0 mb-5 mb-xl-0 justify-content-center" data-aos="zoom-in" data-aos-delay="250">
+      <div class="col-md col-6">
+        <div class="icon-box rounded-5 btn">
+          <img src="{{ url_for('static', filename='img/helmet.png' ) }}" class="img-fluid" alt="" />
+          <h3><a href="">APD</a></h3>
+        </div>
+      </div>
+      <div class="col-md col-6">
+        <div class="icon-box rounded-5 btn" data-bs-toggle="modal" data-bs-target="#modal-safety-induction">
+          <img src="{{ url_for('static', filename='img/play.png' ) }}" class="img-fluid" alt="" />
+          <h3 style="font-size: 11px"><a href="">SAFETY INDUCTION</a></h3>
+        </div>
+      </div>
+      <div class="col-md col-6">
+        <div class="icon-box rounded-5 btn">
+          <img src="{{ url_for('static', filename='img/rules.png' ) }}" class="img-fluid" alt="" />
+          <h3><a href="">SOP</a></h3>
+        </div>
+      </div>
+      <div class="col-md col-6">
+        <div class="icon-box rounded-5 btn" data-bs-toggle="modal" data-bs-target="#modal-tools">
+          <img src="{{ url_for('static', filename='img/tool-box.png' ) }}" class="img-fluid" alt="" />
+          <h3><a href="">TOOLS</a></h3>
+        </div>
+      </div>
     </div>
   </div>
+  {% include 'pages/home/modal/modal-home.html' %}
 </section>
 {% endblock %}

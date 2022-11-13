@@ -16,14 +16,15 @@
               {% if msg %}
               <p class="text-center">{{msg}}</p>
               {% endif %}
-              <div class="input-group input-group-lg mb-2">
+              <div class="input-group input-group-lg mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-lg"><i class="bi-person-fill-lock"></i></span>
                 <input type="text" class="form-control" placeholder="Username" name="username" />
               </div>
               <div class="input-group input-group-lg">
                 <span class="input-group-text" id="inputGroup-sizing-lg"><i class="bi-lock-fill"></i></span>
-                <input type="password" class="form-control" placeholder="Password" name="password" />
+                <input type="password" class="form-control input-password" placeholder="Password" name="password" />
               </div>
+              <p class="mt-1 ms-2 text-sm-start d-block"><input type="checkbox" onclick="show()" /> Show Password</p>
             </div>
             <div class="card-footer"><input class="btn" type="submit" value="Login" /></div>
           </form>

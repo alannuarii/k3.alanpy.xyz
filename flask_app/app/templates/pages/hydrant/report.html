@@ -1,7 +1,7 @@
 {% extends 'layouts/base.html' %} {% block content %}
 <main id="report-apar">
   <div class="row">
-    <div class="col">
+    <div class="col offset-md-3">
       <div class="section-title position-relative">
         <h2>HYDRANT</h2>
         <p>REPORT HYDRANT</p>
@@ -14,7 +14,7 @@
     </form>
   </div>
   {% if month %}
-  <div class="list-group d-grid gap-2 border-0">
+  <div class="list-group d-grid gap-2 border-0 col-md-6 offset-md-3">
     <div class="position-relative text-center">
       <a href="{{ url_for('print_report_hydrant', tanggal=tanggal ) }}" class="list-group-item border rounded-4 mx-3 py-3 pe-5" for="listGroupRadioGrid1">
         <strong class="fw-semibold">Laporan Inspeksi Hydrant</strong>
