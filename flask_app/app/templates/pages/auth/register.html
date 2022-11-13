@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'includes/styles.html' %}
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='img/safety.png' ) }}" rel="icon" />
+  </head>
+  <body>
+    {% block content %}
+    <section id="login" class="d-flex align-items-center justify-content-center">
+      <div class="container">
+        <div class="card text-center">
+          <form action="" method="post">
+            <div class="card-header p-3">R E G I S T E R</div>
+            <div class="card-body py-3 px-4">
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-lg"><i class="bi-person-fill"></i></span>
+                <input type="text" class="form-control" placeholder="Name" name="name" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-lg"><i class="bi-envelope-fill"></i></span>
+                <input type="email" class="form-control" placeholder="Email" name="email" />
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-lg"><i class="bi-person-fill-lock"></i></span>
+                <input type="text" class="form-control" placeholder="Username" name="username" />
+              </div>
+              <div class="input-group">
+                <span class="input-group-text" id="inputGroup-sizing-lg"><i class="bi-lock-fill"></i></span>
+                <input type="password" class="form-control" placeholder="Password" name="password" />
+              </div>
+            </div>
+            <div class="card-footer"><input class="btn" type="submit" value="Register" /></div>
+          </form>
+        </div>
+      </div>
+    </section>
+    {% endblock %} {% include 'includes/scripts.html' %}
+  </body>
+</html>

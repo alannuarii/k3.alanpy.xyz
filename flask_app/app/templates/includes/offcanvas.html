@@ -1,7 +1,26 @@
 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
   <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasRightLabel">Offcanvas right</h5>
+    <h5 class="offcanvas-title" id="offcanvasRightLabel">User Info</h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body">...</div>
+  <div class="offcanvas-body text-center">
+    {% if session %}
+    <div class="card d-block mx-auto mt-4" style="width: 18rem">
+      <img src="{{ url_for('static', filename='img/engineer.png' ) }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">{{session['name']}}</h5>
+        <p class="card-text">{{session['username']}}</p>
+        <a href="{{ url_for('logout' ) }}" class="btn btn-first mt-4">Logout</a>
+      </div>
+    </div>
+    {% else %}
+    <div class="card d-block mx-auto mt-4" style="width: 18rem">
+      <img src="{{ url_for('static', filename='img/unknown.png' ) }}" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">Anonymous</h5>
+        <a href="{{ url_for('login' ) }}" class="btn btn-first mt-4">Login</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
 </div>

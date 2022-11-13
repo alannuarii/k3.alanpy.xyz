@@ -1,15 +1,67 @@
 import os
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 from app.k3 import K3
+from app.user import User
 from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from werkzeug.utils import secure_filename
 
 
+@app.route('/login', methods=['GET','POST'])
+def login():
+    msg = ''
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        object_user = User()
+        user = object_user.get_user(username)
+
+        if user == None:
+            msg = 'Username Incorrect'
+        else:
+            if username == user['username'] and not object_user.check_password(user['password'], password):
+                msg = 'Password Incorrect'
+            elif object_user.check_password(user['password'], password) and username == user['username']:
+                session['loggedin'] = True
+                session['username'] = user['username']
+                session['email'] = user['email']
+                session['name'] = user['name']
+                return redirect('/')
+    
+    return render_template('pages/auth/login.html', title='Login', msg=msg)
+
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/login')
+
+
+@app.route('/register', methods=['GET','POST'])
+def register():
+    
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        username = request.form['username']
+        password = request.form['password']
+
+        object_user = User()
+        password_hash = object_user.set_password(password)
+
+        object_user.register(name=name, email=email, username=username, password=password_hash)
+
+        return redirect('/login') 
+
+    return render_template('pages/auth/register.html', title='Register')
+
+
 @app.route('/')
 def home():
-
+    
     return render_template('pages/home/home.html', title='K3 App')
 
 
@@ -21,7 +73,7 @@ def data_apar():
     for apar in apars:
         apar['masa_berlaku'] = f"{object_apar.format_bulan(apar['masa_berlaku'])} {apar['masa_berlaku'][:-3]}"
 
-    if 'add' in request.form:
+    if 'add' in request.form and 'loggedin' in session:
         try:
             id_apar = int(request.form['id_apar'])
             lokasi = request.form['lokasi']
@@ -54,7 +106,7 @@ def data_apar():
         except Exception as error:
             print(error)
 
-    if 'edit' in request.form:
+    if 'edit' in request.form and 'loggedin' in session:
 
         current_id = int(request.form['current_id'])
         id_apar = int(request.form['id_apar'])
@@ -99,9 +151,10 @@ def delete_apar(id_apar):
 
     object_apar = K3()
     foto = object_apar.get_foto_apar(id_apar)
-    if foto[0]['foto_apar'] != '' or None:
-        os.remove(os.path.join(app.config['FOTO_APAR'], foto[0]['foto_apar']))
-    object_apar.delete_apar(id_apar)
+    if 'loggedin' in session:
+        if foto[0]['foto_apar'] != '' or None:
+            os.remove(os.path.join(app.config['FOTO_APAR'], foto[0]['foto_apar']))
+        object_apar.delete_apar(id_apar)
 
     return redirect('/apar/data')
 
@@ -140,7 +193,7 @@ def checklist_apar():
         else:
             apar['selang_corong'] = '' 
 
-    if 'kirim' in request.form:
+    if 'kirim' in request.form and 'loggedin' in session:
         try:
             if 'fisik' in request.form:
                 fisik = request.form['fisik']
@@ -176,7 +229,7 @@ def checklist_apar():
         except Exception as error:
             print(error)
     
-    if 'update' in request.form:
+    if 'update' in request.form and 'loggedin' in session:
         try:
             if 'fisik' in request.form:
                 fisik = request.form['fisik']
@@ -271,7 +324,7 @@ def data_p3k():
     for p3k in all_p3k:
         p3k['kadaluarsa'] = f"{object_p3k.format_bulan(p3k['kadaluarsa'])} {p3k['kadaluarsa'][:-3]}"
 
-    if 'input' in request.form:
+    if 'input' in request.form and 'loggedin' in session:
         nama_barang = request.form['nama_barang']
         satuan = request.form['satuan']
         kadaluarsa = request.form['kadaluarsa']
@@ -289,7 +342,7 @@ def data_p3k():
 
         return redirect('/p3k/data')
 
-    if 'edit' in request.form:
+    if 'edit' in request.form and 'loggedin' in session:
         id_p3k = request.form['id_p3k']
         nama_barang = request.form['nama_barang']
         satuan = request.form['satuan']
@@ -315,7 +368,7 @@ def data_p3k():
             
         return redirect('/p3k/data')
 
-    if 'kantor' in request.form:
+    if 'kantor' in request.form and 'loggedin' in session:
         p3k_id = request.form['p3k_id']
         tanggal = request.form['tanggal']
         masuk = request.form['masuk']
@@ -325,7 +378,7 @@ def data_p3k():
 
         return redirect('/p3k/data')
 
-    if 'ccr' in request.form:
+    if 'ccr' in request.form and 'loggedin' in session:
         p3k_id = request.form['p3k_id']
         tanggal = request.form['tanggal']
         masuk = request.form['masuk']
@@ -335,7 +388,7 @@ def data_p3k():
 
         return redirect('/p3k/data')
 
-    if 'tps' in request.form:
+    if 'tps' in request.form and 'loggedin' in session:
         p3k_id = request.form['p3k_id']
         tanggal = request.form['tanggal']
         masuk = request.form['masuk']
@@ -345,7 +398,7 @@ def data_p3k():
 
         return redirect('/p3k/data')
 
-    if 'pos' in request.form:
+    if 'pos' in request.form and 'loggedin' in session:
         p3k_id = request.form['p3k_id']
         tanggal = request.form['tanggal']
         masuk = request.form['masuk']
@@ -355,7 +408,7 @@ def data_p3k():
 
         return redirect('/p3k/data')
 
-    if 'stock' in request.form:
+    if 'stock' in request.form and 'loggedin' in session:
         p3k_id = request.form['p3k_id']
         tanggal = request.form['tanggal']
         masuk = request.form['masuk']
@@ -373,8 +426,9 @@ def delete_p3k(id_p3k):
 
     object_p3k = K3()
     foto = object_p3k.get_foto_p3k(id_p3k)
-    os.remove(os.path.join(app.config['FOTO_P3K'], foto[0]['foto_p3k']))
-    object_p3k.delete_p3k(id_p3k)
+    if 'loggedin' in session:
+        os.remove(os.path.join(app.config['FOTO_P3K'], foto[0]['foto_p3k']))
+        object_p3k.delete_p3k(id_p3k)
 
     return redirect('/p3k/data')
 
@@ -425,7 +479,7 @@ def data_hydrant():
     object_hydrant = K3()
     hydrants = object_hydrant.get_hydrant()
 
-    if 'add' in request.form:
+    if 'add' in request.form and 'loggedin' in session:
         try:
             nama_peralatan = request.form['nama_peralatan']
             merek = request.form['merek']
@@ -452,7 +506,7 @@ def data_hydrant():
         except Exception as error:
             print(error)
 
-    if 'edit' in request.form:
+    if 'edit' in request.form and 'loggedin' in session:
 
         id_hydrant = request.form['id_hydrant']
         nama_peralatan = request.form['nama_peralatan']
@@ -490,9 +544,10 @@ def delete_hydrant(id_hydrant):
 
     object_hydrant = K3()
     foto = object_hydrant.get_foto_hydrant(id_hydrant)
-    if foto[0]['foto_hydrant'] != '' or None:
-        os.remove(os.path.join(app.config['FOTO_HYDRANT'], foto[0]['foto_hydrant']))
-    object_hydrant.delete_hydrant(id_hydrant)
+    if 'loggedin' in session:
+        if foto[0]['foto_hydrant'] != '' or None:
+            os.remove(os.path.join(app.config['FOTO_HYDRANT'], foto[0]['foto_hydrant']))
+        object_hydrant.delete_hydrant(id_hydrant)
 
     return redirect('/hydrant/data')
 
@@ -503,7 +558,7 @@ def inspection_hydrant():
     hydrants = object_hydrant.get_hydrant()
     check_hydrant = object_hydrant.get_kondisi_hydrant()
 
-    if 'kirim' in request.form:
+    if 'kirim' in request.form and 'loggedin' in session:
         kondisi = request.form['kondisi']
         keterangan = request.form['keterangan']
         hydrant_id = request.form['hydrant_id']

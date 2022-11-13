@@ -30,8 +30,7 @@ main {
 
 .btn-first {
   background-color: #ffc451;
-  color: #fff;
-  color: #444444;
+  color: #444444 !important;
   border-color: #ffc451;
   transition: ease-in-out 0.3s;
 }
@@ -57,7 +56,7 @@ main {
 
 .offcanvas {
   background: rgba(0, 0, 0, 0.8);
-  color: #fff;
+  color: #444444;
 }
 
 .offcanvas .offcanvas-header {
@@ -67,6 +66,25 @@ main {
 
 .offcanvas .offcanvas-header h5 {
   font-weight: 700;
+}
+
+.offcanvas .card {
+  background: rgba(0, 0, 0, 0);
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.offcanvas .offcanvas-body img {
+  width: 150px;
+}
+
+.offcanvas .offcanvas-body h5 {
+  font-weight: 900;
+  color: #ffc451;
+}
+
+.offcanvas .offcanvas-body p {
+  color: #fff;
+  margin-top: -10px;
 }
 
 .section-title {
@@ -110,6 +128,66 @@ label {
   font-size: 14px;
 }
 
+/* LOGIN */
+#login {
+  width: 100%;
+  height: 100vh;
+  background: url("../img/tekstura-texture-poverhnost-4802.jpg") top center;
+  background-size: cover;
+  position: relative;
+}
+#login:before {
+  content: "";
+  background: rgba(0, 0, 0, 0.6);
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+#login .container {
+  position: relative;
+  text-align: center;
+  width: 400px;
+}
+#login .card {
+  background: rgba(0, 0, 0, 0.8);
+}
+#login .card-header {
+  font-size: 25px;
+  font-weight: 700;
+  color: #ffc451;
+  border-bottom: 1px solid #444444;
+}
+#login .card-body span {
+  background: rgba(0, 0, 0, 0.8);
+}
+#login .card-body i {
+  color: #ffc451;
+}
+#login .card-body p {
+  color: #fff;
+}
+#login .card-footer {
+  background-color: #ffc451;
+  color: #444444;
+  transition: ease-in-out 0.3s;
+  font-size: 20px;
+}
+#login .card-footer:hover {
+  background-color: #ffd584;
+}
+#login .back-home {
+  color: #ffc451;
+  transition: ease-in-out 0.3s;
+}
+#login .back-home:hover {
+  color: #fff;
+  border: 1px solid #ffc451;
+}
+#login .back-home i {
+  font-size: 20px;
+}
 /* NAVBAR */
 .navbar {
   background: rgba(0, 0, 0, 0.8);

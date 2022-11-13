@@ -147,3 +147,12 @@ cur = conn.cursor(dictionary=True)
 #       PRIMARY KEY (id_kondisi_hydrant),
 #       CONSTRAINT fk_kondisi_hydrant FOREIGN KEY (hydrant_id) REFERENCES hydrant (id_hydrant)
 # )
+
+# CREATE TABLE user 
+# (
+#         username VARCHAR(15) NOT NULL,
+#         name VARCHAR(30) NOT NULL,
+#         email VARCHAR(30) NOT NULL,
+#         password VARCHAR(250) NOT NULL,
+#         PRIMARY KEY (username)
+# );

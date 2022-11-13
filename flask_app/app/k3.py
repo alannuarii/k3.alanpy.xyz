@@ -1,4 +1,3 @@
-from unittest import result
 from app.conn import cur, conn
 from datetime import date, timedelta, datetime
 
