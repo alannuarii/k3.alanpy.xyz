@@ -18,19 +18,29 @@
             <tr class="align-middle">
               <th scope="col">No</th>
               <th scope="col">Hari/Tanggal</th>
+              <th scope="col">Waktu</th>
               <th scope="col">Lokasi</th>
               <th scope="col">Agenda</th>
               <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
+            {% for agenda in agendas %}
             <tr class="align-middle">
-              <td>1</td>
-              <td>Senin, 14 November 2022</td>
-              <td>Ruang Rapat</td>
-              <td>Daily Meeting</td>
-              <td>. . .</td>
+              <td>{{loop.index}}</td>
+              <td>{{agenda['tanggal']}}</td>
+              <td>Pukul {{agenda['waktu']}} WITA</td>
+              <td>{{agenda['lokasi']}}</td>
+              <td>{{agenda['agenda_rapat']}}</td>
+              <td>
+                <div class="d-flex justify-content-evenly">
+                  <a href="{{ url_for('input_daftar_hadir', id=agenda['id_agenda'] ) }}"><i class="bi-people"></i></a>
+                  <i class="bi-people"></i>
+                  <i class="bi-people"></i>
+                </div>
+              </td>
             </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>

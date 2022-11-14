@@ -18,6 +18,3 @@ class User:
         cur.execute(f"SELECT * FROM user WHERE username = '{username}'")
         result = cur.fetchone()
         return result
-
-    def get_session(self):
-        pass

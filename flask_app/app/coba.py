@@ -51,5 +51,9 @@ result = nama_file.rsplit('.', 1)[1]
 
 extention = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
-print(today)
+hari = today.strftime('%A')
+
+print(hari)
+
+
 

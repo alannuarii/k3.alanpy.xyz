@@ -156,3 +156,30 @@ cur = conn.cursor(dictionary=True)
 #         password VARCHAR(250) NOT NULL,
 #         PRIMARY KEY (username)
 # );
+
+# CREATE TABLE agenda
+# (
+#         id_agenda INT NOT NULL AUTO_INCREMENT,
+#         tanggal DATE NOT NULL,
+#         waktu TIME NOT NULL,
+#         agenda_rapat VARCHAR(100) NOT NULL,
+#         lokasi VARCHAR(30) NOT NULL,
+#         link VARCHAR(50)
+#         PRIMARY KEY (id_agenda)
+# )
+
+# CREATE TABLE absen
+# (
+#         id_absen INT NOT NULL AUTO_INCREMENT,
+#         nama VARCHAR(30) NOT NULL,
+#         instansi VARCHAR(50),
+#         jabatan VARCHAR(30),
+#         email VARCHAR(25),
+#         hp VARCHAR(15),
+#         ttd VARCHAR(50) NOT NULL,
+#         qrcode VARCHAR(50) NOT NULL,
+#         checkin TIMESTAMP NOT NULL,
+#         agenda_id INT NOT NULL,
+#         PRIMARY KEY (id_absen),
+#         CONSTRAINT fk_absen_agenda FOREIGN KEY (agenda_id) REFERENCES agenda (id_agenda)
+# )

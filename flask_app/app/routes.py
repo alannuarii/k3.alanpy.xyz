@@ -3,6 +3,7 @@ from app import app
 from flask import render_template, request, redirect, session
 from app.k3 import K3
 from app.user import User
+from app.utils import Absen
 from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from werkzeug.utils import secure_filename
@@ -565,7 +566,6 @@ def inspection_hydrant():
 
         object_hydrant.insert_kondisi_hydrant(kondisi=kondisi, keterangan=keterangan, hydrant_id=hydrant_id)
 
-        return redirect('/hydrant/inspection')
 
     checks = []
     for check in check_hydrant:
@@ -606,7 +606,29 @@ def print_report_hydrant(tanggal):
     return render_template('pages/hydrant/print-report.html', title='Report Hydrant', all_hydrant=all_hydrant, bulan=bulan, tanggal=tanggal_format)
 
 
-@app.route('/tools/daftar-hadir')
+@app.route('/tools/daftar-hadir', methods=['GET','POST'])
 def daftar_hadir():
 
-    return render_template('pages/tools/daftar-hadir/daftar-hadir.html', title='Daftar Hadir')
+    object_absen = Absen()
+    agendas = object_absen.get_agenda()
+
+    for agenda in agendas:
+        agenda['tanggal'] = object_absen.get_date_format(agenda['tanggal'])
+        agenda['waktu'] = str(agenda['waktu'])[:-3]
+
+    if 'buat' in request.form:
+        agenda_rapat = request.form['agenda']
+        tanggal = request.form['tanggal']
+        waktu = request.form['waktu']
+        lokasi = request.form['lokasi']
+        link = request.form['link']
+
+        object_absen.insert_agenda(agenda_rapat=agenda_rapat, tanggal=tanggal, waktu=waktu, lokasi=lokasi, link=link)
+
+    return render_template('pages/tools/daftar-hadir/daftar-hadir.html', title='Daftar Hadir', agendas=agendas)
+
+
+@app.route('/tools/daftar-hadir/input/<id>', methods=['GET','POST'])
+def input_daftar_hadir(id):
+    print(id)
+    return render_template('pages/tools/daftar-hadir/input-daftar-hadir.html', title='Input Daftar Hadir')
