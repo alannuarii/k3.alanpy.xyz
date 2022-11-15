@@ -177,7 +177,6 @@ cur = conn.cursor(dictionary=True)
 #         email VARCHAR(25),
 #         hp VARCHAR(15),
 #         ttd VARCHAR(50) NOT NULL,
-#         qrcode VARCHAR(50) NOT NULL,
 #         checkin TIMESTAMP NOT NULL,
 #         agenda_id INT NOT NULL,
 #         PRIMARY KEY (id_absen),

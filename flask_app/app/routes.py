@@ -632,16 +632,24 @@ def daftar_hadir():
 def input_daftar_hadir(id):
 
     object_absen = Absen()
+    agenda = object_absen.get_agenda_id(id)
+    agenda['tanggal'] = object_absen.get_date_format(agenda['tanggal'])
+    agenda['waktu'] = str(agenda['waktu'])[:-3]
     
-    if 'ttd' in request.form:
+    if 'input' in request.form and request.form['ttd'] != '':
         nama = request.form['nama']
         instansi = request.form['instansi']
         jabatan = request.form['jabatan']
         email = request.form['email']
         hp = request.form['hp']
+
         ttd = request.form['ttd']
         foto_ttd = object_absen.base64tojpg(ttd)
+        filename = f"{nama}"
+        foto_ttd.save(os.path.join(app.config['FOTO_TTD'], filename))
 
-        foto_ttd.save(os.path.join(app.config['FOTO_TTD'], 'ttd.png'))
+        object_absen.insert_absen(nama=nama, instansi=instansi, jabatan=jabatan, email=email, hp=hp, agenda_id=id, ttd=filename)
 
-    return render_template('pages/tools/daftar-hadir/input-daftar-hadir.html', title='Input Daftar Hadir')
+
+
+    return render_template('pages/tools/daftar-hadir/input-daftar-hadir.html', title='Input Daftar Hadir', agenda=agenda)

@@ -12,7 +12,6 @@ document.getElementById("submit").addEventListener("click", function () {
 
   var data = signaturePad.toDataURL("image/png");
   ttd.value = data
-  console.log(ttd.value)
 });
 
 document.getElementById("clear").addEventListener("click", function () {
