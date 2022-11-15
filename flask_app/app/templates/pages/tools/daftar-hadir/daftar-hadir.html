@@ -1,15 +1,57 @@
 {% extends 'layouts/base.html' %}{% block content %}
-<main id="data-apar">
+<main id="">
   <div class="container-fluid">
     <div class="row">
       <div class="col">
         <div class="section-title position-relative">
           <h2>TOOLS</h2>
           <p>DAFTAR HADIR</p>
+          <i class="btn bi-printer position-absolute top-0 end-0 me-md-3"><span class="d-block fst-normal">Print</span></i>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row mb-3">
+      <div class="col">
+        <div class="card px-md-5 px-4 pt-md-4 pt-3 pb-2 mx-3 rounded-4">
+          <div class="mb-3 row">
+            <label for="inputPassword" class="col-sm-2 col-form-label">Agenda</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" value="{{absens[0]['agenda_rapat']}}" disabled />
+            </div>
+          </div>
+          <div class="collapse" id="collapseExample">
+            <div class="mb-3 row">
+              <label for="inputPassword" class="col-sm-2 col-form-label">Hari / Tanggal</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" value="{{absens[0]['tanggal']}}" disabled />
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="inputPassword" class="col-sm-2 col-form-label">Waktu</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" value="{{absens[0]['waktu']}}" disabled />
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="inputPassword" class="col-sm-2 col-form-label">Lokasi</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" value="{{absens[0]['lokasi']}}" disabled />
+              </div>
+            </div>
+            {% if absens[0]['link'] %}
+            <div class="mb-3 row">
+              <label for="inputPassword" class="col-sm-2 col-form-label">Link</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" value="{{absens[0]['link']}}" disabled />
+              </div>
+            </div>
+            {% endif %}
+          </div>
+          <i class="bi-chevron-double-down d-block mx-auto mt-2" style="cursor: pointer" data-bs-toggle="collapse" data-bs-target="#collapseExample"></i>
+        </div>
+      </div>
+    </div>
+    <div class="row px-3">
       <div class="table-responsive">
         <table class="table table-bordered text-center">
           <thead>

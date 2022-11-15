@@ -124,6 +124,23 @@ main {
   color: #151515;
 }
 
+.section-title i {
+  color: #444444;
+  font-size: 30px;
+  transition: ease-in-out 0.3s;
+  margin-top: -10px;
+}
+
+.section-title span {
+  font-size: 9px;
+  margin-top: -3px;
+}
+
+.section-title i:hover {
+  color: #ffc451;
+  font-size: 30px;
+}
+
 label {
   font-size: 14px;
 }
@@ -381,23 +398,6 @@ label {
   color: #fff;
   font-size: 30px;
   border: 1px solid #ffc451;
-}
-
-#data-apar .section-title i {
-  color: #444444;
-  font-size: 30px;
-  transition: ease-in-out 0.3s;
-  margin-top: -10px;
-}
-
-#data-apar .section-title span {
-  font-size: 9px;
-  margin-top: -3px;
-}
-
-#data-apar .section-title i:hover {
-  color: #ffc451;
-  font-size: 30px;
 }
 
 #data-apar .modal-content {

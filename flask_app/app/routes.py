@@ -1,6 +1,6 @@
 import os
 from app import app
-from flask import render_template, request, redirect, session
+from flask import render_template, request, redirect, session, url_for
 from app.k3 import K3
 from app.user import User
 from app.utils import Absen
@@ -635,23 +635,21 @@ def input_daftar_hadir(id):
     agenda = object_absen.get_agenda_id(id)
     agenda['tanggal'] = object_absen.get_date_format(agenda['tanggal'])
     agenda['waktu'] = str(agenda['waktu'])[:-3]
-
-    print(datetime.now())
     
     if 'input' in request.form and request.form['ttd'] != '':
-        # for i in range(25):
-        nama = request.form['nama']
-        instansi = request.form['instansi']
-        jabatan = request.form['jabatan']
-        email = request.form['email']
-        hp = request.form['hp']
+        for i in range(25):
+            nama = request.form['nama']
+            instansi = request.form['instansi']
+            jabatan = request.form['jabatan']
+            email = request.form['email']
+            hp = request.form['hp']
 
-        ttd = request.form['ttd']
-        foto_ttd = object_absen.base64tojpg(ttd)
-        filename = f"{nama.replace(' ', '_')}_{datetime.now().strftime('%f')}.png"
-        foto_ttd.save(os.path.join(app.config['FOTO_TTD'], filename))
+            ttd = request.form['ttd']
+            foto_ttd = object_absen.base64tojpg(ttd)
+            filename = f"{nama.replace(' ', '_')}_{datetime.now().strftime('%f')}.png"
+            foto_ttd.save(os.path.join(app.config['FOTO_TTD'], filename))
 
-        object_absen.insert_absen(nama=nama, instansi=instansi, jabatan=jabatan, email=email, hp=hp, agenda_id=id, ttd=filename)
+            object_absen.insert_absen(nama=nama, instansi=instansi, jabatan=jabatan, email=email, hp=hp, agenda_id=id, ttd=filename)
 
     return render_template('pages/tools/daftar-hadir/input-daftar-hadir.html', title='Input Daftar Hadir', agenda=agenda)
 
@@ -661,5 +659,8 @@ def daftar_hadir(id):
 
     object_absen = Absen()
     absens = object_absen.get_absen_id(id)
+    for absen in absens:
+        absen['tanggal'] = object_absen.get_date_format(absen['tanggal'])
+        absen['waktu'] = str(absen['waktu'])[:-3]
 
     return render_template('pages/tools/daftar-hadir/daftar-hadir.html', title='Daftar Hadir', absens=absens)

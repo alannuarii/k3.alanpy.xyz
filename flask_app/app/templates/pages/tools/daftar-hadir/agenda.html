@@ -34,9 +34,10 @@
               <td>{{agenda['agenda_rapat']}}</td>
               <td>
                 <div class="d-flex justify-content-evenly">
-                  <a href="{{ url_for('input_daftar_hadir', id=agenda['id_agenda'] ) }}"><i class="bi-people"></i></a>
-                  <a href="{{ url_for('daftar_hadir', id=agenda['id_agenda'] ) }}"><i class="bi-people"></i></a>
-                  <i class="bi-people"></i>
+                  <a href="{{ url_for('daftar_hadir', id=agenda['id_agenda'] ) }}" class="d-flex align-items-center"><i class="bi-people me-1"></i> <span class="badge text-bg-secondary">{{agenda['nama_count']}}</span></a>
+                  <a href="{{ url_for('input_daftar_hadir', id=agenda['id_agenda'] ) }}"><i class="bi-pencil-square"></i></a>
+                  <i class="bi-link" data-bs-toggle="modal" data-bs-target="#modalLink{{agenda['id_agenda']}}" style="cursor: pointer"></i>
+                  {% include 'pages/tools/daftar-hadir/modal/modal-link.html' %}
                   <i class="bi-people"></i>
                 </div>
               </td>
