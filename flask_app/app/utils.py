@@ -47,6 +47,11 @@ class Absen(K3):
         result = cur.fetchone()
         return result
 
+    def get_absen_id(self, id):
+        cur.execute(f"SELECT * FROM absen JOIN agenda ON absen.agenda_id = agenda.id_agenda WHERE agenda_id = {id} ORDER BY id_absen")
+        result = cur.fetchall()
+        return result
+
     def base64tojpg(self, pic:str):
         new_ttd = pic.replace('data:image/png;base64,', '')
         bytes_decoded = base64.b64decode(new_ttd)

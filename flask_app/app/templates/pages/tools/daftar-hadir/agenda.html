@@ -1,0 +1,51 @@
+{% extends 'layouts/base.html' %}{% block content %}
+<main id="data-apar">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="section-title position-relative">
+          <h2>TOOLS</h2>
+          <p>AGENDA</p>
+          <i class="btn bi-plus-circle position-absolute top-0 end-0 me-md-3" data-bs-toggle="modal" data-bs-target="#modal-buat-daftar-hadir"><span class="d-block fst-normal">Tambah</span></i>
+          {% include 'pages/tools/daftar-hadir/modal/modal-buat-daftar-hadir.html' %}
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          <thead>
+            <tr class="align-middle">
+              <th scope="col">No</th>
+              <th scope="col">Hari/Tanggal</th>
+              <th scope="col">Waktu</th>
+              <th scope="col">Lokasi</th>
+              <th scope="col">Agenda</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for agenda in agendas %}
+            <tr class="align-middle">
+              <td>{{loop.index}}</td>
+              <td>{{agenda['tanggal']}}</td>
+              <td>Pukul {{agenda['waktu']}} WITA</td>
+              <td>{{agenda['lokasi']}}</td>
+              <td>{{agenda['agenda_rapat']}}</td>
+              <td>
+                <div class="d-flex justify-content-evenly">
+                  <a href="{{ url_for('input_daftar_hadir', id=agenda['id_agenda'] ) }}"><i class="bi-people"></i></a>
+                  <a href="{{ url_for('daftar_hadir', id=agenda['id_agenda'] ) }}"><i class="bi-people"></i></a>
+                  <i class="bi-people"></i>
+                  <i class="bi-people"></i>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -6,8 +6,6 @@
         <div class="section-title position-relative">
           <h2>TOOLS</h2>
           <p>DAFTAR HADIR</p>
-          <i class="btn bi-plus-circle position-absolute top-0 end-0 me-md-3" data-bs-toggle="modal" data-bs-target="#modal-buat-daftar-hadir"><span class="d-block fst-normal">Tambah</span></i>
-          {% include 'pages/tools/daftar-hadir/modal/modal-buat-daftar-hadir.html' %}
         </div>
       </div>
     </div>
@@ -17,28 +15,24 @@
           <thead>
             <tr class="align-middle">
               <th scope="col">No</th>
-              <th scope="col">Hari/Tanggal</th>
-              <th scope="col">Waktu</th>
-              <th scope="col">Lokasi</th>
-              <th scope="col">Agenda</th>
-              <th scope="col">Actions</th>
+              <th scope="col">Nama</th>
+              <th scope="col">Instansi</th>
+              <th scope="col">Jabatan</th>
+              <th scope="col">Email</th>
+              <th scope="col">No. HP</th>
+              <th scope="col">Tanda Tangan</th>
             </tr>
           </thead>
           <tbody>
-            {% for agenda in agendas %}
+            {% for absen in absens %}
             <tr class="align-middle">
               <td>{{loop.index}}</td>
-              <td>{{agenda['tanggal']}}</td>
-              <td>Pukul {{agenda['waktu']}} WITA</td>
-              <td>{{agenda['lokasi']}}</td>
-              <td>{{agenda['agenda_rapat']}}</td>
-              <td>
-                <div class="d-flex justify-content-evenly">
-                  <a href="{{ url_for('input_daftar_hadir', id=agenda['id_agenda'] ) }}"><i class="bi-people"></i></a>
-                  <i class="bi-people"></i>
-                  <i class="bi-people"></i>
-                </div>
-              </td>
+              <td>{{absen['nama']}}</td>
+              <td>{{absen['instansi']}}</td>
+              <td>{{absen['jabatan']}}</td>
+              <td>{{absen['email']}}</td>
+              <td>{{absen['hp']}}</td>
+              <td><img src="/static/img/absen/ttd/{{absen['ttd']}}" height="30" alt="" /></td>
             </tr>
             {% endfor %}
           </tbody>

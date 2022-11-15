@@ -606,8 +606,8 @@ def print_report_hydrant(tanggal):
     return render_template('pages/hydrant/print-report.html', title='Report Hydrant', all_hydrant=all_hydrant, bulan=bulan, tanggal=tanggal_format)
 
 
-@app.route('/tools/daftar-hadir', methods=['GET','POST'])
-def daftar_hadir():
+@app.route('/tools/daftar-hadir/agenda', methods=['GET','POST'])
+def agenda():
 
     object_absen = Absen()
     agendas = object_absen.get_agenda()
@@ -625,7 +625,7 @@ def daftar_hadir():
 
         object_absen.insert_agenda(agenda_rapat=agenda_rapat, tanggal=tanggal, waktu=waktu, lokasi=lokasi, link=link)
 
-    return render_template('pages/tools/daftar-hadir/daftar-hadir.html', title='Daftar Hadir', agendas=agendas)
+    return render_template('pages/tools/daftar-hadir/agenda.html', title='Daftar Hadir', agendas=agendas)
 
 
 @app.route('/tools/daftar-hadir/input/<id>', methods=['GET','POST'])
@@ -635,8 +635,11 @@ def input_daftar_hadir(id):
     agenda = object_absen.get_agenda_id(id)
     agenda['tanggal'] = object_absen.get_date_format(agenda['tanggal'])
     agenda['waktu'] = str(agenda['waktu'])[:-3]
+
+    print(datetime.now())
     
     if 'input' in request.form and request.form['ttd'] != '':
+        # for i in range(25):
         nama = request.form['nama']
         instansi = request.form['instansi']
         jabatan = request.form['jabatan']
@@ -645,11 +648,18 @@ def input_daftar_hadir(id):
 
         ttd = request.form['ttd']
         foto_ttd = object_absen.base64tojpg(ttd)
-        filename = f"{nama}"
+        filename = f"{nama.replace(' ', '_')}_{datetime.now().strftime('%f')}.png"
         foto_ttd.save(os.path.join(app.config['FOTO_TTD'], filename))
 
         object_absen.insert_absen(nama=nama, instansi=instansi, jabatan=jabatan, email=email, hp=hp, agenda_id=id, ttd=filename)
 
-
-
     return render_template('pages/tools/daftar-hadir/input-daftar-hadir.html', title='Input Daftar Hadir', agenda=agenda)
+
+
+@app.route('/tools/daftar-hadir/<id>', methods=['GET','POST'])
+def daftar_hadir(id):
+
+    object_absen = Absen()
+    absens = object_absen.get_absen_id(id)
+
+    return render_template('pages/tools/daftar-hadir/daftar-hadir.html', title='Daftar Hadir', absens=absens)
