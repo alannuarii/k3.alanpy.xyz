@@ -1,6 +1,9 @@
 from app.conn import cur, conn
 from app.k3 import K3
 from datetime import date
+import base64
+from PIL import Image
+from io import BytesIO
 
 class Absen(K3):
     def get_hari(self, day):
@@ -33,3 +36,9 @@ class Absen(K3):
         cur.execute(f"SELECT * FROM agenda ORDER BY id_agenda")
         result = cur.fetchall()
         return result
+
+    def base64tojpg(self, pic:str):
+        new_ttd = pic.replace('data:image/png;base64,', '')
+        bytes_decoded = base64.b64decode(new_ttd)
+        img = Image.open(BytesIO(bytes_decoded))
+        return img

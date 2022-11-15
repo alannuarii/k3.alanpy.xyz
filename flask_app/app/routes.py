@@ -630,5 +630,18 @@ def daftar_hadir():
 
 @app.route('/tools/daftar-hadir/input/<id>', methods=['GET','POST'])
 def input_daftar_hadir(id):
-    print(id)
+
+    object_absen = Absen()
+    
+    if 'ttd' in request.form:
+        nama = request.form['nama']
+        instansi = request.form['instansi']
+        jabatan = request.form['jabatan']
+        email = request.form['email']
+        hp = request.form['hp']
+        ttd = request.form['ttd']
+        foto_ttd = object_absen.base64tojpg(ttd)
+
+        foto_ttd.save(os.path.join(app.config['FOTO_TTD'], 'ttd.png'))
+
     return render_template('pages/tools/daftar-hadir/input-daftar-hadir.html', title='Input Daftar Hadir')
