@@ -145,6 +145,41 @@ label {
   font-size: 14px;
 }
 
+.modal-content {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+}
+
+.modal-header {
+  background-color: #ffc451;
+  color: #444444;
+}
+
+.modal-delete a {
+  background-color: #444444;
+  border-color: #ffc451;
+  color: #ffc451;
+  transition: ease-in-out 0.3s;
+}
+
+.modal-delete a:hover {
+  background-color: #ffc451;
+  border-color: #ffc451;
+  color: #444444;
+}
+
+.list-group-item {
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+  color: #444444;
+}
+
+.list-group-item:hover,
+.list-group-item:focus {
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffc451;
+}
+
 /* LOGIN */
 #login {
   width: 100%;
@@ -400,29 +435,6 @@ label {
   border: 1px solid #ffc451;
 }
 
-#data-apar .modal-content {
-  background: rgba(0, 0, 0, 0.8);
-  color: #fff;
-}
-
-#data-apar .modal-header {
-  background-color: #ffc451;
-  color: #444444;
-}
-
-#data-apar .modal-delete a {
-  background-color: #444444;
-  border-color: #ffc451;
-  color: #ffc451;
-  transition: ease-in-out 0.3s;
-}
-
-#data-apar .modal-delete a:hover {
-  background-color: #ffc451;
-  border-color: #ffc451;
-  color: #444444;
-}
-
 /* Checklist APAR */
 #checklist-apar .modal-content {
   background: rgba(0, 0, 0, 0.8);
@@ -436,19 +448,6 @@ label {
 
 #checklist-apar h1 {
   font-weight: 700;
-}
-
-/* Report APAR */
-#report-apar .list-group-item {
-  cursor: pointer;
-  transition: ease-in-out 0.3s;
-  color: #444444;
-}
-
-#report-apar .list-group-item:hover,
-#report-apar .list-group-item:focus {
-  background: rgba(0, 0, 0, 0.8);
-  color: #ffc451;
 }
 
 /* Print Report */
@@ -634,4 +633,45 @@ label {
 #data-p3k .badge {
   background-color: #ffc451;
   color: #444444;
+}
+
+/* DAFTAR HADIR */
+#daftar-hadir .card {
+  background: rgba(0, 0, 0, 0.8);
+  color: #ffc451;
+  font-weight: 700;
+}
+
+#daftar-hadir table {
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  font-size: 13px;
+}
+
+#daftar-hadir thead {
+  color: #ffc451;
+  height: 60px;
+}
+
+#daftar-hadir table i {
+  color: #ffc451;
+  transition: ease-in-out 0.3s;
+}
+
+#daftar-hadir table i:hover {
+  color: #fff;
+}
+
+#daftar-hadir .mobile i {
+  color: #ffc451;
+  transition: ease-in-out 0.3s;
+}
+
+#daftar-hadir .mobile i:hover {
+  color: #fff;
+}
+
+#daftar-hadir .absen {
+  background: #fff;
+  color: #151515;
 }
