@@ -52,9 +52,23 @@ class Absen(K3):
         result = cur.fetchall()
         return result
 
+    def get_absen_ttd(self, id):
+        cur.execute(f"SELECT ttd FROM absen WHERE agenda_id = {id}")
+        result = cur.fetchall()
+        return result
+
+    def delete_agenda(self, id):
+        cur.execute(f"DELETE FROM agenda WHERE id_agenda = {id}")
+        conn.commit()
+
+    def delete_absen(self, id):
+        cur.execute(f"DELETE FROM absen WHERE agenda_id = {id}")
+        conn.commit()
+
     def base64tojpg(self, pic:str):
         new_ttd = pic.replace('data:image/png;base64,', '')
         bytes_decoded = base64.b64decode(new_ttd)
         img = Image.open(BytesIO(bytes_decoded))
         return img
+
 

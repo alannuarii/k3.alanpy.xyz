@@ -1,0 +1,13 @@
+<!-- Modal -->
+<div class="modal modal-delete fade" id="modalDeleteAgenda{{agenda['id_agenda']}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content rounded-5">
+      <div class="modal-body">
+        <p class="text-center">Apakah Anda yakin?</p>
+        <div class="d-flex justify-content-center">
+          <a href="{{ url_for('delete_agenda', id=agenda['id_agenda']) }}" type="submit" class="btn btn-second mx-auto">Hapus</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

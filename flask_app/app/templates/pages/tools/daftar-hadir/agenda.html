@@ -38,7 +38,8 @@
                   <a href="{{ url_for('input_daftar_hadir', id=agenda['id_agenda'] ) }}"><i class="bi-pencil-square"></i></a>
                   <i class="bi-link" data-bs-toggle="modal" data-bs-target="#modalLink{{agenda['id_agenda']}}" style="cursor: pointer"></i>
                   {% include 'pages/tools/daftar-hadir/modal/modal-link.html' %}
-                  <i class="bi-people"></i>
+                  <i class="bi-trash3" data-bs-toggle="modal" data-bs-target="#modalDeleteAgenda{{agenda['id_agenda']}}" style="cursor: pointer"></i>
+                  {% include 'pages/tools/daftar-hadir/modal/modal-delete-agenda.html' %}
                 </div>
               </td>
             </tr>

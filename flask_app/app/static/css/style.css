@@ -44,7 +44,7 @@ main {
 .btn-second {
   background-color: #444444;
   border-color: #ffc451;
-  color: #ffc451;
+  color: #ffc451 !important;
   transition: ease-in-out 0.3s;
 }
 

@@ -30,7 +30,7 @@ def login():
                 session['username'] = user['username']
                 session['email'] = user['email']
                 session['name'] = user['name']
-                return redirect('/')
+                return redirect(url_for('home'))
     
     return render_template('pages/auth/login.html', title='Login', msg=msg)
 
@@ -55,7 +55,7 @@ def register():
 
         object_user.register(name=name, email=email, username=username, password=password_hash)
 
-        return redirect('/login') 
+        return redirect(url_for('login')) 
 
     return render_template('pages/auth/register.html', title='Register')
 
@@ -87,12 +87,12 @@ def data_apar():
 
             for apar in apars:
                 if id_apar == apar['id_apar']:
-                    return redirect('/')
+                    return redirect(url_for('data_apar'))
 
             if foto_apar:
                 extension_foto = foto_apar.filename.rsplit('.',1)[1]
                 if extension_foto not in app.config['ALLOWED_EXTENSIONS']:
-                    return redirect('/')
+                    return redirect(url_for('data_apar'))
 
                 filename = secure_filename(foto_apar.filename)
                 renamefile = f"id_apar={id_apar}-{filename}"
@@ -102,7 +102,7 @@ def data_apar():
 
             object_apar.insert_apar(id_apar=id_apar, lokasi=lokasi, merek=merek, tipe=tipe, kapasitas=kapasitas, jenis=jenis, masa_berlaku=masa_berlaku, foto_apar=renamefile)
             
-            return redirect('/apar/data')
+            return redirect(url_for('data_apar'))
 
         except Exception as error:
             print(error)
@@ -123,7 +123,7 @@ def data_apar():
         if foto_apar:
             extension_foto = foto_apar.filename.rsplit('.',1)[1]
             if extension_foto not in app.config['ALLOWED_EXTENSIONS']:
-                return redirect('/')
+                return redirect(url_for('data_apar'))
             
             if current_foto != '' or None:
                 foto = object_apar.get_foto_apar(current_id)
@@ -137,12 +137,11 @@ def data_apar():
 
         for apar in apars:
             if id_apar == apar['id_apar'] and id_apar != current_id:
-                return redirect('/')
+                return redirect(url_for('data_apar'))
 
         object_apar.update_apar(id_apar=id_apar, lokasi=lokasi, merek=merek, tipe=tipe, kapasitas=kapasitas, jenis=jenis, masa_berlaku=masa_berlaku, foto_apar=renamefile, current_id=current_id)
             
-        return redirect('/apar/data')
-
+        return redirect(url_for('data_apar'))
 
     return render_template('pages/apar/data-apar.html', title='Data APAR', apars=apars)
 
@@ -157,7 +156,7 @@ def delete_apar(id_apar):
             os.remove(os.path.join(app.config['FOTO_APAR'], foto[0]['foto_apar']))
         object_apar.delete_apar(id_apar)
 
-    return redirect('/apar/data')
+    return redirect(url_for('data_apar'))
 
 
 @app.route('/apar/checklist', methods=['GET','POST'])
@@ -225,7 +224,7 @@ def checklist_apar():
 
             object_apar.insert_checklist_apar(fisik=fisik, kartu_gantung=kartu_gantung, seal=seal, pin=pin, meter=meter, selang_corong=selang_corong, keterangan=keterangan, apar_id=apar_id)
 
-            return redirect('/apar/checklist')
+            return redirect(url_for('checklist_apar'))
 
         except Exception as error:
             print(error)
@@ -261,7 +260,7 @@ def checklist_apar():
 
             object_apar.update_checklist_apar(fisik=fisik, kartu_gantung=kartu_gantung, seal=seal, pin=pin, meter=meter, selang_corong=selang_corong, keterangan=keterangan, id_checklist_apar=id_checklist_apar)
 
-            return redirect('/apar/checklist')
+            return redirect(url_for('checklist_apar'))
 
         except Exception as error:
             print(error)
@@ -333,7 +332,7 @@ def data_p3k():
         foto_p3k = request.files['foto_p3k']
         extension_foto = foto_p3k.filename.rsplit('.',1)[1]
         if extension_foto not in app.config['ALLOWED_EXTENSIONS']:
-            return redirect('/')
+            return redirect(url_for('data_p3k'))
 
         filename = secure_filename(foto_p3k.filename)
         renamefile = f"{nama_barang}-{filename}"
@@ -341,7 +340,7 @@ def data_p3k():
 
         object_p3k.insert_p3k(nama_barang=nama_barang, satuan=satuan, kadaluarsa=kadaluarsa, foto_p3k=renamefile)
 
-        return redirect('/p3k/data')
+        return redirect(url_for('data_p3k'))
 
     if 'edit' in request.form and 'loggedin' in session:
         id_p3k = request.form['id_p3k']
@@ -354,7 +353,7 @@ def data_p3k():
         if foto_p3k:
             extension_foto = foto_p3k.filename.rsplit('.',1)[1]
             if extension_foto not in app.config['ALLOWED_EXTENSIONS']:
-                return redirect('/')
+                return redirect(url_for('data_p3k'))
                     
             foto = object_p3k.get_foto_p3k(id_p3k)
             os.remove(os.path.join(app.config['FOTO_P3K'], foto[0]['foto_p3k']))
@@ -367,7 +366,7 @@ def data_p3k():
 
         object_p3k.update_p3k(nama_barang=nama_barang, satuan=satuan, kadaluarsa=kadaluarsa, foto_p3k=renamefile, id_p3k=id_p3k)
             
-        return redirect('/p3k/data')
+        return redirect(url_for('data_p3k'))
 
     if 'kantor' in request.form and 'loggedin' in session:
         p3k_id = request.form['p3k_id']
@@ -377,7 +376,7 @@ def data_p3k():
 
         object_p3k.insert_kantor(tgl_kantor=tanggal, masuk_kantor=masuk, keluar_kantor=keluar, p3k_id=p3k_id)
 
-        return redirect('/p3k/data')
+        return redirect(url_for('data_p3k'))
 
     if 'ccr' in request.form and 'loggedin' in session:
         p3k_id = request.form['p3k_id']
@@ -387,7 +386,7 @@ def data_p3k():
 
         object_p3k.insert_ccr(tgl_ccr=tanggal, masuk_ccr=masuk, keluar_ccr=keluar, p3k_id=p3k_id)
 
-        return redirect('/p3k/data')
+        return redirect(url_for('data_p3k'))
 
     if 'tps' in request.form and 'loggedin' in session:
         p3k_id = request.form['p3k_id']
@@ -397,7 +396,7 @@ def data_p3k():
 
         object_p3k.insert_tps(tgl_tps=tanggal, masuk_tps=masuk, keluar_tps=keluar, p3k_id=p3k_id)
 
-        return redirect('/p3k/data')
+        return redirect(url_for('data_p3k'))
 
     if 'pos' in request.form and 'loggedin' in session:
         p3k_id = request.form['p3k_id']
@@ -407,7 +406,7 @@ def data_p3k():
 
         object_p3k.insert_pos(tgl_pos=tanggal, masuk_pos=masuk, keluar_pos=keluar, p3k_id=p3k_id)
 
-        return redirect('/p3k/data')
+        return redirect(url_for('data_p3k'))
 
     if 'stock' in request.form and 'loggedin' in session:
         p3k_id = request.form['p3k_id']
@@ -417,7 +416,7 @@ def data_p3k():
 
         object_p3k.insert_stock(tgl_stock=tanggal, masuk_stock=masuk, keluar_stock=keluar, p3k_id=p3k_id)
 
-        return redirect('/p3k/data')
+        return redirect(url_for('data_p3k'))
 
     return render_template('pages/p3k/data-p3k.html', title='Mutasi P3K', all_p3k=all_p3k, pers_kantor=get_saldo_kantor, pers_ccr=get_saldo_ccr, pers_tps=get_saldo_tps, pers_pos=get_saldo_pos, pers_stock=get_saldo_stock)
 
@@ -431,7 +430,7 @@ def delete_p3k(id_p3k):
         os.remove(os.path.join(app.config['FOTO_P3K'], foto[0]['foto_p3k']))
         object_p3k.delete_p3k(id_p3k)
 
-    return redirect('/p3k/data')
+    return redirect(url_for('data_p3k'))
 
 
 @app.route('/p3k/report')
@@ -492,7 +491,7 @@ def data_hydrant():
             if foto_hydrant:
                 extension_foto = foto_hydrant.filename.rsplit('.',1)[1]
                 if extension_foto not in app.config['ALLOWED_EXTENSIONS']:
-                    return redirect('/')
+                    return redirect(url_for('data_hydrant'))
 
                 filename = secure_filename(foto_hydrant.filename)
                 renamefile = f"{nama_peralatan}-{filename}"
@@ -502,7 +501,7 @@ def data_hydrant():
 
             object_hydrant.insert_hydrant(nama_peralatan=nama_peralatan, merek=merek, tipe=tipe, jumlah=jumlah, satuan=satuan, foto_hydrant=renamefile)
             
-            return redirect('/hydrant/data')
+            return redirect(url_for('data_hydrant'))
 
         except Exception as error:
             print(error)
@@ -521,7 +520,7 @@ def data_hydrant():
         if foto_hydrant:
             extension_foto = foto_hydrant.filename.rsplit('.',1)[1]
             if extension_foto not in app.config['ALLOWED_EXTENSIONS']:
-                return redirect('/')
+                return redirect(url_for('data_hydrant'))
             
             if current_foto != '' or None:
                 foto = object_hydrant.get_foto_hydrant(id_hydrant)
@@ -535,8 +534,7 @@ def data_hydrant():
 
         object_hydrant.update_hydrant(id_hydrant=id_hydrant, nama_peralatan=nama_peralatan, merek=merek, tipe=tipe, jumlah=jumlah, satuan=satuan, foto_hydrant=renamefile)
             
-        return redirect('/hydrant/data')
-
+        return redirect(url_for('data_hydrant'))
 
     return render_template('pages/hydrant/data-hydrant.html', title='Data Hydrant', hydrants=hydrants)
 
@@ -550,7 +548,7 @@ def delete_hydrant(id_hydrant):
             os.remove(os.path.join(app.config['FOTO_HYDRANT'], foto[0]['foto_hydrant']))
         object_hydrant.delete_hydrant(id_hydrant)
 
-    return redirect('/hydrant/data')
+    return redirect(url_for('data_hydrant'))
 
 
 @app.route('/hydrant/inspection', methods=['GET','POST'])
@@ -565,7 +563,6 @@ def inspection_hydrant():
         hydrant_id = request.form['hydrant_id']
 
         object_hydrant.insert_kondisi_hydrant(kondisi=kondisi, keterangan=keterangan, hydrant_id=hydrant_id)
-
 
     checks = []
     for check in check_hydrant:
@@ -625,6 +622,8 @@ def agenda():
 
         object_absen.insert_agenda(agenda_rapat=agenda_rapat, tanggal=tanggal, waktu=waktu, lokasi=lokasi, link=link)
 
+        return redirect(url_for('agenda'))
+
     return render_template('pages/tools/daftar-hadir/agenda.html', title='Daftar Hadir', agendas=agendas)
 
 
@@ -650,6 +649,8 @@ def input_daftar_hadir(id):
             foto_ttd.save(os.path.join(app.config['FOTO_TTD'], filename))
 
             object_absen.insert_absen(nama=nama, instansi=instansi, jabatan=jabatan, email=email, hp=hp, agenda_id=id, ttd=filename)
+        
+        return redirect(url_for('agenda'))
 
     return render_template('pages/tools/daftar-hadir/input-daftar-hadir.html', title='Input Daftar Hadir', agenda=agenda)
 
@@ -664,3 +665,17 @@ def daftar_hadir(id):
         absen['waktu'] = str(absen['waktu'])[:-3]
 
     return render_template('pages/tools/daftar-hadir/daftar-hadir.html', title='Daftar Hadir', absens=absens)
+
+
+@app.route('/tools/daftar-hadir/agenda/<id>')
+def delete_agenda(id):
+
+    object_absen = Absen()
+    absen_ttd = object_absen.get_absen_ttd(id)
+    if 'loggedin' in session:
+        for ttd in absen_ttd:
+            os.remove(os.path.join(app.config['FOTO_TTD'], ttd['ttd']))
+        object_absen.delete_absen(id)
+        object_absen.delete_agenda(id)
+
+    return redirect(url_for('agenda'))
