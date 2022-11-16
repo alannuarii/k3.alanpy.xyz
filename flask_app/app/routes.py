@@ -679,3 +679,15 @@ def delete_agenda(id):
         object_absen.delete_agenda(id)
 
     return redirect(url_for('agenda'))
+
+
+@app.route('/tools/daftar-hadir/print/<id>')
+def print_absen(id):
+    
+    object_absen = Absen()
+    absens = object_absen.get_absen_id(id)
+    for absen in absens:
+        absen['tanggal'] = object_absen.get_date_format(absen['tanggal'])
+        absen['waktu'] = str(absen['waktu'])[:-3]
+   
+    return render_template('pages/tools/daftar-hadir/print-absen.html', title='Print Daftar Hadir', absens=absens)

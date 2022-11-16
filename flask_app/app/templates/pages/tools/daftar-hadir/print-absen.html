@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'includes/styles.html' %}
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='img/safety.png' ) }}" rel="icon" />
+  </head>
+  <body>
+    {% block content %}
+    <main id="print-report">
+      <div class="container-fluid position-relative overflow-hidden">
+        <div class="table-responsive">
+          <table class="table table-header table-bordered border-dark text-center">
+            <thead>
+              <tr class="align-middle">
+                <th scope="col" rowspan="2"><img src="{{ url_for('static', filename='img/logo-pln.png' ) }}" class="img-fluid" alt="" /></th>
+                <th scope="col" class="smt">PLN SISTEM MANAJEMEN TERINTEGRASI</th>
+                <th scope="col" class="text-start">Nomor</th>
+                <th scope="col" class="text-start">: SMI-PKTM-FR-U-002</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col" class="checklist">FORMULIR</th>
+                <th scope="col" class="text-start">Revisi</th>
+                <th scope="col" class="text-start">: 0</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col">UIKL SULAWESI</th>
+                <th scope="col" rowspan="3" class="align-middle">DAFTAR HADIR</th>
+                <th scope="col" class="text-start">Edisi</th>
+                <th scope="col" class="text-start">: 2</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col">UPDK MINAHASA</th>
+                <th scope="col" class="text-start">Tanggal Terbit</th>
+                <th scope="col" class="text-start">: 03 September 2020</th>
+              </tr>
+              <tr class="align-middle">
+                <th scope="col">ULPLTD KOTAMOBAGU</th>
+                <th scope="col" class="text-start">Halaman</th>
+                <th scope="col" class="text-start">: 1 dari 1</th>
+              </tr>
+            </thead>
+          </table>
+        </div>
+        <div class="table-responsive mt-2">
+          <table class="table main-table table-bordered border-dark text-center">
+            <thead>
+              <tr class="align-middle tr-judul">
+                <th scope="col" colspan="2" class="text-start">AGENDA RAPAT</th>
+                <th scope="col" colspan="5" class="text-start">{{absens[0]['agenda_rapat']}}</th>
+              </tr>
+              <tr class="align-middle tr-judul">
+                <th scope="col" colspan="2" class="text-start">HARI / TANGGAL</th>
+                <th scope="col" colspan="5" class="text-start">{{absens[0]['tanggal']}}</th>
+              </tr>
+              <tr class="align-middle tr-judul">
+                <th scope="col" colspan="2" class="text-start">TEMPAT</th>
+                <th scope="col" colspan="5" class="text-start">{{absens[0]['lokasi']}}</th>
+              </tr>
+              <tr class="align-middle tr-absen">
+                <th scope="col" class="th1">NO</th>
+                <th scope="col" class="th1">NAMA</th>
+                <th scope="col" class="th2">INSTANSI</th>
+                <th scope="col" class="th3">JABATAN</th>
+                <th scope="col" class="th5">NOMOR HP</th>
+                <th scope="col" class="th6">ALAMAT EMAIL</th>
+                <th scope="col" class="th7">TANDA TANGAN</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for absen in absens %}
+              <tr class="align-middle">
+                <td>{{loop.index}}</td>
+                <td>{{absen['nama']}}</td>
+                <td>{{absen['instansi']}}</td>
+                <td>{{absen['jabatan']}}</td>
+                <td>{{absen['hp']}}</td>
+                <td>{{absen['email']}}</td>
+                <td><img src="/static/img/absen/ttd/{{absen['ttd']}}" height="30" alt="" /></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <p class="fst-italic">Source = https://k3.alanpy.xyz{{request.path}}</p>
+      </div>
+    </main>
+    {% endblock %} {% include 'includes/scripts.html' %}
+  </body>
+</html>

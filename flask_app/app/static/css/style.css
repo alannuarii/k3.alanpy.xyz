@@ -540,6 +540,22 @@ label {
   font-weight: 700;
 }
 
+#print-report .tr-judul {
+  height: 40px;
+}
+
+#print-report .tr-judul th {
+  font-size: 13px;
+}
+
+#print-report .tr-absen {
+  height: 50px;
+}
+
+#print-report .tr-absen th {
+  font-size: 12px;
+}
+
 @media print {
   .download {
     display: none;

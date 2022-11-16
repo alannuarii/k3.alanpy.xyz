@@ -6,7 +6,9 @@
         <div class="section-title position-relative">
           <h2>TOOLS</h2>
           <p>DAFTAR HADIR</p>
-          <i class="btn bi-printer position-absolute top-0 end-0 me-md-3"><span class="d-block fst-normal">Print</span></i>
+          <a href="{{ url_for('print_absen', id=absens[0]['agenda_id'] ) }}"
+            ><i class="btn bi-printer position-absolute top-0 end-0 me-md-3"><span class="d-block fst-normal">Print</span></i></a
+          >
         </div>
       </div>
     </div>
