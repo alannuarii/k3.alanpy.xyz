@@ -53,7 +53,7 @@ extention = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 hari = today.strftime('%A')
 
-print(datetime.now().strftime('%f'))
+print(375%10)
 
 
 
