@@ -8,8 +8,13 @@
   <body>
     {% block content %}
     <main id="print-report">
+      <div class="d-flex justify-content-center report-nav download border-bottom mb-3 p-2">
+        <a href="{{ url_for('daftar_hadir', id=absens[0]['id_agenda'] ) }}" class="me-4"
+          ><i class="bi-arrow-left-circle-fill"><span class="d-block fst-normal text-center">Back</span></i></a
+        ><i class="bi-printer-fill" onclick="window.print()"><span class="d-block fst-normal text-center">Print</span></i>
+      </div>
       <div class="container-fluid position-relative overflow-hidden">
-        <div class="table-responsive">
+        <div class="table-responsive d-none d-md-block">
           <table class="table table-header table-bordered border-dark text-center">
             <thead>
               <tr class="align-middle">

@@ -556,9 +556,30 @@ label {
   font-size: 12px;
 }
 
+#print-report .report-nav {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+#print-report .report-nav i {
+  font-size: 25px;
+  color: #ffc451;
+  cursor: pointer;
+  transition: ease-in-out 0.3s;
+}
+
+#print-report .report-nav i span {
+  font-size: 10px;
+  margin-top: -5px;
+}
+
+#print-report .report-nav i:hover {
+  color: #fff;
+}
+
 @media print {
-  .download {
-    display: none;
+  .download,
+  .report-nav {
+    display: none !important;
   }
 }
 
