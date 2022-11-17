@@ -605,9 +605,13 @@ def print_report_hydrant(tanggal):
 
 @app.route('/tools/daftar-hadir/agenda', methods=['GET','POST'])
 def agenda():
+    
 
     object_absen = Absen()
     agendas = object_absen.get_agenda()
+
+    today = date.today()
+    hari_ini = object_absen.get_date_format(today)
 
     for agenda in agendas:
         agenda['tanggal'] = object_absen.get_date_format(agenda['tanggal'])
@@ -624,7 +628,7 @@ def agenda():
 
         return redirect(url_for('agenda'))
 
-    return render_template('pages/tools/daftar-hadir/agenda.html', title='Daftar Hadir', agendas=agendas)
+    return render_template('pages/tools/daftar-hadir/agenda.html', title='Daftar Hadir', agendas=agendas, today=hari_ini)
 
 
 @app.route('/tools/daftar-hadir/input/<id>', methods=['GET','POST'])
