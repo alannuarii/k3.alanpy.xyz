@@ -299,7 +299,7 @@ def report_apar():
     
     return render_template('pages/apar/report.html', title='Report APAR', periodes=list_periode, dates=list_date, month=month)
 
-@app.route('/apar/report/<tanggal>')
+@app.route('/apar/report/<tanggal>', methods=['GET','POST'])
 def print_report_apar(tanggal):
     object_apar = K3()
     object_sign = Absen()
@@ -476,7 +476,7 @@ def report_p3k():
     return render_template('pages/p3k/report.html', title='Report P3K', month=month, year=year, tanggal=next_month)
 
 
-@app.route('/p3k/report/<tanggal>')
+@app.route('/p3k/report/<tanggal>', methods=['GET','POST'])
 def print_report_p3k(tanggal):
     
     object_p3k = K3()
