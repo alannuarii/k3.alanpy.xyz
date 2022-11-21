@@ -192,39 +192,39 @@ cur = conn.cursor(dictionary=True)
 #         PRIMARY KEY (id_sign)
 # )
 
-CREATE TABLE unit
-(
-        id_unit INT NOT NULL,
-        merek VARCHAR(10) NOT NULL,
-        tipe VARCHAR(20),
-        serial_number VARCHAR(10),
-        tahun_operasi VARCHAR(4),
-        PRIMARY KEY (id_unit)
-)
+# CREATE TABLE unit
+# (
+#         id_unit INT NOT NULL,
+#         merek VARCHAR(10) NOT NULL,
+#         tipe VARCHAR(20),
+#         serial_number VARCHAR(10),
+#         tahun_operasi VARCHAR(4),
+#         PRIMARY KEY (id_unit)
+# )
 
-CREATE TABLE pengusahaan
-(
-        id_pengusahaan INT NOT NULL AUTO_INCREMENT,
-        periode DATE NOT NULL,
-        dtp INT NOT NULL,
-        dmn INT NOT NULL,
-        produksi FLOAT NOT NULL,
-        ps_sentral FLOAT NOT NULL,
-        ps_trafo FLOAT NOT NULL,
-        bbm FLOAT NOT NULL,
-        po FLOAT NOT NULL,
-        mo FLOAT NOT NULL,
-        fo FLOAT NOT NULL,
-        fo_omc FLOAT NOT NULL,
-        sh FLOAT NOT NULL,
-        ph INT NOT NULL,
-        epdh FLOAT NOT NULL,
-        eudh FLOAT NOT NULL,
-        esdh FLOAT NOT NULL,
-        efdhrs FLOAT NOT NULL,
-        trip_int INT NOT NULL,
-        trip_eks INT NOT NULL,
-        mesin_id INT NOT NULL,
-        PRIMARY KEY (id_pengusahaan),
-        CONSTRAINT fk_pengusahaan_mesin FOREIGN KEY (mesin_id) REFERENCES unit (id_unit)
-)
+# CREATE TABLE pengusahaan
+# (
+#         id_pengusahaan INT NOT NULL AUTO_INCREMENT,
+#         periode DATE NOT NULL,
+#         dtp INT NOT NULL,
+#         dmn INT NOT NULL,
+#         produksi FLOAT NOT NULL,
+#         ps_sentral FLOAT NOT NULL,
+#         ps_trafo FLOAT NOT NULL,
+#         bbm FLOAT NOT NULL,
+#         po FLOAT NOT NULL,
+#         mo FLOAT NOT NULL,
+#         fo FLOAT NOT NULL,
+#         fo_omc FLOAT NOT NULL,
+#         sh FLOAT NOT NULL,
+#         ph INT NOT NULL,
+#         epdh FLOAT NOT NULL,
+#         eudh FLOAT NOT NULL,
+#         esdh FLOAT NOT NULL,
+#         efdhrs FLOAT NOT NULL,
+#         trip_int INT NOT NULL,
+#         trip_eks INT NOT NULL,
+#         mesin_id INT NOT NULL,
+#         PRIMARY KEY (id_pengusahaan),
+#         CONSTRAINT fk_pengusahaan_mesin FOREIGN KEY (mesin_id) REFERENCES unit (id_unit)
+# )
