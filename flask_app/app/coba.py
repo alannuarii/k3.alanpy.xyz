@@ -53,7 +53,10 @@ extention = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 hari = today.strftime('%A')
 
-print(375%10)
+if 'hydrant' in '/hydrant/report/2022-12-01':
+    print('TRUE')
+else:
+    print('False')
 
 
 

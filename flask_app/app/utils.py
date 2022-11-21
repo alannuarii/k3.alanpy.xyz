@@ -37,8 +37,8 @@ class Absen(K3):
         cur.execute(f"INSERT INTO absen (nama, instansi, jabatan, email, hp, agenda_id, checkin, ttd) VALUES ('{nama}', '{instansi}', '{jabatan}', '{email}', '{hp}', {agenda_id}, NOW(), '{ttd}')")
         conn.commit()
 
-    def get_agenda(self):
-        cur.execute(f"SELECT *, COUNT(nama) nama_count FROM agenda LEFT JOIN absen ON agenda.id_agenda = absen.agenda_id GROUP BY id_agenda ORDER BY tanggal")
+    def get_agenda(self, skip, limit):
+        cur.execute(f"SELECT *, COUNT(nama) nama_count FROM agenda LEFT JOIN absen ON agenda.id_agenda = absen.agenda_id GROUP BY id_agenda ORDER BY tanggal LIMIT {skip}, {limit}")
         result = cur.fetchall()
         return result
 
@@ -54,6 +54,11 @@ class Absen(K3):
 
     def get_absen_ttd(self, id):
         cur.execute(f"SELECT ttd FROM absen WHERE agenda_id = {id}")
+        result = cur.fetchall()
+        return result
+
+    def get_count_absen(self):
+        cur.execute(f"SELECT COUNT(*) pages FROM agenda")
         result = cur.fetchall()
         return result
 

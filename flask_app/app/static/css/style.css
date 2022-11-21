@@ -180,6 +180,17 @@ label {
   color: #ffc451;
 }
 
+.pagination a {
+  color: #ffc451;
+  transition: ease-in-out 0.3s;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.pagination a:hover {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+}
+
 /* LOGIN */
 #login {
   width: 100%;
@@ -576,10 +587,24 @@ label {
   color: #fff;
 }
 
+#print-report .bi-pen {
+  transition: ease-in-out 0.3s;
+}
+
+#print-report .bi-pen:hover {
+  color: #ffc451;
+}
+
 @media print {
   .download,
   .report-nav {
     display: none !important;
+  }
+}
+
+@media print {
+  .bi-pen {
+    visibility: hidden;
   }
 }
 

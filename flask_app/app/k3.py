@@ -278,3 +278,17 @@ class K3:
         cur.execute(f"SELECT * FROM hydrant JOIN kondisi_hydrant ON hydrant.id_hydrant = kondisi_hydrant.hydrant_id WHERE MONTH (tanggal) = '{tanggal}' GROUP BY id_hydrant ORDER BY id_hydrant")
         result = cur.fetchall()
         return result
+
+    def insert_sign(self, role, path, ttd):
+        cur.execute(f"INSERT INTO signature (role, path, ttd) VALUES ('{role}', '{path}', '{ttd}')")
+        conn.commit()
+
+    def get_sign_manager(self, path):
+        cur.execute(f"SELECT * FROM signature WHERE role = 'manager' AND path = '{path}'")
+        result = cur.fetchone()
+        return result
+
+    def get_sign_k3l(self, path):
+        cur.execute(f"SELECT * FROM signature WHERE role = 'k3l' AND path = '{path}'")
+        result = cur.fetchone()
+        return result

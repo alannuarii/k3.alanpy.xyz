@@ -1,0 +1,29 @@
+<!-- Awal Modal Checklist APAR -->
+<div class="modal fade" id="modal-approve" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form method="post">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5 title-sign" id="exampleModalLabel"></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="formFileSm" class="form-label d-block text-center">Tanda Tangan</label>
+          <div class="d-flex justify-content-center">
+            <canvas class="border sign-pad" height="150" width="250"></canvas>
+            <input class="sign" type="hidden" name="ttd" value="" />
+          </div>
+          <div class="d-flex justify-content-center">
+            <div style="width: 250px"><button id="clear" class="btn btn-first btn-sm w-100 rounded-0">Clear</button></div>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-center">
+          <input type="hidden" name="path" value="{{request.path}}" />
+          <input class="role" type="hidden" name="role" value="" />
+          <button id="submit" type="submit" class="btn btn-first">Kirim</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Akhir Modal Checklist APAR  -->

@@ -182,3 +182,12 @@ cur = conn.cursor(dictionary=True)
 #         PRIMARY KEY (id_absen),
 #         CONSTRAINT fk_absen_agenda FOREIGN KEY (agenda_id) REFERENCES agenda (id_agenda)
 # )
+
+# CREATE TABLE signature
+# (
+#         id_sign INT NOT NULL AUTO_INCREMENT,
+#         role VARCHAR(15) NOT NULL,
+#         path VARCHAR(50) NOT NULL,
+#         ttd VARCHAR(50) NOT NULL,
+#         PRIMARY KEY (id_sign)
+# )

@@ -4,7 +4,7 @@
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
   <div class="offcanvas-body text-center">
-    {% if session %}
+    {% if session['loggedin'] %}
     <div class="card d-block mx-auto mt-4" style="width: 18rem">
       <img src="{{ url_for('static', filename='img/engineer.png' ) }}" class="card-img-top" alt="..." />
       <div class="card-body">

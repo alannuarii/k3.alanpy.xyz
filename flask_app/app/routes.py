@@ -13,6 +13,8 @@ from werkzeug.utils import secure_filename
 def login():
     msg = ''
 
+    session.clear()
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -300,6 +302,7 @@ def report_apar():
 @app.route('/apar/report/<tanggal>')
 def print_report_apar(tanggal):
     object_apar = K3()
+    object_sign = Absen()
     date_range = object_apar.get_friday(datetime.strptime(tanggal, '%Y-%m-%d').date())
     datas = object_apar.get_apar_inspection(date_range[0], date_range[1])
 
@@ -308,7 +311,28 @@ def print_report_apar(tanggal):
     for data in datas:
         data['masa_berlaku'] = f"{object_apar.format_bulan(data['masa_berlaku'])} {data['masa_berlaku'][:-3]}"
 
-    return render_template('pages/apar/print-report.html', title='Report APAR', datas=datas, tanggal=tanggal[1], bulan=tanggal[1][3:])
+    sign_manager = object_apar.get_sign_manager(request.path)
+    sign_k3l = object_apar.get_sign_k3l(request.path)
+
+    if 'token' in request.form:
+        if request.form['token'] == '112220':
+            session['token'] = 112220
+
+        return redirect(url_for('print_report_apar', tanggal=tanggal)) 
+
+    if 'ttd' in request.form:
+        role = request.form['role']
+        path = request.form['path']
+        ttd = request.form['ttd']
+        foto_ttd = object_sign.base64tojpg(ttd)
+        filename = f"{role}_{path.replace('/', '_')}.png"
+        foto_ttd.save(os.path.join(app.config['FOTO_APAR_TTD'], filename))
+
+        object_apar.insert_sign(role=role, path=path, ttd=filename)
+
+        return redirect(url_for('print_report_apar', tanggal=tanggal))
+
+    return render_template('pages/apar/print-report.html', title='Report APAR', datas=datas, tanggal=tanggal[1], bulan=tanggal[1][3:], manager=sign_manager, k3l=sign_k3l)
 
 
 @app.route('/p3k/data', methods=['GET','POST'])
@@ -456,6 +480,7 @@ def report_p3k():
 def print_report_p3k(tanggal):
     
     object_p3k = K3()
+    object_sign = Absen()
     all_p3k = object_p3k.get_p3k()
     get_saldo_kantor = object_p3k.get_saldo_kantor_filter(tanggal)
     get_saldo_ccr = object_p3k.get_saldo_ccr_filter(tanggal)
@@ -470,8 +495,29 @@ def print_report_p3k(tanggal):
 
     for p3k in all_p3k:
         p3k['kadaluarsa'] = f"{object_p3k.format_bulan(p3k['kadaluarsa'])} {p3k['kadaluarsa'][:-3]}"
+
+    sign_manager = object_p3k.get_sign_manager(request.path)
+    sign_k3l = object_p3k.get_sign_k3l(request.path)
+
+    if 'token' in request.form:
+        if request.form['token'] == '112220':
+            session['token'] = 112220
+
+        return redirect(url_for('print_report_p3k', tanggal=tanggal)) 
+
+    if 'ttd' in request.form:
+        role = request.form['role']
+        path = request.form['path']
+        ttd = request.form['ttd']
+        foto_ttd = object_sign.base64tojpg(ttd)
+        filename = f"{role}_{path.replace('/', '_')}.png"
+        foto_ttd.save(os.path.join(app.config['FOTO_P3K_TTD'], filename))
+
+        object_p3k.insert_sign(role=role, path=path, ttd=filename)
+
+        return redirect(url_for('print_report_p3k', tanggal=tanggal))
     
-    return render_template('pages/p3k/print-report.html', title='Report P3K', all_p3k=all_p3k, pers_kantor=get_saldo_kantor, pers_ccr=get_saldo_ccr, pers_tps=get_saldo_tps, pers_pos=get_saldo_pos, pers_stock=get_saldo_stock, bulan=bulan, tanggal=tanggal_format)
+    return render_template('pages/p3k/print-report.html', title='Report P3K', all_p3k=all_p3k, pers_kantor=get_saldo_kantor, pers_ccr=get_saldo_ccr, pers_tps=get_saldo_tps, pers_pos=get_saldo_pos, pers_stock=get_saldo_stock, bulan=bulan, tanggal=tanggal_format, manager=sign_manager, k3l=sign_k3l)
 
 
 @app.route('/hydrant/data', methods=['GET','POST'])
@@ -590,28 +636,60 @@ def report_hydrant():
     return render_template('pages/hydrant/report.html', title='Report Hydrant', month=month, year=year, tanggal=next_month)
 
 
-@app.route('/hydrant/report/<tanggal>')
+@app.route('/hydrant/report/<tanggal>', methods=['GET','POST'])
 def print_report_hydrant(tanggal):
     
     object_hydrant = K3()
+    object_sign = Absen()
     tanggal_date = object_hydrant.get_date(tanggal) + relativedelta(months=-1) 
     all_hydrant = object_hydrant.get_inspection_hydrant(str(tanggal_date)[5:-3])
 
     bulan = object_hydrant.format_bulan(str(tanggal_date))
     tanggal_format = object_hydrant.get_tanggal_format(object_hydrant.get_date(tanggal))
 
-    return render_template('pages/hydrant/print-report.html', title='Report Hydrant', all_hydrant=all_hydrant, bulan=bulan, tanggal=tanggal_format)
+    sign_manager = object_hydrant.get_sign_manager(request.path)
+    sign_k3l = object_hydrant.get_sign_k3l(request.path)
+
+    if 'token' in request.form:
+        if request.form['token'] == '112220':
+            session['token'] = 112220
+
+        return redirect(url_for('print_report_hydrant', tanggal=tanggal)) 
+
+    if 'ttd' in request.form:
+        role = request.form['role']
+        path = request.form['path']
+        ttd = request.form['ttd']
+        foto_ttd = object_sign.base64tojpg(ttd)
+        filename = f"{role}_{path.replace('/', '_')}.png"
+        foto_ttd.save(os.path.join(app.config['FOTO_HYDRANT_TTD'], filename))
+
+        object_hydrant.insert_sign(role=role, path=path, ttd=filename)
+
+        return redirect(url_for('print_report_hydrant', tanggal=tanggal))
+
+    return render_template('pages/hydrant/print-report.html', title='Report Hydrant', all_hydrant=all_hydrant, bulan=bulan, tanggal=tanggal_format, manager=sign_manager, k3l=sign_k3l)
 
 
-@app.route('/tools/daftar-hadir/agenda', methods=['GET','POST'])
-def agenda():
+@app.route('/tools/daftar-hadir/agenda/<int:page_num>', methods=['GET','POST'])
+def agenda(page_num):
     
-
     object_absen = Absen()
-    agendas = object_absen.get_agenda()
 
     today = date.today()
     hari_ini = object_absen.get_date_format(today)
+
+    # Pagination
+    per_page = 5
+    pages = object_absen.get_count_absen()[0]['pages']
+    page_num = page_num
+    skip = (page_num - 1) * per_page
+    if pages % per_page != 0:
+        last_page = (pages // per_page) + 1
+    else:
+        last_page = pages // per_page
+
+    agendas = object_absen.get_agenda(skip, per_page)
 
     for agenda in agendas:
         agenda['tanggal'] = object_absen.get_date_format(agenda['tanggal'])
@@ -626,9 +704,9 @@ def agenda():
 
         object_absen.insert_agenda(agenda_rapat=agenda_rapat, tanggal=tanggal, waktu=waktu, lokasi=lokasi, link=link)
 
-        return redirect(url_for('agenda'))
+        return redirect(url_for('agenda', page_num = 1))
 
-    return render_template('pages/tools/daftar-hadir/agenda.html', title='Daftar Hadir', agendas=agendas, today=hari_ini)
+    return render_template('pages/tools/daftar-hadir/agenda.html', title='Daftar Hadir', agendas=agendas, today=hari_ini, page_num=page_num, last_page=last_page)
 
 
 @app.route('/tools/daftar-hadir/input/<id>', methods=['GET','POST'])
@@ -640,21 +718,20 @@ def input_daftar_hadir(id):
     agenda['waktu'] = str(agenda['waktu'])[:-3]
     
     if 'input' in request.form and request.form['ttd'] != '':
-        for i in range(25):
-            nama = request.form['nama']
-            instansi = request.form['instansi']
-            jabatan = request.form['jabatan']
-            email = request.form['email']
-            hp = request.form['hp']
+        nama = request.form['nama']
+        instansi = request.form['instansi']
+        jabatan = request.form['jabatan']
+        email = request.form['email']
+        hp = request.form['hp']
 
-            ttd = request.form['ttd']
-            foto_ttd = object_absen.base64tojpg(ttd)
-            filename = f"{nama.replace(' ', '_')}_{datetime.now().strftime('%f')}.png"
-            foto_ttd.save(os.path.join(app.config['FOTO_TTD'], filename))
+        ttd = request.form['ttd']
+        foto_ttd = object_absen.base64tojpg(ttd)
+        filename = f"{nama.replace(' ', '_')}_{datetime.now().strftime('%f')}.png"
+        foto_ttd.save(os.path.join(app.config['FOTO_TTD'], filename))
 
-            object_absen.insert_absen(nama=nama, instansi=instansi, jabatan=jabatan, email=email, hp=hp, agenda_id=id, ttd=filename)
+        object_absen.insert_absen(nama=nama, instansi=instansi, jabatan=jabatan, email=email, hp=hp, agenda_id=id, ttd=filename)
         
-        return redirect(url_for('agenda'))
+        return redirect(url_for('agenda', page_num = 1))
 
     return render_template('pages/tools/daftar-hadir/input-daftar-hadir.html', title='Input Daftar Hadir', agenda=agenda)
 
