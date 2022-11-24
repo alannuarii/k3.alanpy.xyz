@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'includes/styles.html' %}
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='img/safety.png' ) }}" rel="icon" />
+  </head>
+  <body>
+    {% block content %}
+    <section id="dashboard" class="py-4">
+      <div class="container">
+        <h1>TES</h1>
+      </div>
+    </section>
+    {% endblock %} {% include 'includes/scripts.html' %}
+  </body>
+</html>

@@ -4,6 +4,7 @@ from flask import render_template, request, redirect, session, url_for
 from app.k3 import K3
 from app.user import User
 from app.utils import Absen
+from app.kinerja import Kinerja
 from datetime import date, datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from werkzeug.utils import secure_filename
@@ -772,3 +773,17 @@ def print_absen(id):
         absen['waktu'] = str(absen['waktu'])[:-3]
    
     return render_template('pages/tools/daftar-hadir/print-absen.html', title='Print Daftar Hadir', absens=absens)
+
+
+@app.route('/tools/kinerja/')
+def dashboard():
+
+    object_kinerja = Kinerja()
+
+    month = datetime.strptime('2022-07-01', '%Y-%m-%d').date()
+    month_1 = month - relativedelta(months=+1)
+
+    kinerja_unit_bulanan = object_kinerja.kinerja_unit_bulanan(month)
+    kinerja_unit_bulanan_prev = object_kinerja.kinerja_unit_bulanan(month_1)
+    
+    return render_template('pages/tools/kinerja/dashboard.html', title='Dashboard Kinerja', kin_u_bul=kinerja_unit_bulanan, kin_u_bul_prev=kinerja_unit_bulanan_prev)

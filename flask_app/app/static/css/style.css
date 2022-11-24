@@ -743,3 +743,43 @@ label {
   background: rgba(0, 0, 0, 0.8);
   color: #fff;
 }
+
+/* DASHBOARD */
+#dashboard {
+  background-color: #caf0f8;
+}
+
+#dashboard .card {
+  border-left: 7px solid #00b4d8;
+  height: 120px;
+}
+
+#dashboard .card .green {
+  font-size: 50px;
+  color: #06d6a0;
+}
+
+#dashboard .card .red {
+  font-size: 50px;
+  color: #ef476f;
+}
+
+#dashboard .card .yellow {
+  font-size: 50px;
+  color: #ffc43d;
+}
+
+#dashboard .card h3 {
+  font-weight: 900;
+  color: #595959;
+}
+
+#dashboard .card h5 {
+  color: #151515;
+}
+
+#dashboard .card h6 {
+  font-size: 13px;
+  margin-top: -5px;
+  color: #595959;
+}

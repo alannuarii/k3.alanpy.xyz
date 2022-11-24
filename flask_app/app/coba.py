@@ -53,10 +53,10 @@ extention = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 hari = today.strftime('%A')
 
-if 'hydrant' in '/hydrant/report/2022-12-01':
-    print('TRUE')
-else:
-    print('False')
+kinerja = {'eaf_unit': 100.0, 'efor_unit': 0.0, 'sof_unit': 0.0, 'sfc_unit': 0.274, 'ps_unit': 5.014}
+
+for i in kinerja.values():
+    print()
 
 
 
