@@ -1,0 +1,73 @@
+<div class="row gx-4">
+  <div class="col">
+    <div class="p-3 card rounded-4 shadow-sm position-relative">
+      <h5>EAF</h5>
+      <h3>{{kin_u_bul['eaf_unit']}} %</h3>
+      <h6>{{kin_u_bul_prev['eaf_unit']}} % last month</h6>
+      {% if kin_u_bul['eaf_unit'] > kin_u_bul_prev['eaf_unit'] %}
+      <i class="green ind bi-arrow-up-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% elif kin_u_bul['eaf_unit'] < kin_u_bul_prev['eaf_unit'] %}
+      <i class="red ind bi-arrow-down-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% else %}
+      <i class="yellow ind bi-dash-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% endif %}
+      <h6 class="mt-2 green"><i class="bi-x-lg me-1"></i> Target 99,99 %</h6>
+    </div>
+  </div>
+  <div class="col">
+    <div class="p-3 card rounded-4 shadow-sm position-relative">
+      <h5>EFOR</h5>
+      <h3>{{kin_u_bul['efor_unit']}} %</h3>
+      <h6>{{kin_u_bul_prev['efor_unit']}} % last month</h6>
+      {% if kin_u_bul['efor_unit'] > kin_u_bul_prev['efor_unit'] %}
+      <i class="red ind bi-arrow-up-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% elif kin_u_bul['efor_unit'] < kin_u_bul_prev['efor_unit'] %}
+      <i class="green ind bi-arrow-down-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% else %}
+      <i class="yellow ind bi-dash-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col">
+    <div class="p-3 card rounded-4 shadow-sm position-relative">
+      <h5>SOF</h5>
+      <h3>{{kin_u_bul['sof_unit']}} %</h3>
+      <h6>{{kin_u_bul_prev['sof_unit']}} % last month</h6>
+      {% if kin_u_bul['sof_unit'] > kin_u_bul_prev['sof_unit'] %}
+      <i class="red ind bi-arrow-up-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% elif kin_u_bul['sof_unit'] < kin_u_bul_prev['sof_unit'] %}
+      <i class="green ind bi-arrow-down-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% else %}
+      <i class="yellow ind bi-dash-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col">
+    <div class="p-3 card rounded-4 shadow-sm position-relative">
+      <h5>SFC</h5>
+      <h3 style="font-size: 20px">{{kin_u_bul['sfc_unit']}} Lt/kWh</h3>
+      <h6>{{kin_u_bul_prev['sfc_unit']}} Lt/kWh last month</h6>
+      {% if kin_u_bul['sfc_unit'] > kin_u_bul_prev['sfc_unit'] %}
+      <i class="red ind bi-arrow-up-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% elif kin_u_bul['sfc_unit'] < kin_u_bul_prev['sfc_unit'] %}
+      <i class="green ind bi-arrow-down-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% else %}
+      <i class="yellow ind bi-dash-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% endif %}
+    </div>
+  </div>
+  <div class="col">
+    <div class="p-3 card rounded-4 shadow-sm position-relative">
+      <h5>PS</h5>
+      <h3>{{kin_u_bul['ps_unit']}} %</h3>
+      <h6>{{kin_u_bul_prev['ps_unit']}} % last month</h6>
+      {% if kin_u_bul['ps_unit'] > kin_u_bul_prev['ps_unit'] %}
+      <i class="red ind bi-arrow-up-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% elif kin_u_bul['ps_unit'] < kin_u_bul_prev['ps_unit'] %}
+      <i class="green ind bi-arrow-down-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% else %}
+      <i class="yellow ind bi-dash-circle-fill position-absolute top-50 end-0 translate-middle-y me-3"></i>
+      {% endif %}
+    </div>
+  </div>
+</div>

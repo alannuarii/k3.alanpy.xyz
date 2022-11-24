@@ -228,3 +228,13 @@ cur = conn.cursor(dictionary=True)
 #         PRIMARY KEY (id_pengusahaan),
 #         CONSTRAINT fk_pengusahaan_mesin FOREIGN KEY (mesin_id) REFERENCES unit (id_unit)
 # )
+
+# CREATE TABLE target
+# (
+#         id_target INT NOT NULL AUTO_INCREMENT,
+#         kpi VARCHAR(10) NOT NULL,
+#         nilai_target FLOAT NOT NULL,
+#         satuan VARCHAR(10),
+#         tahun VARCHAR(4) NOT NULL,
+#         PRIMARY KEY (id_target)
+# )

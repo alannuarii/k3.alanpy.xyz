@@ -751,21 +751,22 @@ label {
 
 #dashboard .card {
   border-left: 7px solid #00b4d8;
-  height: 120px;
+  height: 150px;
+}
+
+#dashboard .card .ind {
+  font-size: 50px;
 }
 
 #dashboard .card .green {
-  font-size: 50px;
   color: #06d6a0;
 }
 
 #dashboard .card .red {
-  font-size: 50px;
   color: #ef476f;
 }
 
 #dashboard .card .yellow {
-  font-size: 50px;
   color: #ffc43d;
 }
 
