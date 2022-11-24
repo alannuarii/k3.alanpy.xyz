@@ -14,33 +14,49 @@ class Kinerja:
     dmn_har = '(dmn * (po + mo))'
     sdof = 'trip_internal'
 
-    def eaf_unit_bulanan(self, periode):
+    def eaf_unit_bulanan(self, periode) -> dict:
         cur.execute(f"SELECT ROUND((SUM({self.dmn_ph_der}) / SUM({self.dmn_ph}) * 100), 3) AS 'eaf_unit' FROM pengusahaan WHERE periode = '{periode}'")
         result = cur.fetchone()
         return result
 
-    def efor_unit_bulanan(self, periode):
+    def efor_unit_bulanan(self, periode) -> dict:
         cur.execute(f"SELECT ROUND((SUM({self.dmn_fo_eudh}) / SUM({self.dmn_fo_sh_efdhrs}) * 100), 3) AS 'efor_unit' FROM pengusahaan WHERE periode = '{periode}'")
         result = cur.fetchone()
         return result
 
-    def sof_unit_bulanan(self, periode):
+    def sof_unit_bulanan(self, periode) -> dict:
         cur.execute(f"SELECT ROUND((SUM({self.dmn_har}) / SUM({self.dmn_ph}) * 100), 3) AS 'sof_unit' FROM pengusahaan WHERE periode = '{periode}'")
         result = cur.fetchone()
         return result
 
-    def sfc_unit_bulanan(self, periode):
+    def sfc_unit_bulanan(self, periode) -> dict:
         cur.execute(f"SELECT ROUND((SUM(bbm) / SUM(produksi)), 3) AS 'sfc_unit' FROM pengusahaan WHERE periode = '{periode}'")
         result = cur.fetchone()
         return result
 
-    def ps_unit_bulanan(self, periode):
+    def ps_unit_bulanan(self, periode) -> dict:
         cur.execute(f"SELECT ROUND((SUM({self.total_ps}) / SUM(produksi) * 100), 3) AS 'ps_unit' FROM pengusahaan WHERE periode = '{periode}'")
         result = cur.fetchone()
         return result
 
     def kinerja_unit_bulanan(self, periode):
-        kinerja = self.eaf_unit_bulanan(periode) | self.efor_unit_bulanan(periode) | self.sof_unit_bulanan(periode) | self.sfc_unit_bulanan(periode) | self.ps_unit_bulanan(periode)
+        eaf = self.eaf_unit_bulanan(periode)
+        efor = self.efor_unit_bulanan(periode)
+        sof = self.sof_unit_bulanan(periode)
+        sfc = self.sfc_unit_bulanan(periode)
+        ps = self.ps_unit_bulanan(periode)
 
-        # age_group = "Minor" if age < 18 else "Adult"
+        kinerja = eaf | efor | sof | sfc | ps
+
+        if kinerja['eaf_unit'] is None:
+            kinerja['eaf_unit'] = 0.0
+        if kinerja['efor_unit'] is None:
+            kinerja['efor_unit'] = 0.0
+        if kinerja['sof_unit'] is None:
+            kinerja['sof_unit'] = 0.0
+        if kinerja['sfc_unit'] is None:
+            kinerja['sfc_unit'] = 0.0
+        if kinerja['ps_unit'] is None:
+            kinerja['ps_unit'] = 0.0
+
         return kinerja

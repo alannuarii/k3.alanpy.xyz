@@ -780,7 +780,7 @@ def dashboard():
 
     object_kinerja = Kinerja()
 
-    month = datetime.strptime('2022-07-01', '%Y-%m-%d').date()
+    month = datetime.strptime('2022-10-01', '%Y-%m-%d').date()
     month_1 = month - relativedelta(months=+1)
 
     kinerja_unit_bulanan = object_kinerja.kinerja_unit_bulanan(month)
