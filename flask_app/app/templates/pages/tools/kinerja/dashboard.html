@@ -9,6 +9,7 @@
     {% block content %}
     <section id="dashboard" class="py-4">
       <div class="container">
+        <!-- Row Chart Unit Bulanan -->
         <div class="row gx-4">
           {% if kin_u_bul['eaf_unit'] > kin_u_bul_prev['eaf_unit'] %}
           <div class="col">
@@ -147,6 +148,12 @@
           </div>
           {% endif %}
         </div>
+        <!-- Akhir Row Chart Unit Bulanan -->
+        <!-- Row Chart Unit Bulanan -->
+        <div class="row">
+          <canvas id="myChart"></canvas>
+        </div>
+        <!-- Akhir Row Chart Unit Bulanan -->
       </div>
     </section>
     {% endblock %} {% include 'includes/scripts.html' %}
