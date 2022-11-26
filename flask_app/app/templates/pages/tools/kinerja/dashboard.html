@@ -7,18 +7,15 @@
   </head>
   <body>
     {% block content %}
-    <section id="dashboard" class="py-4">
+    <section id="dashboard" class="d-none d-md-block py-4">
       <div class="container">
-        <!-- Row Kinerja Unit Bulanan -->
-        {% include 'pages/tools/kinerja/parts/kinerja-unit-bulanan.html' %}
-        <!-- Akhir Kinerja Chart Unit Bulanan -->
-        <!-- Row Chart Unit Bulanan -->
-        <div class="row">
-          <canvas id="myChart"></canvas>
+        <div class="row gx-4 kin-unit">{% include 'pages/tools/kinerja/parts/kinerja-unit-bulanan.html' %}</div>
+        <div class="row mt-3">
+          <div class="col-7 kin-kum">{% include 'pages/tools/kinerja/parts/kinerja-kumulatif.html' %}</div>
+          <div class="col-5 bpp">{% include 'pages/tools/kinerja/parts/bpp.html' %}</div>
         </div>
-        <!-- Akhir Row Chart Unit Bulanan -->
       </div>
     </section>
-    {% endblock %} {% include 'includes/scripts.html' %}
+    {% endblock %} {% include 'includes/scripts.html' %} {% include 'pages/tools/kinerja/charts/kinerja-kum.html' %} {% include 'pages/tools/kinerja/charts/komponen.html' %}
   </body>
 </html>

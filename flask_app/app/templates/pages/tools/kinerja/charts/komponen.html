@@ -1,0 +1,26 @@
+<script>
+  const komp = document.getElementById("komponen");
+
+  new Chart(komp, {
+    type: "doughnut",
+    data: {
+      labels: ["Komp. A", "Komp. B", "Komp. C", "Komp. D"],
+      datasets: [
+        {
+          label: "My First Dataset",
+          data: [300, 50, 100, 200],
+          backgroundColor: ["rgb(0, 180, 216)", "rgb(6, 214, 160)", "rgb(239, 71, 111)", "rgb(255, 196, 61)"],
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: "right",
+        },
+      },
+    },
+  });
+</script>

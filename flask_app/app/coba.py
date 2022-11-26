@@ -55,10 +55,9 @@ hari = today.strftime('%A')
 
 kinerja = {'eaf_unit': 100.0, 'efor_unit': None, 'sof_unit': 0.0, 'sfc_unit': 0.274, 'ps_unit': 5.014}
 
-if kinerja['efor_unit'] is None:
-    kinerja['efor_unit'] = 0
-
-print(kinerja)
 
 
+# print(jumat[5:-3])
+for i in range(int(jumat[5:-3])):
+    print(i)
 

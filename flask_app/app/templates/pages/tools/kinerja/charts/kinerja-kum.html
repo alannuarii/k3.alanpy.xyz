@@ -1,0 +1,40 @@
+<script>
+  const kinKum = document.getElementById("kinerja-kum");
+
+  new Chart(kinKum, {
+    type: "line",
+    data: {
+      labels: {{months|safe}},
+      datasets: [
+        {
+          label: "{{kpi|safe}}",
+          data: {{kinerja_kum|safe}},
+          borderWidth: 3.5,
+          lineTension: 0.3,
+          backgroundColor: ["rgb(0, 180, 216)"],
+          borderColor: ["rgb(0, 180, 216)"],
+        },
+        {
+          label: "Target",
+          data: {{list_target|safe}},
+          borderWidth: 3.5,
+          lineTension: 0.3,
+          pointStyle: 'triangle',
+          backgroundColor: ["rgb(239, 71, 111)"],
+          borderColor: ["rgb(239, 71, 111)"],
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: {
+            display: true,
+            text: "{{satuan|safe}}"
+          }
+        },
+      },
+    },
+  });
+</script>

@@ -780,10 +780,34 @@ def dashboard():
 
     object_kinerja = Kinerja()
 
-    month = datetime.strptime('2022-10-01', '%Y-%m-%d').date()
+    periode = '2022-10-01'
+
+    month = datetime.strptime(periode, '%Y-%m-%d').date()
     month_1 = month - relativedelta(months=+1)
 
+    target = object_kinerja.target_kinerja(periode[:4])
     kinerja_unit_bulanan = object_kinerja.kinerja_unit_bulanan(month)
     kinerja_unit_bulanan_prev = object_kinerja.kinerja_unit_bulanan(month_1)
-    
-    return render_template('pages/tools/kinerja/dashboard.html', title='Dashboard Kinerja', kin_u_bul=kinerja_unit_bulanan, kin_u_bul_prev=kinerja_unit_bulanan_prev)
+
+    kinerja_kum = object_kinerja.list_kinerja_unit_kumulatif(periode, 'eaf')
+    list_target = object_kinerja.list_target_kinerja('EAF', periode[:4], kinerja_kum)
+    satuan = object_kinerja.get_satuan('EAF', periode[:4])
+    kpi_ = 'EAF'
+
+    if 'kpi' in request.args:
+        kpi = request.args.get('kpi')
+
+        kinerja_kum = object_kinerja.list_kinerja_unit_kumulatif(periode, kpi)
+        for i in range(len(kinerja_kum)):
+            if kinerja_kum[i] is None:
+                kinerja_kum[i] = 0.0
+
+        list_target = object_kinerja.list_target_kinerja(kpi.upper(), periode[:4], kinerja_kum)
+        satuan = object_kinerja.get_satuan(kpi.upper(), periode[:4])
+        kpi_ = kpi.upper()
+
+    months = []
+    for i in range(len(kinerja_kum)):
+        months.append(object_kinerja.months[i])
+
+    return render_template('pages/tools/kinerja/dashboard.html', title='Dashboard Kinerja', target=target, kin_u_bul=kinerja_unit_bulanan, kin_u_bul_prev=kinerja_unit_bulanan_prev, kinerja_kum=kinerja_kum, months=months, list_target=list_target, satuan=satuan, kpi=kpi_)
