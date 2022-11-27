@@ -761,6 +761,18 @@ label {
   color: #ffc43d !important;
 }
 
+#dashboard .green-bg {
+  background-color: #06d6a0 !important;
+}
+
+#dashboard .red-bg {
+  background-color: #ef476f !important;
+}
+
+#dashboard .yellow-bg {
+  background-color: #ffc43d !important;
+}
+
 #dashboard .kin-unit .card {
   border-left: 7px solid #00b4d8;
   height: 150px;
@@ -810,8 +822,40 @@ label {
   font-size: 30px;
 }
 
-/* Kinerja Kumulatif */
 #dashboard .bpp .bi-currency-dollar {
   background-color: #00b4d8;
   color: #fff;
+}
+
+/* OIL */
+#dashboard .oil .bi-droplet {
+  background-color: #00b4d8;
+  color: #fff;
+}
+
+#dashboard .oil .col-4 h1 {
+  font-size: 50px;
+  font-weight: 900;
+}
+
+#dashboard .oil .col-4 h4 {
+  margin-top: -10px;
+}
+
+#dashboard .oil .col-4 .bi-check-lg {
+  font-size: 80px;
+  color: #06d6a0;
+  margin-left: -8px;
+}
+
+#dashboard .oil .pemakaian {
+  padding-top: 15px;
+}
+
+#dashboard .oil .pemakaian h2 {
+  font-weight: 700;
+}
+
+#dashboard .oil .progress-bar {
+  font-size: 18px;
 }
