@@ -314,6 +314,7 @@ def print_report_apar(tanggal):
 
     sign_manager = object_apar.get_sign_manager(request.path)
     sign_k3l = object_apar.get_sign_k3l(request.path)
+    print(sign_k3l)
 
     if 'token' in request.form:
         if request.form['token'] == '112220':

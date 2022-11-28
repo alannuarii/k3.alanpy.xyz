@@ -1,25 +1,29 @@
 <div class="row">
-    <div class="col-md-6 text-center position-relative">
-      <h6 class="mb-5">PLT MANAGER</h6>
-      {% if manager %}
-      <img class="position-absolute top-50 start-50 translate-middle" src="/static/img/hydrant/ttd/{{manager['ttd']}}" height="40" alt="" />
-      {% else %} {% if session['token'] == 112220 %}
-      <i class="bi-pen pen-manager position-absolute top-50 start-50 translate-middle" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#modal-approve"></i>
-      {% else %}
-      <i class="bi-pen pen-manager position-absolute top-50 start-50 translate-middle" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#modal-token"></i>
-      {% endif %} {% endif %}
-      <h6 class="fw-bolder">BAHAR SUDRAJAT</h6>
-    </div>
-    <div class="col-md-6 order-first order-md-last text-center position-relative">
-      <h6 class="mb-5">PJ LAKS K3L DAN KEAMANAN</h6>
-      {% if k3l %}
-      <img class="position-absolute top-50 start-50 translate-middle" src="/static/img/hydrant/ttd/{{k3l['ttd']}}" height="40" alt="" />
-      {% else %} {% if session['name'] == 'Alan Nuari' %}
-      <i class="bi-pen pen-k3l position-absolute top-50 start-50 translate-middle" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#modal-approve"></i>
-      {% else %}
-      <i class="bi-pen pen-k3l position-absolute top-50 start-50 translate-middle" style="cursor: pointer"></i>
-      {% endif %} {% endif %}
-      <h6 class="fw-bolder">ALAN NUARI</h6>
-    </div>
-    {% include 'pages/home/modal/modal-approve.html' %} {% include 'pages/home/modal/modal-token.html' %}
+  <div class="col-md-6 text-center position-relative">
+    <h6 class="mb-5">PLT MANAGER</h6>
+    {% if manager %}
+    <img class="position-absolute top-50 start-50 translate-middle" src="/static/img/hydrant/ttd/{{manager['ttd']}}" height="40" alt="" />
+    {% else %} {% if session['token'] == 112220 %}
+    <i class="bi-pen pen-manager position-absolute top-50 start-50 translate-middle" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#modal-approve"></i>
+    {% else %}
+    <i class="bi-pen pen-manager position-absolute top-50 start-50 translate-middle" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#modal-token"></i>
+    {% endif %} {% endif %}
+    <h6 class="fw-bolder">BAHAR SUDRAJAT</h6>
   </div>
+  <div class="col-md-6 order-first order-md-last text-center position-relative">
+    <h6 class="mb-5">PJ LAKS K3L DAN KEAMANAN</h6>
+    {% if k3l %} {% if k3l['path'] == request.path %}
+    <img class="position-absolute top-50 start-50 translate-middle" src="/static/img/apar/ttd/{{k3l['ttd']}}" height="40" alt="" />
+    {% elif k3l['path'] == request.path %}
+    <img class="position-absolute top-50 start-50 translate-middle" src="/static/img/p3k/ttd/{{k3l['ttd']}}" height="40" alt="" />
+    {% else %}
+    <img class="position-absolute top-50 start-50 translate-middle" src="/static/img/hydrant/ttd/{{k3l['ttd']}}" height="40" alt="" />
+    {% endif %} {% else %} {% if session['name'] == 'Alan Nuari' %}
+    <i class="bi-pen pen-k3l position-absolute top-50 start-50 translate-middle" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#modal-approve"></i>
+    {% else %}
+    <i class="bi-pen pen-k3l position-absolute top-50 start-50 translate-middle" style="cursor: pointer"></i>
+    {% endif %} {% endif %}
+    <h6 class="fw-bolder">ALAN NUARI</h6>
+  </div>
+  {% include 'pages/home/modal/modal-approve.html' %} {% include 'pages/home/modal/modal-token.html' %}
+</div>
