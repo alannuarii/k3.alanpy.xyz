@@ -859,3 +859,10 @@ label {
 #dashboard .oil .progress-bar {
   font-size: 18px;
 }
+
+/* KONDISI UNIT */
+#dashboard .kondisi .bi-tools {
+  background-color: #00b4d8;
+  color: #fff;
+}
+
