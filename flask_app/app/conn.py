@@ -238,3 +238,12 @@ cur = conn.cursor(dictionary=True)
 #         tahun VARCHAR(4) NOT NULL,
 #         PRIMARY KEY (id_target)
 # )
+
+# CREATE TABLE kondisi_kit
+# (
+#         id_kondisi INT NOT NULL AUTO_INCREMENT,
+#         kondisi TEXT,
+#         unit_id INT NOT NULL,
+#         PRIMARY KEY (id_kondisi),
+#         CONSTRAINT fk_kondisi_unit FOREIGN KEY (unit_id) REFERENCES unit (id_unit)
+# )

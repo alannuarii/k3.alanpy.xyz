@@ -314,7 +314,6 @@ def print_report_apar(tanggal):
 
     sign_manager = object_apar.get_sign_manager(request.path)
     sign_k3l = object_apar.get_sign_k3l(request.path)
-    print(sign_k3l)
 
     if 'token' in request.form:
         if request.form['token'] == '112220':
@@ -323,16 +322,17 @@ def print_report_apar(tanggal):
         return redirect(url_for('print_report_apar', tanggal=tanggal)) 
 
     if 'ttd' in request.form:
-        role = request.form['role']
-        path = request.form['path']
-        ttd = request.form['ttd']
-        foto_ttd = object_sign.base64tojpg(ttd)
-        filename = f"{role}_{path.replace('/', '_')}.png"
-        foto_ttd.save(os.path.join(app.config['FOTO_APAR_TTD'], filename))
+        if request.form['ttd'] != '':
+            role = request.form['role']
+            path = request.form['path']
+            ttd = request.form['ttd']
+            foto_ttd = object_sign.base64tojpg(ttd)
+            filename = f"{role}_{path.replace('/', '_')}.png"
+            foto_ttd.save(os.path.join(app.config['FOTO_APAR_TTD'], filename))
 
-        object_apar.insert_sign(role=role, path=path, ttd=filename)
+            object_apar.insert_sign(role=role, path=path, ttd=filename)
 
-        return redirect(url_for('print_report_apar', tanggal=tanggal))
+            return redirect(url_for('print_report_apar', tanggal=tanggal))
 
     return render_template('pages/apar/print-report.html', title='Report APAR', datas=datas, tanggal=tanggal[1], bulan=tanggal[1][3:], manager=sign_manager, k3l=sign_k3l)
 
@@ -508,16 +508,17 @@ def print_report_p3k(tanggal):
         return redirect(url_for('print_report_p3k', tanggal=tanggal)) 
 
     if 'ttd' in request.form:
-        role = request.form['role']
-        path = request.form['path']
-        ttd = request.form['ttd']
-        foto_ttd = object_sign.base64tojpg(ttd)
-        filename = f"{role}_{path.replace('/', '_')}.png"
-        foto_ttd.save(os.path.join(app.config['FOTO_P3K_TTD'], filename))
+        if request.form['ttd'] != '':
+            role = request.form['role']
+            path = request.form['path']
+            ttd = request.form['ttd']
+            foto_ttd = object_sign.base64tojpg(ttd)
+            filename = f"{role}_{path.replace('/', '_')}.png"
+            foto_ttd.save(os.path.join(app.config['FOTO_P3K_TTD'], filename))
 
-        object_p3k.insert_sign(role=role, path=path, ttd=filename)
+            object_p3k.insert_sign(role=role, path=path, ttd=filename)
 
-        return redirect(url_for('print_report_p3k', tanggal=tanggal))
+            return redirect(url_for('print_report_p3k', tanggal=tanggal))
     
     return render_template('pages/p3k/print-report.html', title='Report P3K', all_p3k=all_p3k, pers_kantor=get_saldo_kantor, pers_ccr=get_saldo_ccr, pers_tps=get_saldo_tps, pers_pos=get_saldo_pos, pers_stock=get_saldo_stock, bulan=bulan, tanggal=tanggal_format, manager=sign_manager, k3l=sign_k3l)
 
@@ -659,16 +660,17 @@ def print_report_hydrant(tanggal):
         return redirect(url_for('print_report_hydrant', tanggal=tanggal)) 
 
     if 'ttd' in request.form:
-        role = request.form['role']
-        path = request.form['path']
-        ttd = request.form['ttd']
-        foto_ttd = object_sign.base64tojpg(ttd)
-        filename = f"{role}_{path.replace('/', '_')}.png"
-        foto_ttd.save(os.path.join(app.config['FOTO_HYDRANT_TTD'], filename))
+        if request.form['ttd'] != '':
+            role = request.form['role']
+            path = request.form['path']
+            ttd = request.form['ttd']
+            foto_ttd = object_sign.base64tojpg(ttd)
+            filename = f"{role}_{path.replace('/', '_')}.png"
+            foto_ttd.save(os.path.join(app.config['FOTO_HYDRANT_TTD'], filename))
 
-        object_hydrant.insert_sign(role=role, path=path, ttd=filename)
+            object_hydrant.insert_sign(role=role, path=path, ttd=filename)
 
-        return redirect(url_for('print_report_hydrant', tanggal=tanggal))
+            return redirect(url_for('print_report_hydrant', tanggal=tanggal))
 
     return render_template('pages/hydrant/print-report.html', title='Report Hydrant', all_hydrant=all_hydrant, bulan=bulan, tanggal=tanggal_format, manager=sign_manager, k3l=sign_k3l)
 

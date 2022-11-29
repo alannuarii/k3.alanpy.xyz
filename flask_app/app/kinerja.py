@@ -134,4 +134,8 @@ class Kinerja:
                 kin = self.ps_unit_kumulatif(awal, f"{akhir[:4]}-{i + 1}-01")
                 list_kum.append(kin['ps_unit'])
             return list_kum
-        
+
+    def get_kondisi_unit(self, periode):
+        cur.execute(f"SELECT id_unit, merek, tipe, kondisi, dtp, dmn FROM unit JOIN kondisi_kit ON unit.id_unit = kondisi_kit.unit_id JOIN pengusahaan ON unit.id_unit = pengusahaan.mesin_id WHERE periode = '{periode}' ORDER BY id_unit")
+        result = cur.fetchall()
+        return result        
