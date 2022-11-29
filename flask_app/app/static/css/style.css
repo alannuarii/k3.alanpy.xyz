@@ -806,6 +806,7 @@ label {
 /* BPP  */
 #dashboard .bpp h1 {
   font-weight: 900;
+  font-size: 35px;
 }
 
 #dashboard .bpp .target h5 {
@@ -866,3 +867,31 @@ label {
   color: #fff;
 }
 
+#dashboard .kondisi .nomor {
+  font-size: 30px;
+}
+
+#dashboard .kondisi h6 {
+  font-size: 13px;
+}
+
+#dashboard .kondisi textarea {
+  font-size: 13px;
+  background-color: #fff;
+  color: #151515;
+}
+
+/* LIMBAH */
+#dashboard .limbah .bi-radioactive {
+  background-color: #00b4d8;
+  color: #fff;
+}
+
+#dashboard .limbah .bi-truck {
+  font-size: 30px;
+}
+
+#dashboard .limbah p {
+  font-size: 13px;
+  margin-top: -10px;
+}

@@ -780,18 +780,22 @@ def print_absen(id):
 
 @app.route('/tools/kinerja/')
 def dashboard():
-
+    # Inisiasi Object 
     object_kinerja = Kinerja()
 
+    # Periode 
     periode = '2022-10-01'
-
     month = datetime.strptime(periode, '%Y-%m-%d').date()
     month_1 = month - relativedelta(months=+1)
 
+    # Target Kinerja 
     target = object_kinerja.target_kinerja(periode[:4])
+
+    # Kinerja Bulanan 
     kinerja_unit_bulanan = object_kinerja.kinerja_unit_bulanan(month)
     kinerja_unit_bulanan_prev = object_kinerja.kinerja_unit_bulanan(month_1)
 
+    # Kinerja Kumulatif
     kinerja_kum = object_kinerja.list_kinerja_unit_kumulatif(periode, 'eaf')
     list_target = object_kinerja.list_target_kinerja('EAF', periode[:4], kinerja_kum)
     satuan = object_kinerja.get_satuan('EAF', periode[:4])
@@ -813,4 +817,7 @@ def dashboard():
     for i in range(len(kinerja_kum)):
         months.append(object_kinerja.months[i])
 
-    return render_template('pages/tools/kinerja/dashboard.html', title='Dashboard Kinerja', target=target, kin_u_bul=kinerja_unit_bulanan, kin_u_bul_prev=kinerja_unit_bulanan_prev, kinerja_kum=kinerja_kum, months=months, list_target=list_target, satuan=satuan, kpi=kpi_)
+    # Kondisi Unit 
+    kondisis = object_kinerja.get_kondisi_unit(periode)
+
+    return render_template('pages/tools/kinerja/dashboard.html', title='Dashboard Kinerja', target=target, kin_u_bul=kinerja_unit_bulanan, kin_u_bul_prev=kinerja_unit_bulanan_prev, kinerja_kum=kinerja_kum, months=months, list_target=list_target, satuan=satuan, kpi=kpi_, kondisis=kondisis)

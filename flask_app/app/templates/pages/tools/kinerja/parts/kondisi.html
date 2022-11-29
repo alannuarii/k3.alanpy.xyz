@@ -2,108 +2,26 @@
   <div class="card-body">
     <h5 class="card-title"><i class="bi-tools p-2 me-1"></i> Kondisi Unit</h5>
     <div class="mt-4">
+      {% for kondisi in kondisis %}
       <div class="card mb-3" style="width: 100%">
         <div class="row g-0">
           <div class="col-md-3">
-            <img src="{{ url_for('static', filename='img/unit1.jpg' ) }}" class="img-fluid rounded-start" alt="..." />
+            <img src="/static/img/unit{{loop.index}}.jpg" class="img-fluid rounded-start" alt="..." />
           </div>
           <div class="col-md-9">
-            <div class="card-body">
+            <div class="card-body position-relative">
+              <i class="bi-{{loop.index}}-square position-absolute top-0 start-0 nomor ps-4 yellow"></i>
               <div class="card-title d-flex justify-content-evenly">
-                <h6>Daya Terpasang : <strong>500 kW</strong></h6>
-                <h6>Daya Mampu : <strong>300 kW</strong></h6>
+                <h6>Daya Terpasang : <strong>{{kondisi['dtp']}} kW</strong></h6>
+                <h6>Daya Mampu : <strong>{{kondisi['dmn']}} kW</strong></h6>
               </div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
+              <textarea class="form-control" placeholder="{{kondisi['kondisi']}}" id="floatingTextarea" disabled></textarea>
+              <!-- <div class="border py-1 px-2 rounded-2 mt-1 kondisi-mesin">{{kondisi['kondisi']}}</div> -->
             </div>
           </div>
         </div>
       </div>
-      <div class="card mb-3" style="width: 100%">
-        <div class="row g-0">
-          <div class="col-md-3">
-            <img src="{{ url_for('static', filename='img/unit2.jpg' ) }}" class="img-fluid rounded-start" alt="..." />
-          </div>
-          <div class="col-md-9">
-            <div class="card-body">
-              <div class="card-title d-flex justify-content-evenly">
-                <h6>Daya Terpasang : <strong>500 kW</strong></h6>
-                <h6>Daya Mampu : <strong>300 kW</strong></h6>
-              </div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3" style="width: 100%">
-        <div class="row g-0">
-          <div class="col-md-3">
-            <img src="{{ url_for('static', filename='img/unit3.jpg' ) }}" class="img-fluid rounded-start" alt="..." />
-          </div>
-          <div class="col-md-9">
-            <div class="card-body">
-              <div class="card-title d-flex justify-content-evenly">
-                <h6>Daya Terpasang : <strong>500 kW</strong></h6>
-                <h6>Daya Mampu : <strong>300 kW</strong></h6>
-              </div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3" style="width: 100%">
-        <div class="row g-0">
-          <div class="col-md-3">
-            <img src="{{ url_for('static', filename='img/unit4.jpg' ) }}" class="img-fluid rounded-start" alt="..." />
-          </div>
-          <div class="col-md-9">
-            <div class="card-body">
-              <div class="card-title d-flex justify-content-evenly">
-                <h6>Daya Terpasang : <strong>500 kW</strong></h6>
-                <h6>Daya Mampu : <strong>300 kW</strong></h6>
-              </div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3" style="width: 100%">
-        <div class="row g-0">
-          <div class="col-md-3">
-            <img src="{{ url_for('static', filename='img/unit5.jpg' ) }}" class="img-fluid rounded-start" alt="..." />
-          </div>
-          <div class="col-md-9">
-            <div class="card-body">
-              <div class="card-title d-flex justify-content-evenly">
-                <h6>Daya Terpasang : <strong>500 kW</strong></h6>
-                <h6>Daya Mampu : <strong>300 kW</strong></h6>
-              </div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="card mb-3" style="width: 100%">
-        <div class="row g-0">
-          <div class="col-md-3">
-            <img src="{{ url_for('static', filename='img/unit6.jpg' ) }}" class="img-fluid rounded-start" alt="..." />
-          </div>
-          <div class="col-md-9">
-            <div class="card-body">
-              <div class="card-title d-flex justify-content-evenly">
-                <h6>Daya Terpasang : <strong>500 kW</strong></h6>
-                <h6>Daya Mampu : <strong>300 kW</strong></h6>
-              </div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
-              <div class="border py-1 px-2 rounded-2 mt-1">Tes</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {% endfor %}
     </div>
   </div>
 </div>
