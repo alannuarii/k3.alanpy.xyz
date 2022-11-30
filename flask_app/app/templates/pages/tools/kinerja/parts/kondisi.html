@@ -3,20 +3,25 @@
     <h5 class="card-title"><i class="bi-tools p-2 me-1"></i> Kondisi Unit</h5>
     <div class="mt-4">
       {% for kondisi in kondisis %}
-      <div class="card mb-3" style="width: 100%">
+      <div class="card mb-3 shadow-sm" style="width: 100%">
         <div class="row g-0">
           <div class="col-md-3">
             <img src="/static/img/unit{{loop.index}}.jpg" class="img-fluid rounded-start" alt="..." />
           </div>
           <div class="col-md-9">
             <div class="card-body position-relative">
-              <i class="bi-{{loop.index}}-square position-absolute top-0 start-0 nomor ps-4 yellow"></i>
+              <i class="bi-{{loop.index}}-square position-absolute top-0 start-0 nomor ps-4 pt-1 yellow"></i>
               <div class="card-title d-flex justify-content-evenly">
-                <h6>Daya Terpasang : <strong>{{kondisi['dtp']}} kW</strong></h6>
-                <h6>Daya Mampu : <strong>{{kondisi['dmn']}} kW</strong></h6>
+                <div>
+                  <i class="bi-lightning-fill"></i>
+                  <h6 class="d-inline">Daya Terpasang : <strong>{{kondisi['dtp']}} kW</strong></h6>
+                </div>
+                <div>
+                  <i class="bi-lightning"></i>
+                  <h6 class="d-inline">Daya Mampu : <strong>{{kondisi['dmn']}} kW</strong></h6>
+                </div>
               </div>
-              <input class="form-control" placeholder="{{kondisi['kondisi']}}" id="floatingTextarea" disabled></inp>
-              <!-- <div class="border py-1 px-2 rounded-2 mt-1 kondisi-mesin">{{kondisi['kondisi']}}</div> -->
+              <input class="form-control" placeholder="{{kondisi['kondisi']}}" id="floatingTextarea" disabled />
             </div>
           </div>
         </div>

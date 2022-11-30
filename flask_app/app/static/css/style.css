@@ -775,6 +775,7 @@ label {
 
 #dashboard .kin-unit .card {
   border-left: 7px solid #00b4d8;
+  border-bottom: 7px solid #00b4d8;
   height: 150px;
 }
 
