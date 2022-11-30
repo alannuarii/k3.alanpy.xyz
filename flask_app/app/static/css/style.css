@@ -875,7 +875,7 @@ label {
   font-size: 13px;
 }
 
-#dashboard .kondisi textarea {
+#dashboard .kondisi input {
   font-size: 13px;
   background-color: #fff;
   color: #151515;
