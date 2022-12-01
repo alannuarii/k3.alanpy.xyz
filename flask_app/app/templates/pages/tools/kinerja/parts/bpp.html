@@ -3,12 +3,22 @@
     <h5 class="card-title"><i class="bi-currency-dollar p-2 me-1"></i> BPP</h5>
     <div class="row mt-3">
       <div class="col-7 pt-2">
-        <h1>2500 Rp/kWh</h1>
-        <h6 class="mt-2 green"><i class="bi-check-lg me-1"></i> Target 2700 Rp/kWh</h6>
+        <h1>{{komps[0] + komps[1] + komps[2] + komps[3]}} Rp/kWh</h1>
+        {% if (komps[0] + komps[1] + komps[2] + komps[3]) <= 12839 %}
+        <h6 class="mt-2 green"><i class="bi-check-lg me-1"></i> Target 12839 Rp/kWh</h6>
+        {% else %}
+        <h6 class="mt-2 red"><i class="bi-x-lg me-1"></i> Target 12839 Rp/kWh</h6>
+        {% endif %}
       </div>
       <div class="col-5 target text-center">
+        {% if (komps[0] + komps[1] + komps[2] + komps[3]) > (komps_prev[0] + komps_prev[1] + komps_prev[2] + komps_prev[3]) %}
+        <i class="red ind bi-arrow-up-circle-fill"></i>
+        {% elif (komps[0] + komps[1] + komps[2] + komps[3]) < (komps_prev[0] + komps_prev[1] + komps_prev[2] + komps_prev[3]) %}
         <i class="green ind bi-arrow-down-circle-fill"></i>
-        <h5>2700 Rp/kWh</h5>
+        {% else %}
+        <i class="yellow ind bi-dash-circle-fill"></i>
+        {% endif %}
+        <h5>12839 Rp/kWh</h5>
         <h6>Last month</h6>
       </div>
     </div>

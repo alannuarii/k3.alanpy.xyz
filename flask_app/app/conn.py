@@ -247,3 +247,14 @@ cur = conn.cursor(dictionary=True)
 #         PRIMARY KEY (id_kondisi),
 #         CONSTRAINT fk_kondisi_unit FOREIGN KEY (unit_id) REFERENCES unit (id_unit)
 # )
+
+# CREATE TABLE bpp
+# (
+#         id_bpp INT NOT NULL AUTO_INCREMENT,
+#         periode DATE NOT NULL,
+#         komp_a INT,
+#         komp_b INT,
+#         komp_c INT,
+#         komp_d INT,
+#         PRIMARY KEY (id_bpp),
+# )

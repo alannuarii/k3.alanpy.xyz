@@ -31,6 +31,8 @@ data = [
     'nama': 'Gagi'}
 ]
 
+data2 = {'komp_a':123, 'komp_b': 456, 'komp_c': 789}
+
 nomor = 'nama'
 
 def uji(nomor):
@@ -56,8 +58,10 @@ hari = today.strftime('%A')
 kinerja = {'eaf_unit': 100.0, 'efor_unit': None, 'sof_unit': 0.0, 'sfc_unit': 0.274, 'ps_unit': 5.014}
 
 
+new_dict = []
+for i in data2.items():
+    new_dict.append(tuple([i[0], i[1]*2]))
 
-# print(jumat[5:-3])
-for i in range(int(jumat[5:-3])):
-    print(i)
+print(data2.items())
+print(dict(new_dict))
 

@@ -33,6 +33,11 @@ class Kinerja:
         result = cur.fetchone()
         return result['satuan']
 
+    def get_produksi_netto(self, tahun) -> dict:
+        cur.execute(f"SELECT SUM({self.produksi_netto}) AS 'produksi_netto' FROM pengusahaan WHERE YEAR (periode) = '{tahun}'")
+        result = cur.fetchone()
+        return result
+
     def eaf_unit_bulanan(self, periode) -> dict:
         cur.execute(f"SELECT ROUND((SUM({self.dmn_ph_der}) / SUM({self.dmn_ph}) * 100), 3) AS 'eaf_unit' FROM pengusahaan WHERE periode = '{periode}'")
         result = cur.fetchone()
@@ -138,4 +143,16 @@ class Kinerja:
     def get_kondisi_unit(self, periode):
         cur.execute(f"SELECT id_unit, merek, tipe, kondisi, dtp, dmn FROM unit JOIN kondisi_kit ON unit.id_unit = kondisi_kit.unit_id JOIN pengusahaan ON unit.id_unit = pengusahaan.mesin_id WHERE periode = '{periode}' ORDER BY id_unit")
         result = cur.fetchall()
-        return result        
+        return result    
+
+    def get_biaya_bpp(self, periode) -> dict:
+        cur.execute(f"SELECT komp_a, komp_b, komp_c, komp_d FROM bpp WHERE periode = '{periode}'")  
+        result = cur.fetchone()  
+        return result
+
+    def get_bpp(self, periode):
+        bpp = []
+        produksi_netto = self.get_produksi_netto(str(periode)[:4])
+        for i in self.get_biaya_bpp(periode).items():
+            bpp.append(int(i[1] / produksi_netto['produksi_netto']))
+        return bpp
