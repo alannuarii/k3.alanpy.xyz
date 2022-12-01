@@ -1,3 +1,6 @@
-const targetBPP = document.querySelector(".target").childNodes[3].innerText;
+const targetBPP = document.querySelectorAll(".need-comma");
 
-console.log(parseInt(targetBPP.slice(0,-7)).toLocaleString());
+for (comma of targetBPP) {
+  const targetWithComma = parseInt(comma.innerText.slice(0, -7)).toLocaleString();
+  comma.textContent = `${targetWithComma} Rp/kWh`;
+}

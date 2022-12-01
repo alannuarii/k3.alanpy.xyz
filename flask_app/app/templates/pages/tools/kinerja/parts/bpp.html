@@ -3,11 +3,11 @@
     <h5 class="card-title"><i class="bi-currency-dollar p-2 me-1"></i> BPP</h5>
     <div class="row mt-3">
       <div class="col-7 pt-2">
-        <h1>{{komps[0] + komps[1] + komps[2] + komps[3]}} Rp/kWh</h1>
+        <h1 class="need-comma">{{komps[0] + komps[1] + komps[2] + komps[3]}} Rp/kWh</h1>
         {% if (komps[0] + komps[1] + komps[2] + komps[3]) <= 12839 %}
-        <h6 class="mt-2 green"><i class="bi-check-lg me-1"></i> Target 12839 Rp/kWh</h6>
+        <h6 class="mt-2 green"><i class="bi-check-lg me-1"></i> Target <span class="need-comma">12839 Rp/kWh</span></h6>
         {% else %}
-        <h6 class="mt-2 red"><i class="bi-x-lg me-1"></i> Target 12839 Rp/kWh</h6>
+        <h6 class="mt-2 red"><i class="bi-x-lg me-1"></i> Target <span class="need-comma">12839 Rp/kWh</span></h6>
         {% endif %}
       </div>
       <div class="col-5 target text-center">
@@ -18,7 +18,7 @@
         {% else %}
         <i class="yellow ind bi-dash-circle-fill"></i>
         {% endif %}
-        <h5>12839 Rp/kWh</h5>
+        <h5 class="need-comma">12839 Rp/kWh</h5>
         <h6>Last month</h6>
       </div>
     </div>
