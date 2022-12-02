@@ -447,18 +447,6 @@ def data_p3k():
     return render_template('pages/p3k/data-p3k.html', title='Mutasi P3K', all_p3k=all_p3k, pers_kantor=get_saldo_kantor, pers_ccr=get_saldo_ccr, pers_tps=get_saldo_tps, pers_pos=get_saldo_pos, pers_stock=get_saldo_stock)
 
 
-@app.route('/p3k/data/<id_p3k>')
-def delete_p3k(id_p3k):
-
-    object_p3k = K3()
-    foto = object_p3k.get_foto_p3k(id_p3k)
-    if 'loggedin' in session:
-        os.remove(os.path.join(app.config['FOTO_P3K'], foto[0]['foto_p3k']))
-        object_p3k.delete_p3k(id_p3k)
-
-    return redirect(url_for('data_p3k'))
-
-
 @app.route('/p3k/report')
 def report_p3k():
     month = None

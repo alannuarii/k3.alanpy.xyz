@@ -822,6 +822,11 @@ label {
   text-shadow: -3px 3px 0 #444444;
 }
 
+#dashboard .title .col-6 h6 {
+  font-size: 20px;
+  font-weight: 900;
+}
+
 #dashboard .kin-unit .card {
   border-left: 7px solid #00b4d8;
   border-bottom: 7px solid #00b4d8;

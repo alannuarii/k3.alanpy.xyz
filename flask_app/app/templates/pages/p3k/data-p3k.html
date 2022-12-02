@@ -44,8 +44,7 @@
                 <td class="text-start d-flex align-items-center nama-barang">
                   {{p3k['nama_barang']}}
                   <div class="d-inline ms-auto btn-nav">
-                    <i class="bi-file-image btn" data-bs-toggle="modal" data-bs-target="#modal-foto-p3k{{p3k['id_p3k']}}"></i><i class="bi-vr btn" data-bs-toggle="modal" data-bs-target="#modalEditP3K{{p3k['id_p3k']}}"></i
-                    ><i class="bi-trash3 btn" data-bs-toggle="modal" data-bs-target="#modalDeleteP3K{{p3k['id_p3k']}}"></i>
+                    <i class="bi-file-image btn" data-bs-toggle="modal" data-bs-target="#modal-foto-p3k{{p3k['id_p3k']}}"></i><i class="bi-vr btn" data-bs-toggle="modal" data-bs-target="#modalEditP3K{{p3k['id_p3k']}}"></i>
                   </div>
                 </td>
                 <td>{{p3k['satuan']}}</td>
@@ -57,7 +56,7 @@
                 <td>{{pers_kantor[loop.index0]['pers_kantor']|int + pers_ccr[loop.index0]['pers_ccr']|int + pers_tps[loop.index0]['pers_tps']|int + pers_pos[loop.index0]['pers_pos']|int + pers_stock[loop.index0]['pers_stock']|int}}</td>
                 <td>{{p3k['kadaluarsa']}}</td>
               </tr>
-              {% include 'pages/p3k/modal/modal-foto-p3k.html' %} {% include 'pages/p3k/modal/modal-edit-p3k.html' %}{% include 'pages/p3k/modal/modal-delete-p3k.html' %}{% endfor %}
+              {% include 'pages/p3k/modal/modal-foto-p3k.html' %} {% include 'pages/p3k/modal/modal-edit-p3k.html' %}{% endfor %}
             </tbody>
           </table>
         </div>
