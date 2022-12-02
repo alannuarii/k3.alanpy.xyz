@@ -33,6 +33,14 @@ class Kinerja:
         result = cur.fetchone()
         return result['satuan']
 
+    def get_periode_bulan(self, bulan):
+        cur.execute(f"SELECT periode FROM pengusahaan WHERE MONTH (periode) = {bulan} LIMIT 1")
+        result = cur.fetchone()
+        if result is None:
+            return 0
+        else:
+            return result['periode'].month
+
     def get_produksi_netto(self, tahun) -> dict:
         cur.execute(f"SELECT SUM({self.produksi_netto}) AS 'produksi_netto' FROM pengusahaan WHERE YEAR (periode) = '{tahun}'")
         result = cur.fetchone()
@@ -141,7 +149,7 @@ class Kinerja:
             return list_kum
 
     def get_kondisi_unit(self, periode):
-        cur.execute(f"SELECT id_unit, merek, tipe, kondisi, dtp, dmn FROM unit JOIN kondisi_kit ON unit.id_unit = kondisi_kit.unit_id JOIN pengusahaan ON unit.id_unit = pengusahaan.mesin_id WHERE periode = '{periode}' ORDER BY id_unit")
+        cur.execute(f"SELECT id_unit, merek, tipe, kondisi, dtp, dmn, produksi, {self.total_ps} AS 'total_ps', bbm, po, mo, fo, sh, ROUND({self.rsh}) AS 'rsh'  FROM unit JOIN kondisi_kit ON unit.id_unit = kondisi_kit.unit_id JOIN pengusahaan ON unit.id_unit = pengusahaan.mesin_id WHERE periode = '{periode}' ORDER BY id_unit")
         result = cur.fetchall()
         return result    
 

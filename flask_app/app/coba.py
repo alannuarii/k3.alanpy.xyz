@@ -1,7 +1,10 @@
 from datetime import date, timedelta, datetime
+from dateutil.relativedelta import relativedelta
 
 today = date.today()
+periode = today - relativedelta(months=+1)
 
+# print(f"{str(periode)[:-3]}-01")
 
 hari = date.strftime(today, '%A')
 
@@ -58,10 +61,20 @@ hari = today.strftime('%A')
 kinerja = {'eaf_unit': 100.0, 'efor_unit': None, 'sof_unit': 0.0, 'sfc_unit': 0.274, 'ps_unit': 5.014}
 
 
-new_dict = []
-for i in data2.items():
-    new_dict.append(tuple([i[0], i[1]*2]))
+# new_dict = []
+# for i in data2.items():
+#     new_dict.append(tuple([i[0], i[1]*2]))
 
-print(data2.items())
-print(dict(new_dict))
+# print(data2.items())
+# print(dict(new_dict))
 
+
+# angka = [1,3,5,7,8,9,7,10,4,5,6]
+# genap = []
+# for i in angka:
+#     if i % 2 == 0:
+#         genap.append(i)
+#         continue
+# print(genap)
+
+print(range(12))

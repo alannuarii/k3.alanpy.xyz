@@ -1,4 +1,4 @@
-<div class="p-3 card rounded-4 shadow-sm position-relative">
+<div class="p-3 card rounded-4 shadow position-relative">
   <form method="get">
     <select class="form-select form-select-sm w-25 position-absolute top-0 end-0 mt-3 me-3" name="kpi" onchange="this.form.submit()">
       <option selected disabled>Select KPI</option>
@@ -10,7 +10,7 @@
     </select>
   </form>
   <div class="card-body">
-    <h5 class="card-title ms-3"><i class="bi-graph-up-arrow p-2 me-1"></i> {{kpi}} Kumulatif</h5>
+    <h5 class="card-title ms-3"><i class="bi-graph-up p-2 me-1"></i> {{kpi}} Kumulatif</h5>
     <div><canvas id="kinerja-kum"></canvas></div>
   </div>
 </div>

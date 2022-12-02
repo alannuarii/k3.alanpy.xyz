@@ -1,4 +1,4 @@
-<div class="p-3 card rounded-4 shadow-sm position-relative">
+<div class="p-3 card rounded-4 shadow position-relative">
   <div class="card-body">
     <h5 class="card-title"><i class="bi-tools p-2 me-1"></i> Kondisi Unit</h5>
     <div class="mt-4">
@@ -6,7 +6,7 @@
       <div class="card mb-3 shadow-sm" style="width: 100%">
         <div class="row g-0">
           <div class="col-md-3">
-            <img src="/static/img/unit{{loop.index}}.jpg" class="img-fluid rounded-start" alt="..." />
+            <img src="/static/img/unit{{loop.index}}.jpg" class="img-fluid rounded-4 p-2" alt="..." />
           </div>
           <div class="col-md-9">
             <div class="card-body position-relative">
@@ -22,7 +22,28 @@
                 </div>
               </div>
               <input class="form-control mt-3" placeholder="{{kondisi['kondisi']}}" id="floatingTextarea" disabled />
+              <div class="collapse" id="collap{{loop.index}}">
+                <div class="row mt-3">
+                  <div class="col-6"><span class="badge green-bg">Produksi </span><span class="badge text-dark">{{kondisi['produksi']}} kWh</span></div>
+                  <div class="col-6"><span class="badge green-bg">PS </span><span class="badge text-dark">{{kondisi['total_ps']}} kWh</span></div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-6"><span class="badge red-bg">Pemakaian BBM </span><span class="badge text-dark">{{kondisi['bbm']}} Liter</span></div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col-6">
+                    <div><span class="badge yellow-bg">SH </span><span class="badge text-dark">{{kondisi['sh']}} Jam</span></div>
+                    <div><span class="badge yellow-bg">RSH </span><span class="badge text-dark">{{kondisi['rsh']}} Jam</span></div>
+                    <div><span class="badge yellow-bg">FOH </span><span class="badge text-dark">{{kondisi['fo']}} Jam</span></div>
+                  </div>
+                  <div class="col-6">
+                    <div><span class="badge yellow-bg">POH </span><span class="badge text-dark">{{kondisi['po']}} Jam</span></div>
+                    <div><span class="badge yellow-bg">MOH </span><span class="badge text-dark">{{kondisi['mo']}} Jam</span></div>
+                  </div>
+                </div>
+              </div>
             </div>
+            <i class="bi-chevron-double-down d-block text-center" style="cursor: pointer" data-bs-toggle="collapse" data-bs-target="#collap{{loop.index}}"></i>
           </div>
         </div>
       </div>

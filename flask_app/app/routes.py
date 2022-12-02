@@ -784,7 +784,18 @@ def dashboard():
     object_kinerja = Kinerja()
 
     # Periode 
-    periode = '2022-10-01'
+    today = date.today()
+    periode_data = (today - relativedelta(months=+1)).month
+
+    if object_kinerja.get_periode_bulan(periode_data) == 0:
+        for i in reversed(range(12)):
+            if object_kinerja.get_periode_bulan(i) != 0:
+                bulan = i
+                break
+    else:
+        bulan = object_kinerja.get_periode_bulan(periode_data)
+
+    periode = f"{today.year}-{bulan}-01"
     month = datetime.strptime(periode, '%Y-%m-%d').date()
     month_1 = month - relativedelta(months=+1)
 
@@ -823,5 +834,7 @@ def dashboard():
 
     # Kondisi Unit 
     kondisis = object_kinerja.get_kondisi_unit(periode)
+
+    print(kondisis)
 
     return render_template('pages/tools/kinerja/dashboard.html', title='Dashboard Kinerja', target=target, kin_u_bul=kinerja_unit_bulanan, kin_u_bul_prev=kinerja_unit_bulanan_prev, kinerja_kum=kinerja_kum, months=months, list_target=list_target, satuan=satuan, kpi=kpi_, kondisis=kondisis, komps=komps, komps_prev=komps_prev)
