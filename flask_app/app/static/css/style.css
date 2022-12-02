@@ -44,7 +44,7 @@ main {
 .btn-second {
   background-color: #444444;
   border-color: #ffc451;
-  color: #ffc451 !important;
+  color: #ffc451;
   transition: ease-in-out 0.3s;
 }
 
@@ -502,7 +502,7 @@ label {
 }
 
 #print-report .main-table tr {
-  line-height: 13px;
+  line-height: 12px;
 }
 
 #print-report .main-table .th2 {
@@ -785,8 +785,8 @@ label {
   text-shadow: -2px 2px 0 #444444;
 }
 
-#dashboard .title .col-4 {
-  margin-left: -40px;
+#dashboard .title .col-5 {
+  margin-left: -50px;
 }
 
 #dashboard .title h2 {
