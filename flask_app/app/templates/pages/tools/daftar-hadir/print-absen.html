@@ -63,20 +63,20 @@
                 <th scope="col" colspan="5" class="text-start">{{absens[0]['lokasi']}}</th>
               </tr>
               <tr class="align-middle tr-absen">
-                <th scope="col" class="th1">NO</th>
-                <th scope="col" class="th1">NAMA</th>
-                <th scope="col" class="th2">INSTANSI</th>
-                <th scope="col" class="th3">JABATAN</th>
-                <th scope="col" class="th5">NOMOR HP</th>
-                <th scope="col" class="th6">ALAMAT EMAIL</th>
-                <th scope="col" class="th7">TANDA TANGAN</th>
+                <th scope="col" class="">NO</th>
+                <th scope="col" class="">NAMA</th>
+                <th scope="col" class="">INSTANSI</th>
+                <th scope="col" class="">JABATAN</th>
+                <th scope="col" class="">NOMOR HP</th>
+                <th scope="col" class="">ALAMAT EMAIL</th>
+                <th scope="col" class="">TANDA TANGAN</th>
               </tr>
             </thead>
             <tbody>
               {% for absen in absens %}
               <tr class="align-middle">
                 <td>{{loop.index}}</td>
-                <td>{{absen['nama']}}</td>
+                <td class="text-start">{{absen['nama']}}</td>
                 <td>{{absen['instansi']}}</td>
                 <td>{{absen['jabatan']}}</td>
                 <td>{{absen['hp']}}</td>
