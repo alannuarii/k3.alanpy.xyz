@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% include 'includes/styles.html' %}
+    <!-- Favicons -->
+    <link href="{{ url_for('static', filename='img/safety.png' ) }}" rel="icon" />
+  </head>
+  <body>
+    {% block content %}
+    <section id="dashboard" class="d-none d-md-block py-4 vh-100">
+      <div class="container position-relative input">
+        <div class="position-absolute top-0 end-0 me-5">
+          <a href="/" class="btn blue-bg"><i class="bi-arrow-left"></i></a>
+          <a href="{{ url_for('dashboard' ) }}" class="btn blue-bg"><i class="bi-graph-up-arrow"></i></a>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h2>INPUT DATA</h2>
+          </div>
+        </div>
+        <div class="p-3 card rounded-4 shadow"></div>
+      </div>
+    </section>
+    {% endblock %} {% include 'includes/scripts.html' %} {% include 'pages/tools/kinerja/charts/kinerja-kum.html' %} {% include 'pages/tools/kinerja/charts/komponen.html' %}
+  </body>
+</html>

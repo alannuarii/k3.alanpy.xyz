@@ -149,7 +149,7 @@ class Kinerja:
             return list_kum
 
     def get_kondisi_unit(self, periode):
-        cur.execute(f"SELECT id_unit, merek, tipe, kondisi, dtp, dmn, produksi, {self.total_ps} AS 'total_ps', bbm, po, mo, fo, sh, ROUND({self.rsh}) AS 'rsh'  FROM unit JOIN kondisi_kit ON unit.id_unit = kondisi_kit.unit_id JOIN pengusahaan ON unit.id_unit = pengusahaan.mesin_id WHERE periode = '{periode}' ORDER BY id_unit")
+        cur.execute(f"SELECT id_unit, merek, tipe, kondisi, dtp, dmn, produksi, {self.total_ps} AS 'total_ps', bbm, po, mo, fo, sh, ROUND({self.rsh}) AS 'rsh', ROUND (((sh + {self.rsh} - {self.total_derating}) / ph * 100), 3) AS 'eaf', ROUND (((eudh + fo)/(fo + sh + efdhrs) * 100), 3) AS 'efor', ROUND (((po + mo) / ph * 100), 3) AS 'sof', ROUND ((bbm / produksi), 3) AS 'sfc', ROUND (({self.total_ps} / produksi * 100), 3) AS 'ps' FROM unit JOIN kondisi_kit ON unit.id_unit = kondisi_kit.unit_id JOIN pengusahaan ON unit.id_unit = pengusahaan.mesin_id WHERE periode = '{periode}' ORDER BY id_unit")
         result = cur.fetchall()
         return result    
 

@@ -773,6 +773,10 @@ label {
   background-color: #ffc43d !important;
 }
 
+#dashboard .blue-bg {
+  background-color: #00b4d8 !important;
+}
+
 #dashboard .title {
   padding-bottom: 20px;
   margin-left: 20px;
@@ -949,4 +953,9 @@ label {
 #dashboard .limbah p {
   font-size: 13px;
   margin-top: -10px;
+}
+
+/* INPUT */
+#dashboard .input h2{
+  font-weight: 900;
 }

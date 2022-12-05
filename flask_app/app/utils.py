@@ -38,7 +38,7 @@ class Absen(K3):
         conn.commit()
 
     def get_agenda(self, skip, limit):
-        cur.execute(f"SELECT *, COUNT(nama) nama_count FROM agenda LEFT JOIN absen ON agenda.id_agenda = absen.agenda_id GROUP BY id_agenda ORDER BY tanggal LIMIT {skip}, {limit}")
+        cur.execute(f"SELECT *, COUNT(nama) nama_count FROM agenda LEFT JOIN absen ON agenda.id_agenda = absen.agenda_id GROUP BY id_agenda ORDER BY tanggal DESC LIMIT {skip}, {limit}")
         result = cur.fetchall()
         return result
 

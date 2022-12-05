@@ -258,3 +258,13 @@ cur = conn.cursor(dictionary=True)
 #         komp_d INT,
 #         PRIMARY KEY (id_bpp),
 # )
+
+# CREATE TABLE limbah
+# (
+#         id_limbah INT NOT NULL AUTO_INCREMENT,
+#         jenis_limbah VARCHAR(15) NOT NULL,
+#         tanggal_masuk DATE,
+#         tanggal_keluar DATE,
+#         jumlah FLOAT NOT NULL,
+#         PRIMARY KEY (id_limbah)
+# )
