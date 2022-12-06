@@ -823,7 +823,10 @@ def dashboard():
     # Kondisi Unit 
     kondisis = object_kinerja.get_kondisi_unit(periode)
 
-    return render_template('pages/tools/kinerja/dashboard.html', title='Dashboard Kinerja', target=target, kin_u_bul=kinerja_unit_bulanan, kin_u_bul_prev=kinerja_unit_bulanan_prev, kinerja_kum=kinerja_kum, months=months, list_target=list_target, satuan=satuan, kpi=kpi_, kondisis=kondisis, komps=komps, komps_prev=komps_prev)
+    # Persediaan BBM
+    bbm = object_kinerja.get_persediaan_bbm(periode)
+
+    return render_template('pages/tools/kinerja/dashboard.html', title='Dashboard Kinerja', target=target, kin_u_bul=kinerja_unit_bulanan, kin_u_bul_prev=kinerja_unit_bulanan_prev, kinerja_kum=kinerja_kum, months=months, list_target=list_target, satuan=satuan, kpi=kpi_, kondisis=kondisis, komps=komps, komps_prev=komps_prev, bbm=bbm)
 
 
 @app.route('/tools/kinerja/input', methods=['GET','POST'])

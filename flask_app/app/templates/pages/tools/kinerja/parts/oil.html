@@ -13,13 +13,13 @@
         <img src="{{ url_for('static', filename='img/oil.png' ) }}" height="100" alt="" />
         <div class="pemakaian">
           <h5>Pemakaian BBM</h5>
-          <h2>10.444 Liter</h2>
+          <h2><span class="comma">{{bbm['total_bbm']}}</span> Liter</h2>
         </div>
       </div>
     </div>
     <div class="progress mt-3" style="height: 40px">
-      <div class="progress-bar yellow-bg" role="progressbar" aria-label="Example 20px high" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">256.435 kL</div>
+      <div class="progress-bar yellow-bg" role="progressbar" aria-label="Example 20px high" style="width: {{bbm['persediaan'] / bbm['kapasitas'] * 100}}%"><span class="comma">{{bbm['persediaan']}}</span></div>
     </div>
-    <h6 class="text-center mt-2">Kapasitas 300.000 kL</h6>
+    <h6 class="text-center mt-2">Kapasitas <span class="comma">{{bbm['kapasitas']}}</span> Liter</h6>
   </div>
 </div>

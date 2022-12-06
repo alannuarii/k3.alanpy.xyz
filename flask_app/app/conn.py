@@ -268,3 +268,13 @@ cur = conn.cursor(dictionary=True)
 #         jumlah FLOAT NOT NULL,
 #         PRIMARY KEY (id_limbah)
 # )
+
+
+# CREATE TABLE bbm
+# (
+#         id_bbm INT NOT NULL AUTO_INCREMENT,
+#         periode DATE,
+#         kapasitas INT,
+#         persediaan INT,
+#         PRIMARY KEY (id_bbm)
+# )

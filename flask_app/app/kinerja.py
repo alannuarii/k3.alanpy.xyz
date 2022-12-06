@@ -46,6 +46,11 @@ class Kinerja:
         result = cur.fetchone()
         return result
 
+    def get_total_pemakaian(self, periode):
+        cur.execute(f"SELECT SUM(bbm) AS 'total_bbm' FROM pengusahaan WHERE periode = '{periode}'")
+        result = cur.fetchone()
+        return result
+
     def eaf_unit_bulanan(self, periode) -> dict:
         cur.execute(f"SELECT ROUND((SUM({self.dmn_ph_der}) / SUM({self.dmn_ph}) * 100), 3) AS 'eaf_unit' FROM pengusahaan WHERE periode = '{periode}'")
         result = cur.fetchone()
@@ -164,3 +169,10 @@ class Kinerja:
         for i in self.get_biaya_bpp(periode).items():
             bpp.append(int(i[1] / produksi_netto['produksi_netto']))
         return bpp
+
+    def get_persediaan_bbm(self, periode):
+        cur.execute(f"SELECT * FROM bbm WHERE periode = '{periode}'")
+        result = cur.fetchone()
+        total_pemakaian = self.get_total_pemakaian(periode)
+        result['total_bbm'] = total_pemakaian['total_bbm']
+        return result
