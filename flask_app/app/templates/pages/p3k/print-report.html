@@ -82,13 +82,17 @@
                 <td>{{pers_kantor[loop.index0]['pers_kantor']|int + pers_ccr[loop.index0]['pers_ccr']|int + pers_tps[loop.index0]['pers_tps']|int + pers_pos[loop.index0]['pers_pos']|int + pers_stock[loop.index0]['pers_stock']|int}}</td>
                 <td>{{p3k['kadaluarsa']}}</td>
               </tr>
-              {% include 'pages/p3k/modal/modal-foto-p3k.html' %} {% include 'pages/p3k/modal/modal-edit-p3k.html' %}{% include 'pages/p3k/modal/modal-delete-p3k.html' %}{% endfor %}
+              {% include 'pages/p3k/modal/modal-foto-p3k.html' %} {% include 'pages/p3k/modal/modal-edit-p3k.html' %}{% endfor %}
             </tbody>
             {% endif %}
           </table>
         </div>
         <p class="fst-italic">Source = https://k3.alanpy.xyz{{request.path}}</p>
-
+        <div class="row text-center">
+          <div class="col-md-6 offset-md-6">
+            <h6 class="mb-3">Kotamobagu, {{tanggal}}</h6>
+          </div>
+        </div>
         {% include 'includes/signature.html' %}
       </div>
     </main>

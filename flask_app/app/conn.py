@@ -7,19 +7,19 @@ import mysql.connector
 #                                password='jxod6yQN%vrt')
 
 # AWS 
-conn = mysql.connector.connect(
-        host = 'k3database.cjbgtbz37j5g.ap-southeast-3.rds.amazonaws.com', 
-        port = 3306,
-        user = 'admin', 
-        password = 'admin123',
-        db = 'k3database',  
-        )
+# conn = mysql.connector.connect(
+#         host = 'k3database.cjbgtbz37j5g.ap-southeast-3.rds.amazonaws.com', 
+#         port = 3306,
+#         user = 'admin', 
+#         password = 'admin123',
+#         db = 'k3database',  
+#         )
 
-# Local 
-# conn = mysql.connector.connect(host='localhost',
-#                                database='k3',
-#                                user='root',
-#                                password='1sampai8')
+# Niagahoster
+conn = mysql.connector.connect(host='srv152.niagahoster.com',
+                               database='u1724208_pltdktm',
+                               user='u1724208_pltdktm',
+                               password='qfyetn[w;aKy')
 
 cur = conn.cursor(dictionary=True)
 
@@ -73,9 +73,9 @@ cur = conn.cursor(dictionary=True)
 # CREATE TABLE kantor
 # (
 #     id_kantor INT NOT NULL AUTO_INCREMENT,
-#     tanggal DATE NOT NULL,
-#     masuk INT,
-#     keluar INT,
+#     tgl_kantor DATE NOT NULL,
+#     masuk_kantor INT,
+#     keluar_kantor INT,
 #     p3k_id INT NOT NULL,
 #     PRIMARY KEY (id_kantor),
 #     CONSTRAINT fk_kantor_p3k FOREIGN KEY (p3k_id) REFERENCES p3k (id_p3k)
@@ -84,9 +84,9 @@ cur = conn.cursor(dictionary=True)
 # CREATE TABLE ccr
 # (
 #     id_ccr INT NOT NULL AUTO_INCREMENT,
-#     tanggal DATE NOT NULL,
-#     masuk INT,
-#     keluar INT,
+#     tgl_ccr DATE NOT NULL,
+#     masuk_ccr INT,
+#     keluar_ccr INT,
 #     p3k_id INT NOT NULL,
 #     PRIMARY KEY (id_ccr),
 #     CONSTRAINT fk_ccr_p3k FOREIGN KEY (p3k_id) REFERENCES p3k (id_p3k)
@@ -95,9 +95,9 @@ cur = conn.cursor(dictionary=True)
 # CREATE TABLE tps
 # (
 #     id_tps INT NOT NULL AUTO_INCREMENT,
-#     tanggal DATE NOT NULL,
-#     masuk INT,
-#     keluar INT,
+#     tgl_tps DATE NOT NULL,
+#     masuk_tps INT,
+#     keluar_tps INT,
 #     p3k_id INT NOT NULL,
 #     PRIMARY KEY (id_tps),
 #     CONSTRAINT fk_tps_p3k FOREIGN KEY (p3k_id) REFERENCES p3k (id_p3k)
@@ -106,9 +106,9 @@ cur = conn.cursor(dictionary=True)
 # CREATE TABLE pos
 # (
 #     id_pos INT NOT NULL AUTO_INCREMENT,
-#     tanggal DATE NOT NULL,
-#     masuk INT,
-#     keluar INT,
+#     tgl_pos DATE NOT NULL,
+#     masuk_pos INT,
+#     keluar_pos INT,
 #     p3k_id INT NOT NULL,
 #     PRIMARY KEY (id_pos),
 #     CONSTRAINT fk_pos_p3k FOREIGN KEY (p3k_id) REFERENCES p3k (id_p3k)
@@ -164,7 +164,7 @@ cur = conn.cursor(dictionary=True)
 #         waktu TIME NOT NULL,
 #         agenda_rapat VARCHAR(100) NOT NULL,
 #         lokasi VARCHAR(30) NOT NULL,
-#         link VARCHAR(50)
+#         link VARCHAR(50),
 #         PRIMARY KEY (id_agenda)
 # )
 
@@ -256,7 +256,7 @@ cur = conn.cursor(dictionary=True)
 #         komp_b INT,
 #         komp_c INT,
 #         komp_d INT,
-#         PRIMARY KEY (id_bpp),
+#         PRIMARY KEY (id_bpp)
 # )
 
 # CREATE TABLE limbah
