@@ -7,19 +7,19 @@ import mysql.connector
 #                                password='jxod6yQN%vrt')
 
 # AWS 
-# conn = mysql.connector.connect(
-#         host = 'k3database.cjbgtbz37j5g.ap-southeast-3.rds.amazonaws.com', 
-#         port = 3306,
-#         user = 'admin', 
-#         password = 'admin123',
-#         db = 'k3database',  
-#         )
+conn = mysql.connector.connect(
+        host = 'k3database.cjbgtbz37j5g.ap-southeast-3.rds.amazonaws.com', 
+        port = 3306,
+        user = 'admin', 
+        password = 'admin123',
+        db = 'k3database',  
+        )
 
 # Niagahoster
-conn = mysql.connector.connect(host='srv152.niagahoster.com',
-                               database='u1724208_pltdktm',
-                               user='u1724208_pltdktm',
-                               password='qfyetn[w;aKy')
+# conn = mysql.connector.connect(host='srv152.niagahoster.com',
+#                                database='u1724208_pltdktm',
+#                                user='u1724208_pltdktm',
+#                                password='qfyetn[w;aKy')
 
 cur = conn.cursor(dictionary=True)
 
