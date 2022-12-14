@@ -1,10 +1,10 @@
 import mysql.connector
 
 # Domainesia
-# conn = mysql.connector.connect(host='vicenza.id.domainesia.com',
-#                                database='alanwebi_pltdktm',
-#                                user='alanwebi_pltdktm',
-#                                password='jxod6yQN%vrt')
+conn = mysql.connector.connect(host='localhost',
+                               database='alanwebi_pltdktm',
+                               user='alanwebi_pltdktm',
+                               password='jxod6yQN%vrt')
 
 # AWS 
 # conn = mysql.connector.connect(
@@ -16,10 +16,10 @@ import mysql.connector
 #         )
 
 # Niagahoster
-conn = mysql.connector.connect(host='srv152.niagahoster.com',
-                               database='u1724208_pltdktm',
-                               user='u1724208_pltdktm',
-                               password='qfyetn[w;aKy')
+# conn = mysql.connector.connect(host='srv152.niagahoster.com',
+#                                database='u1724208_pltdktm',
+#                                user='u1724208_pltdktm',
+#                                password='qfyetn[w;aKy')
 
 cur = conn.cursor(dictionary=True)
 
