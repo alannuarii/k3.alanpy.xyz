@@ -1,9 +1,13 @@
 <div class="row">
   <div class="col-md-6 text-center position-relative">
     <h6 class="mb-5">PLT MANAGER</h6>
-    {% if manager %}
+    {% if manager %} {% if manager['path'] == request.path%}
+    <img class="position-absolute top-50 start-50 translate-middle" src="/static/img/apar/ttd/{{manager['ttd']}}" height="40" alt="" />
+    {% elif manager['path'] == request.path %}
+    <img class="position-absolute top-50 start-50 translate-middle" src="/static/img/p3k/ttd/{{manager['ttd']}}" height="40" alt="" />
+    {% else %}
     <img class="position-absolute top-50 start-50 translate-middle" src="/static/img/hydrant/ttd/{{manager['ttd']}}" height="40" alt="" />
-    {% else %} {% if session['token'] == 112220 %}
+    {% endif %} {% else %} {% if session['token'] == 112220 %}
     <i class="bi-pen pen-manager position-absolute top-50 start-50 translate-middle" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#modal-approve"></i>
     {% else %}
     <i class="bi-pen pen-manager position-absolute top-50 start-50 translate-middle" style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#modal-token"></i>
