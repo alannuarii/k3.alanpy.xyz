@@ -307,7 +307,7 @@ def print_report_apar(tanggal):
     date_range = object_apar.get_friday(datetime.strptime(tanggal, '%Y-%m-%d').date())
     datas = object_apar.get_apar_inspection(date_range[0], date_range[1])
 
-    tanggal = object_apar.get_friday_format(date_range[0])
+    tanggal_ttd = object_apar.get_friday_format(date_range[0])
 
     for data in datas:
         data['masa_berlaku'] = f"{object_apar.format_bulan(data['masa_berlaku'])} {data['masa_berlaku'][:-3]}"
@@ -334,7 +334,7 @@ def print_report_apar(tanggal):
 
             return redirect(url_for('print_report_apar', tanggal=tanggal))
 
-    return render_template('pages/apar/print-report.html', title='Report APAR', datas=datas, tanggal=tanggal[1], bulan=tanggal[1][3:], manager=sign_manager, k3l=sign_k3l)
+    return render_template('pages/apar/print-report.html', title='Report APAR', datas=datas, tanggal=tanggal_ttd[1], bulan=tanggal_ttd[1][3:], manager=sign_manager, k3l=sign_k3l)
 
 
 @app.route('/p3k/data', methods=['GET','POST'])
