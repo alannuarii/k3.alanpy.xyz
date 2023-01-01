@@ -4,7 +4,7 @@ from os import environ
 def max_workers():
     return cpu_count()
 
-chdir = '/home/alanwebi/repositories/k3.alanpy.xyz/flask_app'
+chdir = '/home/alanwebi/repositories/K3App/flask_app'
 bind = '127.0.0.1:52335'
 max_requests = 1000
 workers = max_workers()
