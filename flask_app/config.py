@@ -13,3 +13,4 @@ class Config(object):
     FOTO_P3K_TTD = 'app/static/img/p3k/ttd'
     FOTO_HYDRANT_TTD = 'app/static/img/hydrant/ttd'
     ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+    APA = 'XXXXX'
