@@ -1,4 +1,4 @@
-from app.conn import cur, conn
+from app.conn import connection
 
 class Kinerja:
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Des']
@@ -16,64 +16,64 @@ class Kinerja:
     sdof = 'trip_internal'
 
     def target_kinerja(self, tahun):
-        cur.execute(f"SELECT * FROM target WHERE tahun = '{tahun}'")
-        result = cur.fetchall()
+        query = f"SELECT * FROM target WHERE tahun = '{tahun}'"
+        result = connection(query, 'selectall')
         return result
 
     def list_target_kinerja(self, kpi, tahun, length):
-        cur.execute(f"SELECT nilai_target FROM target WHERE kpi = '{kpi}' AND tahun = '{tahun}'")
-        result = cur.fetchone()
+        query = f"SELECT nilai_target FROM target WHERE kpi = '{kpi}' AND tahun = '{tahun}'"
+        result = connection(query, 'selectone')
         list_result = []
         for i in range(len(length)):
             list_result.append(result['nilai_target'])
         return list_result
 
     def get_satuan(self, kpi, tahun):
-        cur.execute(f"SELECT satuan FROM target WHERE kpi = '{kpi}' AND tahun = '{tahun}'")
-        result = cur.fetchone()
+        query = f"SELECT satuan FROM target WHERE kpi = '{kpi}' AND tahun = '{tahun}'"
+        result = connection(query, 'selectone')
         return result['satuan']
 
     def get_periode_bulan(self, bulan):
-        cur.execute(f"SELECT periode FROM pengusahaan WHERE MONTH (periode) = {bulan} LIMIT 1")
-        result = cur.fetchone()
+        query = f"SELECT periode FROM pengusahaan WHERE MONTH (periode) = {bulan} LIMIT 1"
+        result = connection(query, 'selectone')
         if result is None:
             return 0
         else:
             return result['periode'].month
 
     def get_produksi_netto(self, tahun) -> dict:
-        cur.execute(f"SELECT SUM({self.produksi_netto}) AS 'produksi_netto' FROM pengusahaan WHERE YEAR (periode) = '{tahun}'")
-        result = cur.fetchone()
+        query = f"SELECT SUM({self.produksi_netto}) AS 'produksi_netto' FROM pengusahaan WHERE YEAR (periode) = '{tahun}'"
+        result = connection(query, 'selectone')
         return result
 
     def get_total_pemakaian(self, periode):
-        cur.execute(f"SELECT SUM(bbm) AS 'total_bbm' FROM pengusahaan WHERE periode = '{periode}'")
-        result = cur.fetchone()
+        query = f"SELECT SUM(bbm) AS 'total_bbm' FROM pengusahaan WHERE periode = '{periode}'"
+        result = connection(query, 'selectone')
         return result
 
     def eaf_unit_bulanan(self, periode) -> dict:
-        cur.execute(f"SELECT ROUND((SUM({self.dmn_ph_der}) / SUM({self.dmn_ph}) * 100), 3) AS 'eaf_unit' FROM pengusahaan WHERE periode = '{periode}'")
-        result = cur.fetchone()
+        query = f"SELECT ROUND((SUM({self.dmn_ph_der}) / SUM({self.dmn_ph}) * 100), 3) AS 'eaf_unit' FROM pengusahaan WHERE periode = '{periode}'"
+        result = connection(query, 'selectone')
         return result
 
     def efor_unit_bulanan(self, periode) -> dict:
-        cur.execute(f"SELECT ROUND((SUM({self.dmn_fo_eudh}) / SUM({self.dmn_fo_sh_efdhrs}) * 100), 3) AS 'efor_unit' FROM pengusahaan WHERE periode = '{periode}'")
-        result = cur.fetchone()
+        query = f"SELECT ROUND((SUM({self.dmn_fo_eudh}) / SUM({self.dmn_fo_sh_efdhrs}) * 100), 3) AS 'efor_unit' FROM pengusahaan WHERE periode = '{periode}'"
+        result = connection(query, 'selectone')
         return result
 
     def sof_unit_bulanan(self, periode) -> dict:
-        cur.execute(f"SELECT ROUND((SUM({self.dmn_har}) / SUM({self.dmn_ph}) * 100), 3) AS 'sof_unit' FROM pengusahaan WHERE periode = '{periode}'")
-        result = cur.fetchone()
+        query = f"SELECT ROUND((SUM({self.dmn_har}) / SUM({self.dmn_ph}) * 100), 3) AS 'sof_unit' FROM pengusahaan WHERE periode = '{periode}'"
+        result = connection(query, 'selectone')
         return result
 
     def sfc_unit_bulanan(self, periode) -> dict:
-        cur.execute(f"SELECT ROUND((SUM(bbm) / SUM(produksi)), 3) AS 'sfc_unit' FROM pengusahaan WHERE periode = '{periode}'")
-        result = cur.fetchone()
+        query = f"SELECT ROUND((SUM(bbm) / SUM(produksi)), 3) AS 'sfc_unit' FROM pengusahaan WHERE periode = '{periode}'"
+        result = connection(query, 'selectone')
         return result
 
     def ps_unit_bulanan(self, periode) -> dict:
-        cur.execute(f"SELECT ROUND((SUM({self.total_ps}) / SUM(produksi) * 100), 3) AS 'ps_unit' FROM pengusahaan WHERE periode = '{periode}'")
-        result = cur.fetchone()
+        query = f"SELECT ROUND((SUM({self.total_ps}) / SUM(produksi) * 100), 3) AS 'ps_unit' FROM pengusahaan WHERE periode = '{periode}'"
+        result = connection(query, 'selectone')
         return result
 
     def kinerja_unit_bulanan(self, periode):
@@ -99,28 +99,28 @@ class Kinerja:
         return kinerja
 
     def eaf_unit_kumulatif(self, awal, akhir):
-        cur.execute(f"SELECT ROUND((SUM({self.dmn_ph_der}) / SUM({self.dmn_ph}) * 100), 3) AS 'eaf_unit' FROM pengusahaan WHERE periode BETWEEN '{awal}' AND '{akhir}'")
-        result = cur.fetchone()
+        query = f"SELECT ROUND((SUM({self.dmn_ph_der}) / SUM({self.dmn_ph}) * 100), 3) AS 'eaf_unit' FROM pengusahaan WHERE periode BETWEEN '{awal}' AND '{akhir}'"
+        result = connection(query, 'selectone')
         return result
 
     def efor_unit_kumulatif(self, awal, akhir):
-        cur.execute(f"SELECT ROUND((SUM({self.dmn_fo_eudh}) / SUM({self.dmn_fo_sh_efdhrs}) * 100), 3) AS 'efor_unit' FROM pengusahaan WHERE periode BETWEEN '{awal}' AND '{akhir}'")
-        result = cur.fetchone()
+        query = f"SELECT ROUND((SUM({self.dmn_fo_eudh}) / SUM({self.dmn_fo_sh_efdhrs}) * 100), 3) AS 'efor_unit' FROM pengusahaan WHERE periode BETWEEN '{awal}' AND '{akhir}'"
+        result = connection(query, 'selectone')
         return result
 
     def sof_unit_kumulatif(self, awal, akhir):
-        cur.execute(f"SELECT ROUND((SUM({self.dmn_har}) / SUM({self.dmn_ph}) * 100), 3) AS 'sof_unit' FROM pengusahaan WHERE periode BETWEEN '{awal}' AND '{akhir}'")
-        result = cur.fetchone()
+        query = f"SELECT ROUND((SUM({self.dmn_har}) / SUM({self.dmn_ph}) * 100), 3) AS 'sof_unit' FROM pengusahaan WHERE periode BETWEEN '{awal}' AND '{akhir}'"
+        result = connection(query, 'selectone')
         return result
 
     def sfc_unit_kumulatif(self, awal, akhir):
-        cur.execute(f"SELECT ROUND((SUM(bbm) / SUM(produksi)), 3) AS 'sfc_unit' FROM pengusahaan WHERE periode BETWEEN '{awal}' AND '{akhir}'")
-        result = cur.fetchone()
+        query = f"SELECT ROUND((SUM(bbm) / SUM(produksi)), 3) AS 'sfc_unit' FROM pengusahaan WHERE periode BETWEEN '{awal}' AND '{akhir}'"
+        result = connection(query, 'selectone')
         return result
 
     def ps_unit_kumulatif(self, awal, akhir):
-        cur.execute(f"SELECT ROUND((SUM({self.total_ps}) / SUM(produksi) * 100), 3) AS 'ps_unit' FROM pengusahaan WHERE periode BETWEEN '{awal}' AND '{akhir}'")
-        result = cur.fetchone()
+        query = f"SELECT ROUND((SUM({self.total_ps}) / SUM(produksi) * 100), 3) AS 'ps_unit' FROM pengusahaan WHERE periode BETWEEN '{awal}' AND '{akhir}'"
+        result = connection(query, 'selectone')
         return result
 
     def list_kinerja_unit_kumulatif(self, periode, kpi):
@@ -154,13 +154,13 @@ class Kinerja:
             return list_kum
 
     def get_kondisi_unit(self, periode):
-        cur.execute(f"SELECT id_unit, merek, tipe, kondisi, dtp, dmn, produksi, {self.total_ps} AS 'total_ps', bbm, po, mo, fo, sh, ROUND({self.rsh}) AS 'rsh', ROUND (((sh + {self.rsh} - {self.total_derating}) / ph * 100), 3) AS 'eaf', ROUND (((eudh + fo)/(fo + sh + efdhrs) * 100), 3) AS 'efor', ROUND (((po + mo) / ph * 100), 3) AS 'sof', ROUND ((bbm / produksi), 3) AS 'sfc', ROUND (({self.total_ps} / produksi * 100), 3) AS 'ps' FROM unit JOIN kondisi_kit ON unit.id_unit = kondisi_kit.unit_id JOIN pengusahaan ON unit.id_unit = pengusahaan.mesin_id WHERE periode = '{periode}' ORDER BY id_unit")
-        result = cur.fetchall()
-        return result    
+        query = f"SELECT id_unit, merek, tipe, kondisi, dtp, dmn, produksi, {self.total_ps} AS 'total_ps', bbm, po, mo, fo, sh, ROUND({self.rsh}) AS 'rsh', ROUND (((sh + {self.rsh} - {self.total_derating}) / ph * 100), 3) AS 'eaf', ROUND (((eudh + fo)/(fo + sh + efdhrs) * 100), 3) AS 'efor', ROUND (((po + mo) / ph * 100), 3) AS 'sof', ROUND ((bbm / produksi), 3) AS 'sfc', ROUND (({self.total_ps} / produksi * 100), 3) AS 'ps' FROM unit JOIN kondisi_kit ON unit.id_unit = kondisi_kit.unit_id JOIN pengusahaan ON unit.id_unit = pengusahaan.mesin_id WHERE periode = '{periode}' ORDER BY id_unit"
+        result = connection(query, 'selectall')
+        return result  
 
     def get_biaya_bpp(self, periode) -> dict:
-        cur.execute(f"SELECT komp_a, komp_b, komp_c, komp_d FROM bpp WHERE periode = '{periode}'")  
-        result = cur.fetchone()  
+        query = f"SELECT komp_a, komp_b, komp_c, komp_d FROM bpp WHERE periode = '{periode}'"  
+        result = connection(query, 'selectone')
         return result
 
     def get_bpp(self, periode):
@@ -171,8 +171,8 @@ class Kinerja:
         return bpp
 
     def get_persediaan_bbm(self, periode):
-        cur.execute(f"SELECT * FROM bbm WHERE periode = '{periode}'")
-        result = cur.fetchone()
+        query = f"SELECT * FROM bbm WHERE periode = '{periode}'"
+        result = connection(query, 'selectone')
         total_pemakaian = self.get_total_pemakaian(periode)
         result['total_bbm'] = total_pemakaian['total_bbm']
         return result

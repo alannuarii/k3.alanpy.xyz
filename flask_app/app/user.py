@@ -1,4 +1,4 @@
-from app.conn import cur, conn
+from app.conn import connection
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -11,10 +11,10 @@ class User:
         return check_password_hash(password_hash, password)
 
     def register(self, name, email, username, password):
-        cur.execute(f"INSERT INTO user (name, email, username, password) VALUES ('{name}', '{email}', '{username}', '{password}')")
-        conn.commit()
+        query = f"INSERT INTO user (name, email, username, password) VALUES ('{name}', '{email}', '{username}', '{password}')"
+        connection(query, 'insert')
 
     def get_user(self, username:str):
-        cur.execute(f"SELECT * FROM user WHERE username = '{username}'")
-        result = cur.fetchone()
+        query = f"SELECT * FROM user WHERE username = '{username}'"
+        result = connection(query, 'selectone')
         return result

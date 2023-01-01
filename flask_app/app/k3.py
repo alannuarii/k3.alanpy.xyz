@@ -1,4 +1,4 @@
-from app.conn import cur, conn
+from app.conn import connection
 from datetime import date, timedelta, datetime
 
 class K3:
@@ -102,193 +102,193 @@ class K3:
         return date_id
 
     def get_apar(self):
-        cur.execute("SELECT * FROM apar")
-        result = cur.fetchall()
+        query = "SELECT * FROM apar"
+        result = connection(query, 'selectall')
         return result
 
     def insert_apar(self, id_apar, lokasi, merek, tipe, kapasitas, jenis, masa_berlaku, foto_apar):
-        cur.execute(f"INSERT INTO apar (id_apar, lokasi, merek, tipe, kapasitas, jenis, masa_berlaku, foto_apar) VALUES ({id_apar}, '{lokasi}', '{merek}', '{tipe}', '{kapasitas}', '{jenis}', '{masa_berlaku}', '{foto_apar}')")
-        conn.commit()
+        query = f"INSERT INTO apar (id_apar, lokasi, merek, tipe, kapasitas, jenis, masa_berlaku, foto_apar) VALUES ({id_apar}, '{lokasi}', '{merek}', '{tipe}', '{kapasitas}', '{jenis}', '{masa_berlaku}', '{foto_apar}')"
+        connection(query, 'insert')
 
     def update_apar(self, id_apar, lokasi, merek, tipe, kapasitas, jenis, masa_berlaku, current_id, foto_apar):
-        cur.execute(f"UPDATE apar SET id_apar={id_apar}, lokasi='{lokasi}', merek='{merek}', tipe='{tipe}', kapasitas='{kapasitas}', jenis='{jenis}', masa_berlaku='{masa_berlaku}', foto_apar='{foto_apar}' WHERE id_apar={current_id}")
-        conn.commit()
+        query = f"UPDATE apar SET id_apar={id_apar}, lokasi='{lokasi}', merek='{merek}', tipe='{tipe}', kapasitas='{kapasitas}', jenis='{jenis}', masa_berlaku='{masa_berlaku}', foto_apar='{foto_apar}' WHERE id_apar={current_id}"
+        connection(query, 'update')
 
     def delete_apar(self, id_apar):
-        cur.execute(f"DELETE FROM apar WHERE id_apar={id_apar}")
-        conn.commit()
+        query = f"DELETE FROM apar WHERE id_apar={id_apar}"
+        connection(query, 'delete')
 
     def get_foto_apar(self, id_apar):
-        cur.execute(f"SELECT foto_apar FROM apar WHERE id_apar={id_apar}")
-        result = cur.fetchall()
+        query = f"SELECT foto_apar FROM apar WHERE id_apar={id_apar}"
+        result = connection(query, 'selectall')
         return result
 
     def get_checklist_apar(self, awal, akhir):
-        cur.execute(f"SELECT DISTINCT(apar_id) FROM checklist_apar WHERE tanggal >= '{awal}' AND tanggal <= '{akhir}' GROUP BY apar_id")
-        result = cur.fetchall()
+        query = f"SELECT DISTINCT(apar_id) FROM checklist_apar WHERE tanggal >= '{awal}' AND tanggal <= '{akhir}' GROUP BY apar_id"
+        result = connection(query, 'selectall')
         return result
 
     def get_apar_inspection(self, awal, akhir):
-        cur.execute(f"SELECT * FROM checklist_apar JOIN apar ON checklist_apar.apar_id = apar.id_apar WHERE tanggal >= '{awal}' AND tanggal <= '{akhir}' GROUP BY id_apar ORDER BY id_apar")
-        result = cur.fetchall()
+        query = f"SELECT * FROM checklist_apar JOIN apar ON checklist_apar.apar_id = apar.id_apar WHERE tanggal >= '{awal}' AND tanggal <= '{akhir}' GROUP BY id_apar ORDER BY id_apar"
+        result = connection(query, 'selectall')
         return result
 
     def get_checklist_month(self, month):
-        cur.execute(f"SELECT DISTINCT(tanggal) FROM checklist_apar WHERE tanggal LIKE '%{month}%'")
-        result = cur.fetchall()
+        query = f"SELECT DISTINCT(tanggal) FROM checklist_apar WHERE tanggal LIKE '%{month}%'"
+        result = connection(query, 'selectall')
         return result
 
     def insert_checklist_apar(self, fisik, kartu_gantung, seal, pin, meter, selang_corong, keterangan, apar_id):
-        cur.execute(f"INSERT INTO checklist_apar (tanggal, fisik, kartu_gantung, seal, pin, meter, selang_corong, keterangan, apar_id) VALUES (NOW(), {fisik}, {kartu_gantung}, {seal}, {pin}, {meter}, {selang_corong}, '{keterangan}', {apar_id})")
-        conn.commit()
+        query = f"INSERT INTO checklist_apar (tanggal, fisik, kartu_gantung, seal, pin, meter, selang_corong, keterangan, apar_id) VALUES (NOW(), {fisik}, {kartu_gantung}, {seal}, {pin}, {meter}, {selang_corong}, '{keterangan}', {apar_id})"
+        connection(query, 'insert')
 
     def update_checklist_apar(self, fisik, kartu_gantung, seal, pin, meter, selang_corong, keterangan, id_checklist_apar):
-        cur.execute(f"UPDATE checklist_apar SET fisik={fisik}, kartu_gantung={kartu_gantung}, seal={seal}, pin={pin}, meter={meter}, selang_corong={selang_corong}, keterangan='{keterangan}', tanggal=NOW() WHERE id_checklist_apar={id_checklist_apar}")
-        conn.commit()
+        query = f"UPDATE checklist_apar SET fisik={fisik}, kartu_gantung={kartu_gantung}, seal={seal}, pin={pin}, meter={meter}, selang_corong={selang_corong}, keterangan='{keterangan}', tanggal=NOW() WHERE id_checklist_apar={id_checklist_apar}"
+        connection(query, 'update')
 
     def get_p3k(self):
-        cur.execute(f"SELECT * FROM p3k")
-        result = cur.fetchall()
+        query = f"SELECT * FROM p3k"
+        result = connection(query, 'selectall')
         return result
 
     def insert_p3k(self, nama_barang, satuan, kadaluarsa, foto_p3k):
-        cur.execute(f"INSERT INTO p3k (nama_barang, satuan, kadaluarsa, foto_p3k) VALUES ('{nama_barang}', '{satuan}', '{kadaluarsa}', '{foto_p3k}')")
-        conn.commit()
+        query = f"INSERT INTO p3k (nama_barang, satuan, kadaluarsa, foto_p3k) VALUES ('{nama_barang}', '{satuan}', '{kadaluarsa}', '{foto_p3k}')"
+        connection(query, 'insert')
 
     def update_p3k(self, nama_barang, satuan, kadaluarsa, foto_p3k, id_p3k):
-        cur.execute(f"UPDATE p3k SET nama_barang='{nama_barang}', satuan='{satuan}', kadaluarsa='{kadaluarsa}', foto_p3k='{foto_p3k}' WHERE id_p3k={id_p3k}")
-        conn.commit()
+        query = f"UPDATE p3k SET nama_barang='{nama_barang}', satuan='{satuan}', kadaluarsa='{kadaluarsa}', foto_p3k='{foto_p3k}' WHERE id_p3k={id_p3k}"
+        connection(query, 'update')
 
     def delete_p3k(self, id_p3k):
-        cur.execute(f"DELETE FROM p3k WHERE id_p3k={id_p3k}")
-        conn.commit()
+        query = f"DELETE FROM p3k WHERE id_p3k={id_p3k}"
+        connection(query, 'delete')
 
     def get_foto_p3k(self, id_p3k):
-        cur.execute(f"SELECT foto_p3k FROM p3k WHERE id_p3k={id_p3k}")
-        result = cur.fetchall()
+        query = f"SELECT foto_p3k FROM p3k WHERE id_p3k={id_p3k}"
+        result = connection(query, 'selectall')
         return result
 
     def get_saldo_kantor(self):
-        cur.execute(f"SELECT (SUM(masuk_kantor) - SUM(keluar_kantor)) AS pers_kantor FROM p3k LEFT JOIN kantor ON p3k.id_p3k = kantor.p3k_id GROUP BY id_p3k")
-        result = cur.fetchall()
+        query = f"SELECT (SUM(masuk_kantor) - SUM(keluar_kantor)) AS pers_kantor FROM p3k LEFT JOIN kantor ON p3k.id_p3k = kantor.p3k_id GROUP BY id_p3k"
+        result = connection(query, 'selectall')
         return result
 
     def get_saldo_kantor_filter(self, tanggal):
-        cur.execute(f"SELECT (SUM(masuk_kantor) - SUM(keluar_kantor)) AS pers_kantor FROM p3k LEFT JOIN kantor ON p3k.id_p3k = kantor.p3k_id WHERE tgl_kantor < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k")
-        result = cur.fetchall()
+        query = f"SELECT (SUM(masuk_kantor) - SUM(keluar_kantor)) AS pers_kantor FROM p3k LEFT JOIN kantor ON p3k.id_p3k = kantor.p3k_id WHERE tgl_kantor < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k"
+        result = connection(query, 'selectall')
         return result
 
     def insert_kantor(self, tgl_kantor, masuk_kantor, keluar_kantor, p3k_id):
-        cur.execute(f"INSERT INTO kantor (tgl_kantor, masuk_kantor, keluar_kantor, p3k_id) VALUES ('{tgl_kantor}', {masuk_kantor}, {keluar_kantor}, {p3k_id})")
-        conn.commit()
+        query = f"INSERT INTO kantor (tgl_kantor, masuk_kantor, keluar_kantor, p3k_id) VALUES ('{tgl_kantor}', {masuk_kantor}, {keluar_kantor}, {p3k_id})"
+        connection(query, 'insert')
 
     def get_saldo_ccr(self):
-        cur.execute(f"SELECT (SUM(masuk_ccr) - SUM(keluar_ccr)) AS pers_ccr FROM p3k LEFT JOIN ccr ON p3k.id_p3k = ccr.p3k_id GROUP BY id_p3k")
-        result = cur.fetchall()
+        query = f"SELECT (SUM(masuk_ccr) - SUM(keluar_ccr)) AS pers_ccr FROM p3k LEFT JOIN ccr ON p3k.id_p3k = ccr.p3k_id GROUP BY id_p3k"
+        result = connection(query, 'selectall')
         return result
 
     def get_saldo_ccr_filter(self, tanggal):
-        cur.execute(f"SELECT (SUM(masuk_ccr) - SUM(keluar_ccr)) AS pers_ccr FROM p3k LEFT JOIN ccr ON p3k.id_p3k = ccr.p3k_id WHERE tgl_ccr < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k")
-        result = cur.fetchall()
+        query = f"SELECT (SUM(masuk_ccr) - SUM(keluar_ccr)) AS pers_ccr FROM p3k LEFT JOIN ccr ON p3k.id_p3k = ccr.p3k_id WHERE tgl_ccr < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k"
+        result = connection(query, 'selectall')
         return result
 
     def insert_ccr(self, tgl_ccr, masuk_ccr, keluar_ccr, p3k_id):
-        cur.execute(f"INSERT INTO ccr (tgl_ccr, masuk_ccr, keluar_ccr, p3k_id) VALUES ('{tgl_ccr}', {masuk_ccr}, {keluar_ccr}, {p3k_id})")
-        conn.commit()
+        query = f"INSERT INTO ccr (tgl_ccr, masuk_ccr, keluar_ccr, p3k_id) VALUES ('{tgl_ccr}', {masuk_ccr}, {keluar_ccr}, {p3k_id})"
+        connection(query, 'insert')
 
     def get_saldo_tps(self):
-        cur.execute(f"SELECT (SUM(masuk_tps) - SUM(keluar_tps)) AS pers_tps FROM p3k LEFT JOIN tps ON p3k.id_p3k = tps.p3k_id GROUP BY id_p3k")
-        result = cur.fetchall()
+        query = f"SELECT (SUM(masuk_tps) - SUM(keluar_tps)) AS pers_tps FROM p3k LEFT JOIN tps ON p3k.id_p3k = tps.p3k_id GROUP BY id_p3k"
+        result = connection(query, 'selectall')
         return result
 
     def get_saldo_tps_filter(self, tanggal):
-        cur.execute(f"SELECT (SUM(masuk_tps) - SUM(keluar_tps)) AS pers_tps FROM p3k LEFT JOIN tps ON p3k.id_p3k = tps.p3k_id WHERE tgl_tps < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k")
-        result = cur.fetchall()
+        query = f"SELECT (SUM(masuk_tps) - SUM(keluar_tps)) AS pers_tps FROM p3k LEFT JOIN tps ON p3k.id_p3k = tps.p3k_id WHERE tgl_tps < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k"
+        result = connection(query, 'selectall')
         return result
 
     def insert_tps(self, tgl_tps, masuk_tps, keluar_tps, p3k_id):
-        cur.execute(f"INSERT INTO tps (tgl_tps, masuk_tps, keluar_tps, p3k_id) VALUES ('{tgl_tps}', {masuk_tps}, {keluar_tps}, {p3k_id})")
-        conn.commit()
+        query = f"INSERT INTO tps (tgl_tps, masuk_tps, keluar_tps, p3k_id) VALUES ('{tgl_tps}', {masuk_tps}, {keluar_tps}, {p3k_id})"
+        connection(query, 'insert')
 
     def get_saldo_pos(self):
-        cur.execute(f"SELECT (SUM(masuk_pos) - SUM(keluar_pos)) AS pers_pos FROM p3k LEFT JOIN pos ON p3k.id_p3k = pos.p3k_id GROUP BY id_p3k")
-        result = cur.fetchall()
+        query = f"SELECT (SUM(masuk_pos) - SUM(keluar_pos)) AS pers_pos FROM p3k LEFT JOIN pos ON p3k.id_p3k = pos.p3k_id GROUP BY id_p3k"
+        result = connection(query, 'selectall')
         return result
 
     def get_saldo_pos_filter(self, tanggal):
-        cur.execute(f"SELECT (SUM(masuk_pos) - SUM(keluar_pos)) AS pers_pos FROM p3k LEFT JOIN pos ON p3k.id_p3k = pos.p3k_id WHERE tgl_pos < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k")
-        result = cur.fetchall()
+        query = f"SELECT (SUM(masuk_pos) - SUM(keluar_pos)) AS pers_pos FROM p3k LEFT JOIN pos ON p3k.id_p3k = pos.p3k_id WHERE tgl_pos < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k"
+        result = connection(query, 'selectall')
         return result
 
     def insert_pos(self, tgl_pos, masuk_pos, keluar_pos, p3k_id):
-        cur.execute(f"INSERT INTO pos (tgl_pos, masuk_pos, keluar_pos, p3k_id) VALUES ('{tgl_pos}', {masuk_pos}, {keluar_pos}, {p3k_id})")
-        conn.commit()
+        query = f"INSERT INTO pos (tgl_pos, masuk_pos, keluar_pos, p3k_id) VALUES ('{tgl_pos}', {masuk_pos}, {keluar_pos}, {p3k_id})"
+        connection(query, 'insert')
 
     def get_saldo_stock(self):
-        cur.execute(f"SELECT (SUM(masuk_stock) - SUM(keluar_stock)) AS pers_stock FROM p3k LEFT JOIN stock ON p3k.id_p3k = stock.p3k_id GROUP BY id_p3k")
-        result = cur.fetchall()
+        query = f"SELECT (SUM(masuk_stock) - SUM(keluar_stock)) AS pers_stock FROM p3k LEFT JOIN stock ON p3k.id_p3k = stock.p3k_id GROUP BY id_p3k"
+        result = connection(query, 'selectall')
         return result
 
     def get_saldo_stock_filter(self, tanggal):
-        cur.execute(f"SELECT (SUM(masuk_stock) - SUM(keluar_stock)) AS pers_stock FROM p3k LEFT JOIN stock ON p3k.id_p3k = stock.p3k_id WHERE tgl_stock < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k")
-        result = cur.fetchall()
+        query = f"SELECT (SUM(masuk_stock) - SUM(keluar_stock)) AS pers_stock FROM p3k LEFT JOIN stock ON p3k.id_p3k = stock.p3k_id WHERE tgl_stock < '{tanggal}' GROUP BY id_p3k ORDER BY id_p3k"
+        result = connection(query, 'selectall')
         return result
 
     def insert_stock(self, tgl_stock, masuk_stock, keluar_stock, p3k_id):
-        cur.execute(f"INSERT INTO stock (tgl_stock, masuk_stock, keluar_stock, p3k_id) VALUES ('{tgl_stock}', {masuk_stock}, {keluar_stock}, {p3k_id})")
-        conn.commit()
+        query = f"INSERT INTO stock (tgl_stock, masuk_stock, keluar_stock, p3k_id) VALUES ('{tgl_stock}', {masuk_stock}, {keluar_stock}, {p3k_id})"
+        connection(query, 'insert')
 
     def get_saldo_p3k(self, table, tgl_p3k, tanggal):
-        cur.execute(f"SELECT * FROM {table} WHERE {tgl_p3k} < '{tanggal}'")
-        result = cur.fetchall()
+        query = f"SELECT * FROM {table} WHERE {tgl_p3k} < '{tanggal}'"
+        result = connection(query, 'selectall')
         return result
         
     def get_hydrant(self):
-        cur.execute("SELECT * FROM hydrant")
-        result = cur.fetchall()
+        query = "SELECT * FROM hydrant"
+        result = connection(query, 'selectall')
         return result
 
     def insert_hydrant(self, nama_peralatan, merek, tipe, jumlah, satuan, foto_hydrant):
-        cur.execute(f"INSERT INTO hydrant (nama_peralatan, merek, tipe, jumlah, satuan, foto_hydrant) VALUES ('{nama_peralatan}', '{merek}', '{tipe}', {jumlah}, '{satuan}', '{foto_hydrant}')")
-        conn.commit()
+        query = f"INSERT INTO hydrant (nama_peralatan, merek, tipe, jumlah, satuan, foto_hydrant) VALUES ('{nama_peralatan}', '{merek}', '{tipe}', {jumlah}, '{satuan}', '{foto_hydrant}')"
+        connection(query, 'insert')
 
     def update_hydrant(self, id_hydrant, nama_peralatan, merek, tipe, jumlah, satuan, foto_hydrant):
-        cur.execute(f"UPDATE hydrant SET nama_peralatan='{nama_peralatan}', merek='{merek}', tipe='{tipe}', jumlah='{jumlah}', satuan='{satuan}', foto_hydrant='{foto_hydrant}' WHERE id_hydrant={id_hydrant}")
-        conn.commit()
+        query = f"UPDATE hydrant SET nama_peralatan='{nama_peralatan}', merek='{merek}', tipe='{tipe}', jumlah='{jumlah}', satuan='{satuan}', foto_hydrant='{foto_hydrant}' WHERE id_hydrant={id_hydrant}"
+        connection(query, 'update')
 
     def delete_hydrant(self, id_hydrant):
-        cur.execute(f"DELETE FROM hydrant WHERE id_hydrant={id_hydrant}")
-        conn.commit()
+        query = f"DELETE FROM hydrant WHERE id_hydrant={id_hydrant}"
+        connection(query, 'delete')
 
     def get_foto_hydrant(self, id_hydrant):
-        cur.execute(f"SELECT foto_hydrant FROM hydrant WHERE id_hydrant={id_hydrant}")
-        result = cur.fetchall()
+        query = f"SELECT foto_hydrant FROM hydrant WHERE id_hydrant={id_hydrant}"
+        result = connection(query, 'selectall')
         return result
 
     def insert_kondisi_hydrant(self, kondisi, keterangan, hydrant_id):
-        cur.execute(f"INSERT INTO kondisi_hydrant (tanggal, kondisi, keterangan, hydrant_id) VALUES (NOW(), '{kondisi}', '{keterangan}', {hydrant_id})")
-        conn.commit()
+        query = f"INSERT INTO kondisi_hydrant (tanggal, kondisi, keterangan, hydrant_id) VALUES (NOW(), '{kondisi}', '{keterangan}', {hydrant_id})"
+        connection(query, 'insert')
 
     def get_kondisi_hydrant(self):
-        cur.execute(f"SELECT DISTINCT (hydrant_id) FROM kondisi_hydrant WHERE MONTH(tanggal) = '{self.get_this_month()}'")
-        result = cur.fetchall()
+        query = f"SELECT DISTINCT (hydrant_id) FROM kondisi_hydrant WHERE MONTH(tanggal) = '{self.get_this_month()}'"
+        result = connection(query, 'selectall')
         return result
 
     def get_inspection_hydrant(self, tanggal):
-        cur.execute(f"SELECT * FROM hydrant JOIN kondisi_hydrant ON hydrant.id_hydrant = kondisi_hydrant.hydrant_id WHERE MONTH (tanggal) = '{tanggal}' GROUP BY id_hydrant ORDER BY id_hydrant")
-        result = cur.fetchall()
+        query = f"SELECT * FROM hydrant JOIN kondisi_hydrant ON hydrant.id_hydrant = kondisi_hydrant.hydrant_id WHERE MONTH (tanggal) = '{tanggal}' GROUP BY id_hydrant ORDER BY id_hydrant"
+        result = connection(query, 'selectall')
         return result
 
     def insert_sign(self, role, path, ttd):
-        cur.execute(f"INSERT INTO signature (role, path, ttd) VALUES ('{role}', '{path}', '{ttd}')")
-        conn.commit()
+        query = f"INSERT INTO signature (role, path, ttd) VALUES ('{role}', '{path}', '{ttd}')"
+        connection(query, 'insert')
 
     def get_sign_manager(self, path):
-        cur.execute(f"SELECT * FROM signature WHERE role = 'manager' AND path = '{path}'")
-        result = cur.fetchone()
+        query = f"SELECT * FROM signature WHERE role = 'manager' AND path = '{path}'"
+        result = connection(query, 'selectone')
         return result
 
     def get_sign_k3l(self, path):
-        cur.execute(f"SELECT * FROM signature WHERE role = 'k3l' AND path = '{path}'")
-        result = cur.fetchone()
+        query = f"SELECT * FROM signature WHERE role = 'k3l' AND path = '{path}'"
+        result = connection(query, 'selectone')
         return result

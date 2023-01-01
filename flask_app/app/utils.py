@@ -1,4 +1,4 @@
-from app.conn import cur, conn
+from app.conn import connection
 from app.k3 import K3
 from datetime import date
 import base64
@@ -30,45 +30,45 @@ class Absen(K3):
         return tanggal_format
 
     def insert_agenda(self, agenda_rapat, tanggal, waktu, lokasi, link):
-        cur.execute(f"INSERT INTO agenda (agenda_rapat, tanggal, waktu, lokasi, link) VALUES ('{agenda_rapat}', '{tanggal}', '{waktu}', '{lokasi}', '{link}')")
-        conn.commit()
+        query = f"INSERT INTO agenda (agenda_rapat, tanggal, waktu, lokasi, link) VALUES ('{agenda_rapat}', '{tanggal}', '{waktu}', '{lokasi}', '{link}')"
+        connection(query, 'insert')
 
     def insert_absen(self, nama, instansi, jabatan, email, hp, agenda_id, ttd):
-        cur.execute(f"INSERT INTO absen (nama, instansi, jabatan, email, hp, agenda_id, checkin, ttd) VALUES ('{nama}', '{instansi}', '{jabatan}', '{email}', '{hp}', {agenda_id}, NOW(), '{ttd}')")
-        conn.commit()
+        query = f"INSERT INTO absen (nama, instansi, jabatan, email, hp, agenda_id, checkin, ttd) VALUES ('{nama}', '{instansi}', '{jabatan}', '{email}', '{hp}', {agenda_id}, NOW(), '{ttd}')"
+        connection(query, 'insert')
 
     def get_agenda(self, skip, limit):
-        cur.execute(f"SELECT *, COUNT(nama) nama_count FROM agenda LEFT JOIN absen ON agenda.id_agenda = absen.agenda_id GROUP BY id_agenda ORDER BY tanggal DESC LIMIT {skip}, {limit}")
-        result = cur.fetchall()
+        query = f"SELECT *, COUNT(nama) nama_count FROM agenda LEFT JOIN absen ON agenda.id_agenda = absen.agenda_id GROUP BY id_agenda ORDER BY tanggal DESC LIMIT {skip}, {limit}"
+        result = connection(query, 'selectall')
         return result
 
     def get_agenda_id(self, id):
-        cur.execute(f"SELECT * FROM agenda WHERE id_agenda = {id}")
-        result = cur.fetchone()
+        query = f"SELECT * FROM agenda WHERE id_agenda = {id}"
+        result = connection(query, 'selectone')
         return result
 
     def get_absen_id(self, id):
-        cur.execute(f"SELECT * FROM absen JOIN agenda ON absen.agenda_id = agenda.id_agenda WHERE agenda_id = {id} ORDER BY id_absen")
-        result = cur.fetchall()
+        query = f"SELECT * FROM absen JOIN agenda ON absen.agenda_id = agenda.id_agenda WHERE agenda_id = {id} ORDER BY id_absen"
+        result = connection(query, 'selectall')
         return result
 
     def get_absen_ttd(self, id):
-        cur.execute(f"SELECT ttd FROM absen WHERE agenda_id = {id}")
-        result = cur.fetchall()
+        query = f"SELECT ttd FROM absen WHERE agenda_id = {id}"
+        result = connection(query, 'selectall')
         return result
 
     def get_count_absen(self):
-        cur.execute(f"SELECT COUNT(*) pages FROM agenda")
-        result = cur.fetchall()
+        query = f"SELECT COUNT(*) pages FROM agenda"
+        result = connection(query, 'selectall')
         return result
 
     def delete_agenda(self, id):
-        cur.execute(f"DELETE FROM agenda WHERE id_agenda = {id}")
-        conn.commit()
+        query = f"DELETE FROM agenda WHERE id_agenda = {id}"
+        connection(query, 'delete')
 
     def delete_absen(self, id):
-        cur.execute(f"DELETE FROM absen WHERE agenda_id = {id}")
-        conn.commit()
+        query = f"DELETE FROM absen WHERE agenda_id = {id}"
+        connection(query, 'delete')
 
     def base64tojpg(self, pic:str):
         new_ttd = pic.replace('data:image/png;base64,', '')
