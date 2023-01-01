@@ -5,7 +5,7 @@ def max_workers():
     return cpu_count()
 
 chdir = '/home/alanwebi/repositories/k3.alanpy.xyz/flask_app'
-bind = '127.0.0.1:52782'
+bind = '127.0.0.1:52335'
 max_requests = 100
 workers = 1
 worker_class = 'tornado'
